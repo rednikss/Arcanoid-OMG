@@ -1,25 +1,23 @@
-﻿using App.Scripts.Architecture.InitPoint.MonoInitializable;
-using App.Scripts.UI.MVP.Start.Model;
+﻿using App.Scripts.UI.MVP.Start.Model;
 using App.Scripts.UI.MVP.Start.Presenter;
 using App.Scripts.UI.MVP.Start.View;
+using App.Scripts.UI.PanelManager.InstallerBase;
 using UnityEngine;
 
 namespace App.Scripts.UI.MVP.Start.Installer
 {
-    public class StartPanelInstaller : MonoInitializable
+    public class StartPanelInstaller : PanelInstaller
     {
         [SerializeField] private StartView view;
         
-        public override void Init()
+        public override void SetupPanel()
         {
-            var newView = Instantiate(view, transform);
-
             var model = new StartModel();
             var presenter = new StartPresenter();
             
-            newView.Init(presenter);
-            presenter.Init(newView, model);
-            model.Init(newView);
+            view.Init(presenter);
+            presenter.Init(view, model);
+            model.Init(view);
         }
     }
 }
