@@ -1,4 +1,4 @@
-﻿using App.Scripts.Architecture.MonoInitializable;
+﻿using App.Scripts.Architecture.InitPoint.MonoInitializable;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base.Scriptable;
 using DG.Tweening;
 using UnityEngine;

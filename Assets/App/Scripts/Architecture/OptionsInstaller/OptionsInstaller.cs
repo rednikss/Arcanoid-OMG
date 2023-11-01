@@ -1,9 +1,10 @@
-﻿using App.Scripts.Architecture.OptionsInstaller.Scriptable;
+﻿using App.Scripts.Architecture.InitPoint.MonoInitializable;
+using App.Scripts.Architecture.OptionsInstaller.Scriptable;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.OptionsInstaller
 {
-    public class OptionsInstaller : MonoInitializable.MonoInitializable
+    public class OptionsInstaller : MonoInitializable
     {
         [SerializeField] private BaseOptionsScriptable scriptable;
         

@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using App.Scripts.Architecture.MonoInitializable;
+using App.Scripts.Architecture.InitPoint.MonoInitializable;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;

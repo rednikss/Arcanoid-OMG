@@ -1,4 +1,4 @@
-﻿using App.Scripts.Architecture.MonoInitializable;
+﻿using App.Scripts.Architecture.InitPoint.MonoInitializable;
 using UnityEngine;
 
 namespace App.Scripts.Utilities.CameraAdapter

@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using App.Scripts.Architecture.Command;
+using App.Scripts.Architecture.Patterns.Command;
 using UnityEngine;
 
 namespace App.Scripts.Commands.Data.Save

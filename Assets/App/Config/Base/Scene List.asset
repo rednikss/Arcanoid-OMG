@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ff486352264091a1f40d993af6f874, type: 3}
   m_Name: Scene List
   m_EditorClassIdentifier: 
-  menuSceneName: Menu
-  packSceneName: Packs
-  gameSceneName: Game
-  winSceneName: Win
+  sceneList:
+  - sceneID: 0
+    sceneName: Start
+  - sceneID: 1
+    sceneName: Packs
+  - sceneID: 2
+    sceneName: Game
+  - sceneID: 3
+    sceneName: Win
