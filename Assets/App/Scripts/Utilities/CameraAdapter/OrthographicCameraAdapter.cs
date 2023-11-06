@@ -1,9 +1,10 @@
-﻿using App.Scripts.Architecture.InitPoint.MonoInitializable;
+﻿using App.Scripts.Architecture.InitPoint.MonoInstaller;
+using App.Scripts.Architecture.ProjectContext;
 using UnityEngine;
 
 namespace App.Scripts.Utilities.CameraAdapter
 {
-    public class OrthographicCameraAdapter : MonoInitializable
+    public class OrthographicCameraAdapter : MonoInstaller
     {
         [SerializeField] private Camera currentCamera;
         
@@ -11,7 +12,7 @@ namespace App.Scripts.Utilities.CameraAdapter
 
         private float _screenAspect;
         
-        public override void Init()
+        public override void Init(ProjectContext context)
         {
             _verticalSize = currentCamera.orthographicSize;
             _screenAspect = currentCamera.aspect;
@@ -33,12 +34,5 @@ namespace App.Scripts.Utilities.CameraAdapter
         {
             return currentCamera.ScreenToWorldPoint(position);
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmos() 
-        {
-            Init();
-        }
-#endif
     }
 }

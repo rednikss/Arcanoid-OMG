@@ -1,60 +1,70 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Architecture.InitPoint.MonoInitializable;
+using App.Scripts.Architecture.InitPoint.MonoInstaller;
+using App.Scripts.Architecture.ProjectContext;
 using App.Scripts.UI.PanelManager.Scriptable;
 using UnityEngine;
 
 namespace App.Scripts.UI.PanelManager
 {
-    public class PanelManager : MonoInitializable
+    public class PanelManager : MonoInstaller
     {
         [SerializeField] private PanelListScriptable scriptable;
 
-        private List<PanelListScriptable.PanelInfo> _panels = new();
-
-        [SerializeField] private string firstPanelName;
+        [SerializeField] private string initPanelName;
         
-        public override void Init()
+        private readonly List<PanelInfo> _panels = new();
+
+        private ProjectContext _context;
+
+        public override void Init(ProjectContext context)
         {
-            if (firstPanelName.Length == 0) return;
+            _context = context;
             
-            InstallPanel(firstPanelName);
+            if (initPanelName.Length == 0) return;
+            
+            InstallPanel(initPanelName);
         }
         
         public void InstallPanel(string panelName)
         {
-            for (int i = 0; i < _panels.Count; i++)
-            {
-                var panel = _panels[i];
-                if (panel.name.Equals(panelName) && !panel.installer.isActiveAndEnabled)
-                {
-                    panel.installer.gameObject.SetActive(true);
-                    return;
-                }
-            }
-
-            for (int i = 0; i < scriptable.panelList.Length; i++)
-            {
-                var newPanel = scriptable.panelList[i];
-                if (newPanel.name.Equals(panelName))
-                {
-                    var newInstaller = Instantiate(newPanel.installer, transform);
-                    _panels.Add(new PanelListScriptable.PanelInfo(newPanel.name, newInstaller));
-                    newInstaller.SetupPanel();
-                }
-            }
+            FindPanel(panelName, false, true).installer.gameObject.SetActive(true);
         }
 
         public void DisablePanel(string panelName)
         {
-            for (int i = 0; i < _panels.Count; i++)
+            FindPanel(panelName, true, false).installer.gameObject.SetActive(false);
+        }
+
+        private PanelInfo FindPanel(string panelName, bool isActiveState, bool createIfNotFound)
+        {
+            foreach (var panel in _panels)
             {
-                var panel = _panels[i];
-                if (panel.name.Equals(panelName) && panel.installer.isActiveAndEnabled)
-                {
-                    panel.installer.gameObject.SetActive(false);
-                    return;
-                }
+                if (!panel.name.Equals(panelName) || panel.installer.isActiveAndEnabled != isActiveState) continue;
+                
+                return panel;
             }
+
+            return createIfNotFound ? CreatePanel(panelName) : null;
+        }
+
+        private PanelInfo CreatePanel(string panelName)
+        {
+            foreach (var newPanel in scriptable.panelList)
+            {
+                if (!newPanel.name.Equals(panelName)) continue;
+                
+                var newInstaller = Instantiate(newPanel.installer, transform);
+                newInstaller.Init(_context);
+
+                var info = new PanelInfo(newPanel.name, newInstaller);
+                _panels.Add(info);
+                
+                return info;
+            }
+
+            Debug.LogError($"Attempted to create non-existent panel {panelName}!");
+
+            return null;
         }
     }
 }

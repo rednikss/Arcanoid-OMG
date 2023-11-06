@@ -1,4 +1,4 @@
-﻿using App.Scripts.Architecture.Patterns.Command;
+﻿using App.Scripts.Libs.Command;
 using UnityEditor;
 
 namespace App.Scripts.Commands.ExitGame

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Scene List
   m_EditorClassIdentifier: 
   sceneList:
-  - sceneID: 0
+  - stringID: Start Scene
     sceneName: Start
-  - sceneID: 1
+  - stringID: Pack Scene
     sceneName: Packs
-  - sceneID: 2
+  - stringID: Level Scene
     sceneName: Game
-  - sceneID: 3
+  - stringID: End Scene
     sceneName: Win

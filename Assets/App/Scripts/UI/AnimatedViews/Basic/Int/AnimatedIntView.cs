@@ -1,12 +1,12 @@
 ﻿using System.Text;
-using App.Scripts.Architecture.InitPoint.MonoInitializable;
+using App.Scripts.Architecture.InitPoint.MonoInstaller;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
 namespace App.Scripts.UI.AnimatedViews.Basic.Int
 {
-    public class AnimatedIntView : MonoInitializable
+    public class AnimatedIntView : MonoBehaviour, IInitializable
     {
         [SerializeField] private TextMeshProUGUI label;
         [SerializeField] private string prefix;
@@ -17,7 +17,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.Int
         private StringBuilder _builder;
         private int _value;
 
-        public override void Init()
+        public void Init()
         {
             _builder = new(prefix);
             _builder.Append(0);
