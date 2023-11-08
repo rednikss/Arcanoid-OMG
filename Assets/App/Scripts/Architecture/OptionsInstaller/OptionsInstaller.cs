@@ -1,5 +1,5 @@
-﻿using App.Scripts.Architecture.InitPoint.MonoInstaller;
-using App.Scripts.Architecture.OptionsInstaller.Scriptable;
+﻿using App.Scripts.Architecture.OptionsInstaller.Scriptable;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.OptionsInstaller

@@ -1,4 +1,4 @@
-﻿using App.Scripts.Architecture.InitPoint.MonoInstaller;
+﻿using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.Data.DataParser
@@ -7,7 +7,7 @@ namespace App.Scripts.Architecture.Data.DataParser
     {
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetServiceContainer().SetServiceSelf<IDataParser>(this);
+            context.GetContainer().SetServiceSelf<IDataParser>(this);
         }
         
         public TDataType Parse<TDataType>(in string data)

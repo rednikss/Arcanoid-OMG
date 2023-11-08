@@ -1,5 +1,5 @@
-﻿using App.Scripts.Architecture.InitPoint.MonoInstaller;
-using App.Scripts.Architecture.ProjectContext;
+﻿using App.Scripts.Architecture.ProjectContext;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.SceneLoader.Scriptable;
 using App.Scripts.Libs.ServiceContainer;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace App.Scripts.Libs.SceneLoader
         
         public override void Init(ProjectContext context)
         {
-            context.GetServiceContainer().SetServiceSelf(this);
+            context.GetContainer().SetServiceSelf(this);
         }
 
         public void LoadScene(string scriptableID)

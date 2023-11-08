@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using App.Scripts.Architecture.Data.DataParser;
-using App.Scripts.Architecture.InitPoint.MonoInstaller;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.Data.DataLoader
@@ -15,8 +15,8 @@ namespace App.Scripts.Architecture.Data.DataLoader
         
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetServiceContainer().SetServiceSelf<IDataProvider>(this);
-            _dataParser = context.GetServiceContainer().GetService<IDataParser>();
+            context.GetContainer().SetServiceSelf<IDataProvider>(this);
+            _dataParser = context.GetContainer().GetService<IDataParser>();
         }
     
         public void LoadData<TDataType>(out TDataType data) where TDataType : new()

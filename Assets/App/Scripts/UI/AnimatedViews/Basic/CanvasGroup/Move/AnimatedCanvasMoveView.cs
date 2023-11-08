@@ -1,6 +1,6 @@
 using System;
+using App.Scripts.Architecture.CameraUtilities.Adapter;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
-using App.Scripts.Utilities.CameraAdapter;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
         
         [SerializeField] private Canvas parentCanvas;
         
-        [SerializeField] private OrthographicCameraAdapter adapter;
+        [SerializeField] private CameraAdapter adapter;
         
         private Transform _canvasTransform;
         
@@ -24,7 +24,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
         {
             _canvasTransform = canvasGroup.transform;
             _openedPos = _closedPos = _canvasTransform.position;
-            _closedPos -= showDirection.normalized * 2 * adapter.AdaptPixelPosition(parentCanvas.pixelRect.size);
+            _closedPos -= showDirection.normalized * 2 * adapter.PixelToWorld(parentCanvas.pixelRect.size);
             canvasGroup.interactable = false;
         }
 

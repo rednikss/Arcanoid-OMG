@@ -1,56 +1,43 @@
-using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace App.Scripts.Libs.StateMachine
 {
-    public class GameStateMachine
+    public class GameStateMachine : MonoBehaviour
     {
-        private readonly Dictionary<Type, GameState> _states = new();
+        private readonly Dictionary<string, GameState> _states = new();
+        
         private GameState _currentState;
-        private GameState _stateToChange;
-
+        
         public void AddState(GameState state)
         {
             state.StateMachine = this;
-            _states[state.GetType()] = state;
+            _states[state.GetType().Name] = state;
         }
 
         public void ChangeState<T>()
         {
-            var stateType = typeof(T);
-            if (_states.TryGetValue(stateType, out var state)) _stateToChange = state;
+            var stateType = typeof(T).Name;
+            if (!_states.TryGetValue(stateType, out var state)) return;
+            
+            SetState(state);
         }
 
         public void Update()
         {
-            CheckSwitchState();
-
             _currentState?.Update();
         }
 
-        private void CheckSwitchState()
+        private void SetState(GameState value)
         {
-            if (_stateToChange is null) return;
-
-            var nextState = _stateToChange;
-            _stateToChange = null;
-
-            ProcessChangeState(nextState);
-        }
-
-        private void ProcessChangeState(GameState value)
-        {
-            ExitState();
-
+            _currentState?.OnExitState();
             _currentState = value;
-            _currentState.OnEnterState();
+            _currentState?.OnEnterState();
         }
 
-        private void ExitState()
+        public void ExitState()
         {
-            if (_currentState is null) return;
-
-            _currentState.OnExitState();
+            _currentState?.OnExitState();
         }
     }
 }

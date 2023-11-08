@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Architecture.InitPoint.MonoInstaller;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.ServiceContainer;
 using UnityEngine;
 
@@ -34,6 +34,6 @@ namespace App.Scripts.Architecture.ProjectContext
             foreach (var installer in installers) installer.Init(_instance);
         }
 
-        public ServiceContainer GetServiceContainer() => container;
+        public ServiceContainer GetContainer() => container;
     }
 }

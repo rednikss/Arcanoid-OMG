@@ -1,5 +1,5 @@
 ﻿using System;
-using App.Scripts.Architecture.InitPoint.MonoInstaller;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base.Scriptable;
 using UnityEngine;
 

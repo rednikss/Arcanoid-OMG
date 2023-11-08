@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using App.Scripts.Architecture.Data.DataLoader;
-using App.Scripts.Architecture.InitPoint.MonoInstaller;
 using App.Scripts.Architecture.Localization.Scriptable.AvailableLocales;
 using App.Scripts.Architecture.Localization.Scriptable.Locale;
+using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.ServiceContainer;
 using UnityEngine;
 
@@ -24,14 +24,12 @@ namespace App.Scripts.Architecture.Localization.Manager
         
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetServiceContainer().SetServiceSelf(this);
-            
-            _provider = context.GetServiceContainer().GetService<IDataProvider>();
+            _provider = context.GetContainer().GetService<IDataProvider>();
             _provider.LoadData(out _current);
 
             SetLocale(_current.ID);
             
-            OnLocaleChanged?.Invoke();
+            context.GetContainer().SetServiceSelf(this);
         }
 
         
@@ -49,6 +47,8 @@ namespace App.Scripts.Architecture.Localization.Manager
             }
             
             LoadLocaleWords();
+            _provider.SaveData(_current);
+            
             OnLocaleChanged?.Invoke();
         }
         
@@ -58,21 +58,24 @@ namespace App.Scripts.Architecture.Localization.Manager
             _current.Name = scriptable.localesNames[localeID];
             
             LoadLocaleWords();
+            _provider.SaveData(_current);
+            
             OnLocaleChanged?.Invoke();
         }
 
         private void LoadLocaleWords()
         {
             string path = Path.Combine(localesPath, _current.Name);
-            var localeData = Resources.Load<LocaleScriptable>(path);
+            var localeData = Resources.Load<TextAsset>(path);
 
-            _current.Words.Clear();
-            foreach (var keyTextPair in localeData.pairs)
+            var pairs = localeData.text.Split(Environment.NewLine);
+
+            foreach (var pair in pairs)
             {
-                _current.Words.Add(keyTextPair.key, keyTextPair.text);
+                var data = pair.Split(';', 2);
+                _current.Words[data[0]] = data[1];
             }
-            
-            _provider.SaveData(_current);
+
         }
         
 
@@ -82,7 +85,7 @@ namespace App.Scripts.Architecture.Localization.Manager
         {
             public string Name;
             public int ID;
-            public Dictionary<string, string> Words;
+            public readonly Dictionary<string, string> Words;
 
             public LocaleInfo()
             {

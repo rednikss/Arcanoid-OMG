@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using App.Scripts.Architecture.Localization.Scriptable.Locale;
 using UnityEditor;
 using UnityEngine;
@@ -8,10 +9,10 @@ namespace App.Scripts.Editor.Locale
     public class LocaleCreator : EditorWindow
     {
         private TextAsset keysList;
-        private string keysSeparator;
+        private string keysSeparator = Environment.NewLine;
 
         private TextAsset wordsList;
-        private string wordsSeparator;
+        private string wordsSeparator = Environment.NewLine;
         
         private LocaleScriptable currentTarget;
 
@@ -59,7 +60,7 @@ namespace App.Scripts.Editor.Locale
             
             UpdateTarget();
 
-            string filePath = Path.Combine("Assets", "Resources", "Locales", $"{wordsList.name}Locale.asset");
+            string filePath = Path.Combine("Assets", "Resources", "Locales", $"{wordsList.name} Locale.asset");
             AssetDatabase.CreateAsset(currentTarget, filePath);
             AssetDatabase.SaveAssets();
         }
