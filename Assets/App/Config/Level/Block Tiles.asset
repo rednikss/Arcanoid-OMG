@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3725e603df814a689a3fcf449dcce695, type: 3}
-  m_Name: Russian
+  m_Script: {fileID: 11500000, guid: 3c716e194cb845c797b1fca03e05bab2, type: 3}
+  m_Name: Block Tiles
   m_EditorClassIdentifier: 
-  localeName: Russian
-  pairs:
-  - key: LANGUAGE
-    text: RU
-  - key: PLAY
-    text: "\u0418\u0413\u0420\u0410\u0422\u042C"
+  BlockTiles:
+  - {fileID: 11400000, guid: b29bdcca5c1a2a84dac21107fe05e0ad, type: 2}

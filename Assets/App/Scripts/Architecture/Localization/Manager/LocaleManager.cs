@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using App.Scripts.Architecture.Data.DataLoader;
+using App.Scripts.Architecture.Data.DataProvider;
 using App.Scripts.Architecture.Localization.Scriptable.AvailableLocales;
-using App.Scripts.Architecture.Localization.Scriptable.Locale;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ServiceContainer;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.Localization.Manager

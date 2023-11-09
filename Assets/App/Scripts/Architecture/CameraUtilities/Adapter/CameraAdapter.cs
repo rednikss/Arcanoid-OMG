@@ -27,13 +27,17 @@ namespace App.Scripts.Architecture.CameraUtilities.Adapter
             percentPosition.x -= _verticalSize * _screenAspect;
             percentPosition.y -= _verticalSize;
 
-            return percentPosition;
+            return percentPosition + (Vector2) currentCamera.transform.position;
         }
 
         public Vector3 PixelToWorld(Vector3 position)
         {
             return currentCamera.ScreenToWorldPoint(position);
         }
+        
+        public float GetVerticalSize() => _verticalSize;
+        
+        public float GetHorizontalSize() => _verticalSize * _screenAspect;
         
         public float GetAspect() => _screenAspect;
     }

@@ -3,7 +3,7 @@ using App.Scripts.Architecture.Data.DataParser;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using UnityEngine;
 
-namespace App.Scripts.Architecture.Data.DataLoader
+namespace App.Scripts.Architecture.Data.DataProvider
 {
     public class FileDataProvider : MonoInstaller, IDataProvider
     {
@@ -19,17 +19,17 @@ namespace App.Scripts.Architecture.Data.DataLoader
             _dataParser = context.GetContainer().GetService<IDataParser>();
         }
     
-        public void LoadData<TDataType>(out TDataType data) where TDataType : new()
+        public void LoadData<TDataType>(out TDataType data, string fileName = null) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFileName<TDataType>());
+            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFullFileName<TDataType>(fileName));
 #else
-            string fullPath = Path.Combine(Application.persistentDataPath, GetFileName<TDataType>());
+            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
 #endif
             if (!File.Exists(fullPath))
             {
                 data = new();
-                SaveData(data);
+                SaveData(data, fileName);
                 
                 return;
             }
@@ -42,12 +42,12 @@ namespace App.Scripts.Architecture.Data.DataLoader
             data = _dataParser.Parse<TDataType>(unparsedData);
         }
 
-        public void SaveData<TDataType>(in TDataType data) where TDataType : new()
+        public void SaveData<TDataType>(in TDataType data, string fileName = null) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFileName<TDataType>());
+            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFullFileName<TDataType>(fileName));
 #else
-            string fullPath = Path.Combine(Application.persistentDataPath, GetFileName<TDataType>());
+            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
 #endif
             
             FileStream fileStream = File.Open(fullPath, FileMode.OpenOrCreate);
@@ -60,9 +60,9 @@ namespace App.Scripts.Architecture.Data.DataLoader
             fileStream.Close();
         }
 
-        private string GetFileName<TDataType>()
+        private string GetFullFileName<TDataType>(string fileName)
         {
-            return string.Format($"{typeof(TDataType).Name}.{format}");
+            return string.Format($"{fileName ?? typeof(TDataType).Name}.{format}");
         }
         
     }
