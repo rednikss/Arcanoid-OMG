@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace App.Scripts.Game.LevelManager
+{
+    [Serializable]
+    public class LevelInfo
+    {
+        public Vector3Int size;
+
+        public List<BlockInfo> blocks;
+
+        public LevelInfo(Vector3Int size)
+        {
+            this.size = size;
+            blocks = new List<BlockInfo>();
+        }
+    }
+    
+    [Serializable]
+    public class BlockInfo
+    {
+        public int id;
+        public Vector3Int pos;
+
+        public BlockInfo(int id, Vector3Int pos)
+        {
+            this.id = id;
+            this.pos = pos;
+        }
+    }
+}

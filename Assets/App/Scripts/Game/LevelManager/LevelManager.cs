@@ -2,21 +2,20 @@
 using App.Scripts.Architecture.CameraUtilities.Adapter;
 using App.Scripts.Architecture.ProjectContext;
 using App.Scripts.Game.Blocks.Base;
-using App.Scripts.Game.LevelLoader.Scriptable;
+using App.Scripts.Game.LevelManager.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace App.Scripts.Game.LevelLoader
+namespace App.Scripts.Game.LevelManager
 {
-    public class LevelLoader : MonoInstaller
+    public class LevelManager : MonoInstaller
     {
         [SerializeField] private BlockTileListScriptable scriptable;
         [SerializeField] private Tilemap tilemap;
 
         [Header("Percent Padding")]
         [SerializeField] [Range(0, 1)] private float top;
-        //[SerializeField] [Range(0, 1)] private float bottom;
         [SerializeField] [Range(0, 1)] private float right;
         [SerializeField] [Range(0, 1)] private float left;
 
@@ -35,43 +34,44 @@ namespace App.Scripts.Game.LevelLoader
             LevelInfo info = JsonUtility.FromJson<LevelInfo>(new StreamReader(
                 File.OpenRead(Path.Combine(Application.dataPath, "App", "Data", "Levels", "Level.txt"))
                 ).ReadToEnd());
-
             
-            float xSize = ((1 - right - left) * 2 * adapter.GetHorizontalSize()
-                           - (info.HorizontalSize - 1) * column) / info.HorizontalSize;
+            float size = (1 - right - left) * 2 * adapter.GetHorizontalSize();
+            size -= (info.size.x - 1) * column;
+            size /= info.size.x;
             
-            tilemap.gameObject.transform.localScale = Vector3.one * xSize;
+            tilemap.transform.localScale = Vector3.one * size;
+            tilemap.layoutGrid.cellGap = new Vector3(column, row, 0) / size;
             tilemap.transform.position = adapter.PercentToWorld(percentPosition);
-            tilemap.layoutGrid.cellGap = new Vector3(column, row, 0) / xSize;
 
-            foreach (var blockInfo in info.Blocks)
+            foreach (var blockInfo in info.blocks)
             {
-                tilemap.SetTile(blockInfo.Pos, scriptable.BlockTiles[blockInfo.BlockID]);
+                tilemap.SetTile(blockInfo.pos, scriptable.blockTiles[blockInfo.id]);
             }
             
             tilemap.CompressBounds();
         }
         
 #if UNITY_EDITOR
+        
         public void SaveCurrentAsLevel(string filepath)
         {
             tilemap.CompressBounds();
             var cellBounds = tilemap.cellBounds;
             var positions = cellBounds.allPositionsWithin;
             
-            Vector3Int delta = cellBounds.position + new Vector3Int(0, cellBounds.size.y, 0);
+            Vector3Int topLeftPosition = cellBounds.position + new Vector3Int(0, cellBounds.size.y, 0);
 
-            LevelInfo level = new LevelInfo(cellBounds.size.x);
+            LevelInfo level = new LevelInfo(cellBounds.size);
             foreach (var position in positions)
             {
                 var block = tilemap.GetTile<BlockTile>(position);
                 
                 if (block == null) continue;
                 
-                level.Blocks.Add(new BlockInfo(block.ID, position - delta));
+                level.blocks.Add(new BlockInfo(block.ID, position - topLeftPosition));
             }
             
-            var stream = File.Create($"{Path.Combine(Application.dataPath, filepath, "Level")}.txt");
+            var stream = File.Create(filepath);
             StreamWriter writer = new(stream);
             
             writer.Write(JsonUtility.ToJson(level));

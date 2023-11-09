@@ -1,30 +1,28 @@
-﻿using App.Scripts.Game.LevelLoader;
+﻿using System.IO;
+using App.Scripts.Game.LevelManager;
 using UnityEditor;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace App.Scripts.Editor.Level
 {
-    [CustomEditor(typeof(LevelLoader), true)]
+    [CustomEditor(typeof(LevelManager), true)]
     public class LevelSaver : UnityEditor.Editor
     {
-        private string currentPath;
-        
         public override VisualElement CreateInspectorGUI()
         {
-            var component = (LevelLoader) target;
+            var component = (LevelManager) target;
             
             VisualElement myInspector = new VisualElement();
 
             InspectorElement.FillDefaultInspector(myInspector, serializedObject, this);
 
-            var pathText = new TextField("Level File Path");
-            pathText.value = currentPath;
-            
+            var pathText = new TextField("Level File Full Name");
+
             var button = new Button(() =>
             {
-                currentPath = pathText.value;
-                component.SaveCurrentAsLevel(pathText.value);
+                component.SaveCurrentAsLevel(Path.Combine(Application.dataPath, pathText.value));
             });
             
             button.text = "Save Current Tilemap As A New Level";
