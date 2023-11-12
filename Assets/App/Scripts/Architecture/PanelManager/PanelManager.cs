@@ -1,70 +1,77 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Architecture.PanelManager.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.ProjectContext;
+using App.Scripts.UI.PanelInstallers.Base;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace App.Scripts.Architecture.PanelManager
 {
-    public class PanelManager : MonoInstaller
+    public class PanelManager : MonoInstaller 
     {
         [SerializeField] private PanelListScriptable scriptable;
 
-        [SerializeField] private string initPanelName;
-        
-        private readonly List<PanelInfo> _panels = new();
+        private readonly List<LocalizedPanelInstaller> _panels = new();
 
-        private ProjectContext.ProjectContext _context;
+        private ProjectContext _context;
 
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ProjectContext context)
         {
             context.GetContainer().SetServiceSelf(this);
             _context = context;
-            
-            if (initPanelName.Length == 0) return;
-            
-            InstallPanel(initPanelName);
-        }
-        
-        public void InstallPanel(string panelName)
-        {
-            FindPanel(panelName, false, true).installer.gameObject.SetActive(true);
+
+            SceneManager.sceneUnloaded += (arg0) => DisableAll();
         }
 
-        public void DisablePanel(string panelName)
+        public TInstaller GetDisabledPanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
         {
-            FindPanel(panelName, true, false).installer.gameObject.SetActive(false);
+            return FindPanel<TInstaller>(false) ?? CreatePanel<TInstaller>();
         }
 
-        private PanelInfo FindPanel(string panelName, bool isActiveState, bool createIfNotFound)
+        public TInstaller GetEnabledPanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
+        {
+            return FindPanel<TInstaller>(true);
+        }
+
+        private TInstaller FindPanel<TInstaller>(bool activeState) where TInstaller : LocalizedPanelInstaller
         {
             foreach (var panel in _panels)
             {
-                if (!panel.name.Equals(panelName) || panel.installer.isActiveAndEnabled != isActiveState) continue;
+                if (panel.GetType() != typeof(TInstaller) || panel.isActiveAndEnabled != activeState) continue;
                 
-                return panel;
+                return (TInstaller)panel;
             }
 
-            return createIfNotFound ? CreatePanel(panelName) : null;
+            return null;
         }
 
-        private PanelInfo CreatePanel(string panelName)
+        private TInstaller CreatePanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
         {
             foreach (var newPanel in scriptable.panelList)
             {
-                if (!newPanel.name.Equals(panelName)) continue;
+                if (newPanel.GetType() != typeof(TInstaller)) continue;
                 
-                var newInstaller = Instantiate(newPanel.installer, transform);
-                newInstaller.Init(_context);
-
-                var info = new PanelInfo(newPanel.name, newInstaller);
-                _panels.Add(info);
+                var installer = Instantiate(newPanel, transform);
+                installer.Init(_context);
+                installer.gameObject.SetActive(false);
                 
-                return info;
+                _panels.Add(installer);
+                
+                return (TInstaller)installer;
             }
 
-            Debug.LogError($"Attempted to create non-existent panel {panelName}!");
+            Debug.LogError($"Attempted to create non-existent panel {typeof(TInstaller).Name}!");
 
             return null;
+        }
+
+        private void DisableAll()
+        {
+            foreach (var installer in _panels)
+            {
+                installer.gameObject.SetActive(false);
+            }
         }
     }
 }

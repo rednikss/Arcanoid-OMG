@@ -1,5 +1,5 @@
-﻿using App.Scripts.Architecture.CameraUtilities.Adapter;
-using App.Scripts.Architecture.ProjectContext;
+﻿using App.Scripts.Libs.CameraUtilities.Adapter;
+using App.Scripts.Libs.ProjectContext;
 using App.Scripts.Libs.StateMachine.MonoSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;

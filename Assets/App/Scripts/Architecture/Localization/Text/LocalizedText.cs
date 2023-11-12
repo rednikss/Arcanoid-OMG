@@ -1,9 +1,11 @@
-﻿using App.Scripts.Architecture.Localization.Manager;
+﻿using System;
+using App.Scripts.Architecture.Localization.Manager;
 using TMPro;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.Localization.Text
 {
+    [Serializable]
     public class LocalizedText : MonoBehaviour
     {
         [SerializeField] private TMP_Text tmpText;

@@ -1,6 +1,6 @@
 ﻿using App.Scripts.Architecture.Localization.Manager;
-using App.Scripts.Architecture.ProjectContext;
 using App.Scripts.Game.States;
+using App.Scripts.Libs.ProjectContext;
 using App.Scripts.Libs.SceneLoader;
 using App.Scripts.Libs.StateMachine;
 using App.Scripts.UI.PanelInstallers.Base;

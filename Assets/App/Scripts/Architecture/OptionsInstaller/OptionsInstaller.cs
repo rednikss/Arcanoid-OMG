@@ -1,5 +1,6 @@
 ﻿using App.Scripts.Architecture.OptionsInstaller.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.ProjectContext;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.OptionsInstaller
@@ -8,7 +9,7 @@ namespace App.Scripts.Architecture.OptionsInstaller
     {
         [SerializeField] private BaseOptionsScriptable scriptable;
 
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ProjectContext context)
         {
             Application.targetFrameRate = scriptable.targetFPS;
         }

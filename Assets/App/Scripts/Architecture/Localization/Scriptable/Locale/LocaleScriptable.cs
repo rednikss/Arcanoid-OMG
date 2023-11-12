@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace App.Scripts.Architecture.Localization.Scriptable.Locale
 {
-    [CreateAssetMenu(fileName = "New Locale", menuName = "Scriptable Object/Localization", order = 0)]
+    [CreateAssetMenu(fileName = "New Locale", menuName = "Scriptable Object/Base/Localization", order = 0)]
     public class LocaleScriptable : ScriptableObject
     {
         public string localeName;

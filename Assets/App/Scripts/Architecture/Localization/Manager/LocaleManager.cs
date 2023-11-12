@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using App.Scripts.Architecture.Data.DataProvider;
 using App.Scripts.Architecture.Localization.Scriptable.AvailableLocales;
+using App.Scripts.Libs.Data.DataProvider;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.ProjectContext;
 using UnityEngine;
 
 namespace App.Scripts.Architecture.Localization.Manager
@@ -20,7 +21,7 @@ namespace App.Scripts.Architecture.Localization.Manager
 
         public event Action OnLocaleChanged;
         
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ProjectContext context)
         {
             _provider = context.GetContainer().GetService<IDataProvider>();
             _provider.LoadData(out _current);

@@ -11,7 +11,6 @@ namespace App.Scripts.Libs.StateMachine
         
         public void AddState(GameState state)
         {
-            state.StateMachine = this;
             _states[state.GetType().Name] = state;
         }
 

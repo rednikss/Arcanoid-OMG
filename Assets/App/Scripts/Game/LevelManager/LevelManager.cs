@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using App.Scripts.Architecture.CameraUtilities.Adapter;
-using App.Scripts.Architecture.ProjectContext;
 using App.Scripts.Game.Blocks.Base;
 using App.Scripts.Game.LevelManager.Scriptable;
+using App.Scripts.Libs.CameraUtilities.Adapter;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.ProjectContext;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,41 +11,31 @@ namespace App.Scripts.Game.LevelManager
 {
     public class LevelManager : MonoInstaller
     {
-        [SerializeField] private BlockTileListScriptable scriptable;
         [SerializeField] private Tilemap tilemap;
+        [SerializeField] private LevelSizeScriptable mapSize;
+        [SerializeField] private BlockTileListScriptable blocks;
 
-        [Header("Percent Padding")]
-        [SerializeField] [Range(0, 1)] private float top;
-        [SerializeField] [Range(0, 1)] private float right;
-        [SerializeField] [Range(0, 1)] private float left;
-
-        [Header("World Spacing")]
-        [SerializeField] [Range(0, 1)] private float row;
-        [SerializeField] [Range(0, 1)] private float column;
-        
         private CameraAdapter adapter;
         
         public override void Init(ProjectContext context)
         {
             adapter = context.GetContainer().GetService<CameraAdapter>();
 
-            Vector2 percentPosition = new Vector2(right, 1 - top);
+            Vector2 percentPosition = new(mapSize.right, 1 - mapSize.top);
 
-            LevelInfo info = JsonUtility.FromJson<LevelInfo>(new StreamReader(
-                File.OpenRead(Path.Combine(Application.dataPath, "App", "Data", "Levels", "Level.txt"))
-                ).ReadToEnd());
+            LevelInfo info = JsonUtility.FromJson<LevelInfo>(Resources.Load<TextAsset>("Levels/Level").text);
             
-            float size = (1 - right - left) * 2 * adapter.GetHorizontalSize();
-            size -= (info.size.x - 1) * column;
+            float size = (1 - mapSize.right - mapSize.left) * 2 * adapter.GetSize().x;
+            size -= (info.size.x - 1) * mapSize.column;
             size /= info.size.x;
             
             tilemap.transform.localScale = Vector3.one * size;
-            tilemap.layoutGrid.cellGap = new Vector3(column, row, 0) / size;
-            tilemap.transform.position = adapter.PercentToWorld(percentPosition);
+            tilemap.layoutGrid.cellGap = new Vector2(mapSize.column, mapSize.row) / size;
+            tilemap.transform.position = adapter.PercentToWorld(percentPosition) + Vector2.up * mapSize.row;
 
             foreach (var blockInfo in info.blocks)
             {
-                tilemap.SetTile(blockInfo.pos, scriptable.blockTiles[blockInfo.id]);
+                tilemap.SetTile(blockInfo.pos, blocks.tiles[blockInfo.id]);
             }
             
             tilemap.CompressBounds();

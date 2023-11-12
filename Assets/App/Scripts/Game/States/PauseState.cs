@@ -1,6 +1,7 @@
 ﻿using App.Scripts.Architecture.PanelManager;
-using App.Scripts.Architecture.ProjectContext;
+using App.Scripts.Libs.ProjectContext;
 using App.Scripts.Libs.StateMachine;
+using App.Scripts.UI.PanelInstallers.Pause;
 
 namespace App.Scripts.Game.States
 {
@@ -8,18 +9,15 @@ namespace App.Scripts.Game.States
     {
         private readonly PanelManager _panelManager;
         
-        private readonly string _pausePanelName;
-        
-        public PauseState(ProjectContext context, string pausePanelName)
+        public PauseState(ProjectContext context)
         {
             _panelManager = context.GetContainer().GetService<PanelManager>();
-            _pausePanelName = pausePanelName;
         }
         
-
         public override void OnEnterState()
         {
-            _panelManager.InstallPanel(_pausePanelName);
+            var panel = _panelManager.GetDisabledPanel<PausePanelInstaller>();
+            panel.gameObject.SetActive(true);
         }
 
         public override void Update()
@@ -29,7 +27,8 @@ namespace App.Scripts.Game.States
         
         public override void OnExitState()
         {
-            _panelManager.DisablePanel(_pausePanelName);
+            var panel = _panelManager.GetEnabledPanel<PausePanelInstaller>();
+            panel.gameObject.SetActive(false);
         }
     }
 }
