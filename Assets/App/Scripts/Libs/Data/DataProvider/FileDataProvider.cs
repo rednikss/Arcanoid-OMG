@@ -15,7 +15,6 @@ namespace App.Scripts.Libs.Data.DataProvider
         
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetContainer().SetServiceSelf<IDataProvider>(this);
             _dataParser = context.GetContainer().GetService<IDataParser>();
         }
     

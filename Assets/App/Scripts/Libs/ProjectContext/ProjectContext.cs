@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Service.Container;
+using App.Scripts.Libs.Service.ServiceContainer;
 using UnityEngine;
 
 namespace App.Scripts.Libs.ProjectContext
@@ -8,7 +10,7 @@ namespace App.Scripts.Libs.ProjectContext
     {
         [SerializeField] private List<MonoInstaller> installers;
         
-        private ServiceContainer.ServiceContainer container;
+        private ServiceContainer container;
 
         private static ProjectContext _instance;
         public static ProjectContext Instance
@@ -30,14 +32,13 @@ namespace App.Scripts.Libs.ProjectContext
 
         private void Init()
         {
-            container = new ServiceContainer.ServiceContainer();
+            container = new ServiceContainer();
             foreach (var installer in installers)
             {
-                container.SetServiceSelf(installer);
                 installer.Init(_instance);
             }
         }
 
-        public ServiceContainer.ServiceContainer GetContainer() => container;
+        public ServiceContainer GetContainer() => container;
     }
 }

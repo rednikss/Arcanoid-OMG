@@ -6,7 +6,7 @@ namespace App.Scripts.Libs.EntryPoint
     {
         [SerializeField] private MonoInstaller.MonoInstaller[] monoInstallers;
 
-        [SerializeReference] private MonoInstaller.MonoInstaller starter;
+        [SerializeField] private MonoInstaller.MonoInstaller sceneStarter;
         
         public void Awake()
         {
@@ -17,7 +17,7 @@ namespace App.Scripts.Libs.EntryPoint
                 monoInstaller.Init(context);
             }
             
-            starter.Init(context);
+            sceneStarter.Init(context);
         }
     }
 }

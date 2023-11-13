@@ -27,8 +27,6 @@ namespace App.Scripts.Architecture.Localization.Manager
             _provider.LoadData(out _current);
 
             SetLocale(_current.ID);
-            
-            context.GetContainer().SetServiceSelf(this);
         }
 
         

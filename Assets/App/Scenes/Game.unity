@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160974104a244cb5a7482f9311b48b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStateMachine: {fileID: 769972910}
   levelSystems:
   - {fileID: 1954023906}
 --- !u!114 &769972910
@@ -485,6 +484,7 @@ GameObject:
   - component: {fileID: 1218846503}
   - component: {fileID: 1218846504}
   - component: {fileID: 1218846505}
+  - component: {fileID: 1218846506}
   m_Layer: 0
   m_Name: Scene Context
   m_TagString: Untagged
@@ -524,11 +524,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoInstallers:
+  - {fileID: 1218846506}
   - {fileID: 1411332436}
   - {fileID: 1157186760}
   - {fileID: 769972909}
   - {fileID: 1000444338}
-  starter: {fileID: 1218846505}
+  sceneStarter: {fileID: 1218846505}
 --- !u!114 &1218846505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +542,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c38ae626f949c4949b520e3485deb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1218846506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218846502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c91a65d147346f3983e3d2fb262d2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  services:
+  - {fileID: 1411332436}
+  - {fileID: 769972910}
+  - {fileID: 1000444338}
 --- !u!1 &1411332434
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +614,6 @@ GameObject:
   - component: {fileID: 1874351885}
   - component: {fileID: 1874351884}
   - component: {fileID: 1874351883}
-  - component: {fileID: 1874351882}
   m_Layer: 3
   m_Name: Canvas_BG
   m_TagString: Untagged
@@ -605,23 +621,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1874351882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1874351881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1874351883
 MonoBehaviour:
   m_ObjectHideFlags: 0

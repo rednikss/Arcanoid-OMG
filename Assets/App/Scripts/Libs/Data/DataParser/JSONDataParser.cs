@@ -7,7 +7,6 @@ namespace App.Scripts.Libs.Data.DataParser
     {
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetContainer().SetServiceSelf<IDataParser>(this);
         }
         
         public TDataType Parse<TDataType>(in string data)

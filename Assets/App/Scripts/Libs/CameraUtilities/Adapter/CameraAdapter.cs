@@ -12,9 +12,7 @@ namespace App.Scripts.Libs.CameraUtilities.Adapter
         private float _cameraAspect;
         
         public override void Init(ProjectContext.ProjectContext context)
-        {
-            context.GetContainer().SetServiceSelf(this);
-            
+        {            
             _cameraAspect = currentCamera.aspect;
             
             _unitSize = Vector2.one * currentCamera.orthographicSize;

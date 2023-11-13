@@ -10,9 +10,7 @@ namespace App.Scripts.Libs.SceneLoader
         [SerializeField] private SceneLoaderScriptable scriptable;
         
         public override void Init(ProjectContext.ProjectContext context)
-        {
-            context.GetContainer().SetServiceSelf(this);
-        }
+        { }
 
         public void LoadScene(string scriptableID)
         {

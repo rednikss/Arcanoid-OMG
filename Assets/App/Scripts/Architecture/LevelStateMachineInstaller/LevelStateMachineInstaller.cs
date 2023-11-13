@@ -9,21 +9,20 @@ namespace App.Scripts.Architecture.LevelStateMachineInstaller
 {
     public class LevelStateMachineInstaller : MonoInstaller
     {
-        [SerializeField] private GameStateMachine gameStateMachine;
+        private GameStateMachine gameStateMachine;
 
         [SerializeField] private MonoSystem[] levelSystems;
         
         public override void Init(ProjectContext context)
         {
             foreach (var levelSystem in levelSystems) levelSystem.Init(context);
-
+            
             var playState = new PlayState(context, levelSystems);
             var pauseState = new PauseState(context);
-            
+
+            gameStateMachine = context.GetContainer().GetService<GameStateMachine>();
             gameStateMachine.AddState(playState);
             gameStateMachine.AddState(pauseState);
-            
-            context.GetContainer().SetServiceSelf(gameStateMachine);
         }
     }
 }

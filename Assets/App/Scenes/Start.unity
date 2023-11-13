@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoInstallers: []
-  starter: {fileID: 1827881418}
+  sceneStarter: {fileID: 1827881418}
 --- !u!114 &1827881418
 MonoBehaviour:
   m_ObjectHideFlags: 0

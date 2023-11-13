@@ -18,7 +18,6 @@ namespace App.Scripts.Architecture.PanelManager
 
         public override void Init(ProjectContext context)
         {
-            context.GetContainer().SetServiceSelf(this);
             _context = context;
 
             SceneManager.sceneUnloaded += (arg0) => DisableAll();

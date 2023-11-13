@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using App.Scripts.Libs.Service.ServiceContainer;
 
-namespace App.Scripts.Libs.ServiceContainer
+namespace App.Scripts.Libs.Service.Container
 {
     public class ServiceContainer
     {
@@ -23,13 +24,6 @@ namespace App.Scripts.Libs.ServiceContainer
             var container = FindContainer<TBind>();
 
             return container.Get();
-        }
-        
-        public void RemoveService<TService>(TService service)
-        {
-            var typeBind = typeof(TService).Name;
-            
-            _services.Remove(typeBind);
         }
 
         private Container<T> FindContainer<T>()
