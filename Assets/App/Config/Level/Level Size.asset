@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267032cda0ee468088d6d0ffb77d9ed5, type: 3}
   m_Name: Level Size
   m_EditorClassIdentifier: 
-  top: 0.2
-  right: 0
-  left: 0
+  padding: {fileID: 11400000, guid: f029367bfa93d96498bdf36cdcab993a, type: 2}
   row: 0.05
   column: 0.05

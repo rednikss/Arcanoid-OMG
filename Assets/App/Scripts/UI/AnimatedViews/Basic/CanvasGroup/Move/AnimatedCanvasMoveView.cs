@@ -1,5 +1,5 @@
 using System;
-using App.Scripts.Libs.CameraUtilities.Adapter;
+using App.Scripts.Libs.Utilities.Camera.Adapter;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using DG.Tweening;
 using UnityEngine;

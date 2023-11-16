@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptable: {fileID: 11400000, guid: 58a0cce447f6cb248bf94051905cf5eb, type: 2}
-  localesPath: Locales
+  localesPath: Data/Locales
 --- !u!1 &5799107849311243750
 GameObject:
   m_ObjectHideFlags: 0

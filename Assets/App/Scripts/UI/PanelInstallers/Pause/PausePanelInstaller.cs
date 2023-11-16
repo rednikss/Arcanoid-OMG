@@ -1,8 +1,8 @@
-﻿using App.Scripts.Architecture.Localization.Manager;
+﻿using App.Scripts.Architecture.Project.Localization.Manager;
 using App.Scripts.Game.States;
+using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.SceneLoader;
-using App.Scripts.Libs.StateMachine;
+using App.Scripts.Libs.Utilities.SceneLoader;
 using App.Scripts.UI.PanelInstallers.Base;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,36 +1,27 @@
-﻿using App.Scripts.Architecture.PanelManager;
+﻿using System;
+using System.Collections.Generic;
+using App.Scripts.Architecture.Scene.PanelManager;
+using App.Scripts.Libs.Patterns.StateMachine;
+using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.StateMachine;
-using App.Scripts.Libs.StateMachine.MonoSystem;
 using App.Scripts.UI.PanelInstallers.Level;
-using UnityEngine;
 
 namespace App.Scripts.Game.States
 {
     public class PlayState : GameState
     {
         private readonly PanelManager _panelManager;
-        
-        private readonly MonoSystem[] defaultLevelSystems;
-        
-        public PlayState(ProjectContext context, MonoSystem[] defaultSystems)
+
+        public PlayState(GameStateMachine machine, 
+            ProjectContext context, 
+            Dictionary<Type, MonoSystem> systems) : base(machine)
         {
             _panelManager = context.GetContainer().GetService<PanelManager>();
-            defaultLevelSystems = defaultSystems;
+            MonoSystems = systems;
         }
         
         public override void OnEnterState()
         {
-            var panel = _panelManager.GetDisabledPanel<LevelPanelInstaller>();
-            panel.gameObject.SetActive(true);
-        }
-
-        public override void Update()
-        {
-            foreach (var monoSystem in defaultLevelSystems)
-            {
-                monoSystem.UpdateWithDT(Time.deltaTime);
-            }
         }
 
         public override void OnExitState()

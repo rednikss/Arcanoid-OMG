@@ -1,6 +1,6 @@
-﻿using App.Scripts.Architecture.PanelManager;
+﻿using App.Scripts.Architecture.Scene.PanelManager;
+using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.StateMachine;
 using App.Scripts.UI.PanelInstallers.Pause;
 
 namespace App.Scripts.Game.States
@@ -9,7 +9,8 @@ namespace App.Scripts.Game.States
     {
         private readonly PanelManager _panelManager;
         
-        public PauseState(ProjectContext context)
+        public PauseState(GameStateMachine machine, 
+            ProjectContext context) : base(machine)
         {
             _panelManager = context.GetContainer().GetService<PanelManager>();
         }
@@ -20,11 +21,6 @@ namespace App.Scripts.Game.States
             panel.gameObject.SetActive(true);
         }
 
-        public override void Update()
-        {
-            
-        }
-        
         public override void OnExitState()
         {
             var panel = _panelManager.GetEnabledPanel<PausePanelInstaller>();

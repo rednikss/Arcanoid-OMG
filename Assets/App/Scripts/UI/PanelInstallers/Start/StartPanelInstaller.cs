@@ -1,8 +1,6 @@
-﻿using App.Scripts.Architecture.Localization.Manager;
-using App.Scripts.Architecture.Localization.Text;
-using App.Scripts.Libs.EntryPoint.MonoInstaller;
+﻿using App.Scripts.Architecture.Project.Localization.Manager;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.SceneLoader;
+using App.Scripts.Libs.Utilities.SceneLoader;
 using App.Scripts.UI.PanelInstallers.Base;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +14,8 @@ namespace App.Scripts.UI.PanelInstallers.Start
 
         [SerializeField] private Button languageButton;
 
+        private int localeID;
+        
         public override void Init(ProjectContext context)
         {
             InitLocalizedTexts(context.GetContainer().GetService<LocaleManager>());
@@ -27,7 +27,12 @@ namespace App.Scripts.UI.PanelInstallers.Start
             
             languageButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<LocaleManager>().ChangeLocale();
+                var localeManager = context.GetContainer().GetService<LocaleManager>();
+                var locales = localeManager.GetAvailableLocales();
+                
+                localeManager.SetLocale(locales[localeID++]);
+
+                localeID %= locales.Count;
             });
         }
     }

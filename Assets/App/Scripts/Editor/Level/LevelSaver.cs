@@ -7,12 +7,12 @@ using UnityEngine.UIElements;
 
 namespace App.Scripts.Editor.Level
 {
-    [CustomEditor(typeof(LevelManager), true)]
+    [CustomEditor(typeof(LevelLoader), true)]
     public class LevelSaver : UnityEditor.Editor
     {
         public override VisualElement CreateInspectorGUI()
         {
-            var component = (LevelManager) target;
+            var component = (LevelLoader) target;
             
             VisualElement myInspector = new VisualElement();
 

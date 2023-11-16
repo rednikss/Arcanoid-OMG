@@ -16,8 +16,8 @@ namespace App.Scripts.Libs.EntryPoint
             {
                 monoInstaller.Init(context);
             }
-            
-            sceneStarter.Init(context);
+
+            if (sceneStarter != null) sceneStarter.Init(context);
         }
     }
 }

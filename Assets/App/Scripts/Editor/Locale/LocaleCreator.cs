@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using App.Scripts.Architecture.Localization.Scriptable.Locale;
+using App.Scripts.Architecture.Project.Localization.Scriptable.Locale;
 using UnityEditor;
 using UnityEngine;
 
