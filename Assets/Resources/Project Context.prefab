@@ -373,11 +373,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   services:
-  - {fileID: 5799107850585403802}
-  - {fileID: 5799107850676743648}
-  - {fileID: 5799107849311243744}
-  - {fileID: 5799107848962729405}
-  - {fileID: 5485889750013960750}
+  - service: {fileID: 5799107850676743648}
+    type: 1
+  - service: {fileID: 5799107849311243744}
+    type: 1
+  - service: {fileID: 5799107848962729405}
+    type: 0
+  - service: {fileID: 5485889750013960750}
+    type: 0
+  - service: {fileID: 5799107850585403802}
+    type: 0
 --- !u!1 &5799107850585403800
 GameObject:
   m_ObjectHideFlags: 0

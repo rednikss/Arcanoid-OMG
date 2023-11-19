@@ -17,9 +17,7 @@ namespace App.Scripts.Game.Mechanics.Ball.Factory
         public override Ball Create()
         {
             var newBall = Instantiate(prefab, transform);
-            
-            stateMachine.GetState<PlayState>().AddSystem(newBall);
-
+            newBall.Init(ProjectContext.Instance);
             return newBall;
         }
     }

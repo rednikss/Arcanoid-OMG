@@ -36,6 +36,11 @@ namespace App.Scripts.Libs.Utilities.Camera.Adapter
         {
             return currentCamera.ScreenToWorldPoint(position);
         }
+
+        public Vector2 PixelToWorld(Vector2 position)
+        {
+            return currentCamera.ScreenToWorldPoint(position);
+        }
         
         public Vector2 GetSize() => _unitSize;
     }

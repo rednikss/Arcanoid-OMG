@@ -26,7 +26,7 @@ namespace App.Scripts.Game.Mechanics.Platform
 
         public override void UpdateWithDT(float dt)
         {
-            bool isPressed = inputObserver.IsPressed && !inputObserver.IsOverGameObject;
+            bool isPressed = inputObserver.IsPressedInGame;
             var targetPos = isPressed ? inputObserver.GetWorldPosition() : transform.position;
 
             float velocity = Mathf.Clamp((targetPos - transform.position).x, -1, 1);

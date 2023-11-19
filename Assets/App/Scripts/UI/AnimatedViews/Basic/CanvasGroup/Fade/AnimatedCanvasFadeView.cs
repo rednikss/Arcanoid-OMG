@@ -1,59 +1,49 @@
-using System;
+using System.Threading.Tasks;
+using App.Scripts.Libs.ProjectContext;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using DG.Tweening;
 
 namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Fade
 {
-    public class AnimatedCanvasFadeView : CanvasGroupView
+    public class AnimatedCanvasFadeView : AnimatedCanvasGroupView
     {
-        public override void Init()
-        {
-            canvasGroup.interactable = false;
-        }
+        public override void Init(ProjectContext context)
+        { }
 
-        public override void Show(Action onComplete = null)
+        public override async Task Show()
         {
             if (DOTween.IsTweening(canvasGroup)) canvasGroup.DOKill();
 
-            canvasGroup.DOFade(1, scriptable.animationTime)
-                .SetUpdate(true)
-                .SetLink(gameObject)
+            canvasGroup.alpha = 0;
+            await canvasGroup.DOFade(1, scriptable.animationTime)
                 .SetEase(scriptable.showEase)
-                .OnStart(() =>
-                {
-                    canvasGroup.interactable = false;
-                    canvasGroup.gameObject.SetActive(true);
-                })
-                .OnComplete(() =>
-                {
-                    canvasGroup.interactable = true;
-                    onComplete?.Invoke();
-                });
+                .SetLink(gameObject)
+                .AsyncWaitForCompletion();
         }
 
-        public override void Hide(Action onComplete = null)
+        public override async Task Hide()
         {
             if (DOTween.IsTweening(canvasGroup)) canvasGroup.DOKill();
-            
-            canvasGroup.DOFade(0, scriptable.animationTime)
-                .SetUpdate(true)
-                .SetLink(gameObject)
+
+            canvasGroup.alpha = 1;
+            await canvasGroup.DOFade(0, scriptable.animationTime)
                 .SetEase(scriptable.hideEase)
-                .OnStart(() =>
-                {
-                    canvasGroup.interactable = false;
-                    canvasGroup.gameObject.SetActive(true);
-                    canvasGroup.alpha = 1;
-                })
-                .OnComplete(() =>
-                {
-                    canvasGroup.gameObject.SetActive(false);
-                    
-                    canvasGroup.interactable = true;
-                    onComplete?.Invoke();
-                });
+                .SetLink(gameObject)
+                .AsyncWaitForCompletion();
+        }
+
+        public override void ImmediateEnable()
+        {
+            base.ImmediateEnable();
+            
+            canvasGroup.alpha = 1;
         }
         
-        private void OnEnable() => canvasGroup.alpha = 0;
+        public override void ImmediateDisable()
+        {
+            base.ImmediateDisable();
+            
+            canvasGroup.alpha = 0;
+        }
     }
 }

@@ -651,7 +651,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8191965845002089563}
+  - component: {fileID: 5786550531866941763}
+  - component: {fileID: 4394975530306884687}
   - component: {fileID: 8426861587355909103}
+  - component: {fileID: 8759330017489351752}
   m_Layer: 5
   m_Name: Level Header
   m_TagString: Untagged
@@ -681,6 +684,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 1366}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!225 &5786550531866941763
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965845002089560}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &4394975530306884687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965845002089560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaf3d1418784e6b8c8f825bd69ffea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 5786550531866941763}
+  scriptable: {fileID: 11400000, guid: 66629fcd3e5700842955cb8fcc4534f7, type: 2}
 --- !u!114 &8426861587355909103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,9 +722,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480e120e01e24216a54ff9ca40c17723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelCanvasGroup: {fileID: 5786550531866941763}
+  canvasGroupView: {fileID: 4394975530306884687}
   localizedTexts:
   - {fileID: 3938881021012886237}
   menuButton: {fileID: 2534092293934220057}
+--- !u!114 &8759330017489351752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965845002089560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9849d2bf273a01c459923dfa3c564b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoInstallers:
+  - {fileID: 4394975530306884687}
+  - {fileID: 8426861587355909103}
 --- !u!1001 &1950727762587706236
 PrefabInstance:
   m_ObjectHideFlags: 0

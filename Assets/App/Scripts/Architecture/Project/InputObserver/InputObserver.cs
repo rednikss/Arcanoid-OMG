@@ -12,11 +12,18 @@ namespace App.Scripts.Architecture.Project.InputObserver
         
         public bool IsPressed => Input.GetMouseButton(0);
         
-        public bool IsDown =>  Input.GetMouseButtonDown(0);
+        public bool IsDown => Input.GetMouseButtonDown(0);
         
         public bool IsUp => Input.GetMouseButtonUp(0);
 
         public bool IsOverGameObject => EventSystem.current.IsPointerOverGameObject();
+
+        public bool IsPressedInGame => IsPressed && !IsOverGameObject;
+        
+        public bool IsDownInGame => IsDown && !IsOverGameObject;
+        
+        public bool IsUpInGame => IsUp && !IsOverGameObject;
+        
         
         private CameraAdapter _adapter;
         

@@ -1,4 +1,5 @@
-using System;
+using System.Threading.Tasks;
+using App.Scripts.Libs.ProjectContext;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using DG.Tweening;
@@ -6,66 +7,68 @@ using UnityEngine;
 
 namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
 {
-    public class AnimatedCanvasMoveView : CanvasGroupView
+    public class AnimatedCanvasMoveView : AnimatedCanvasGroupView
     {
         [Header("Additional Options")]
         [SerializeField] private Vector2 showDirection;
         
         [SerializeField] private Canvas parentCanvas;
         
-        [SerializeField] private CameraAdapter adapter;
+        private CameraAdapter _adapter;
         
         private Transform _canvasTransform;
         
-        private Vector2 _openedPos;
-        private Vector2 _closedPos;
+        private Vector3 _openedPos;
+        private Vector3 _closedPos;
 
-        public override void Init()
+        public override void Init(ProjectContext context)
         {
+            _adapter = context.GetContainer().GetService<CameraAdapter>();
+            
             _canvasTransform = canvasGroup.transform;
-            _openedPos = _closedPos = _canvasTransform.position;
-            _closedPos -= showDirection.normalized * 2 * adapter.PixelToWorld(parentCanvas.pixelRect.size);
-            canvasGroup.interactable = false;
+
+            var size = parentCanvas.pixelRect.size;
+            Vector3 deltaPos = showDirection.normalized * 2 * _adapter.PixelToWorld(size);
+            
+            _openedPos = _closedPos = (Vector2)_canvasTransform.position;
+            _closedPos -= deltaPos;
         }
 
-        public override void Show(Action onComplete = null)
+        public override async Task Show()
         {
             if (DOTween.IsTweening(canvasGroup)) canvasGroup.DOKill();
-            
-            canvasGroup.interactable = false;
-            _canvasTransform.DOMove(_openedPos, scriptable.animationTime)
-                .SetUpdate(true)
-                .SetLink(gameObject)
+
+            _canvasTransform.position = _closedPos;
+            await _canvasTransform.DOMove(_openedPos, scriptable.animationTime)
                 .SetEase(scriptable.showEase)
-                .OnStart(() => canvasGroup.gameObject.SetActive(true))
-                .OnComplete(() =>
-                {
-                    canvasGroup.interactable = true;
-                    onComplete?.Invoke();
-                });
+                .SetLink(gameObject)
+                .AsyncWaitForCompletion();
         }
 
-        public override void Hide(Action onComplete = null)
+        public override async Task Hide()
         {
             if (DOTween.IsTweening(canvasGroup)) canvasGroup.DOKill();
-            
-            canvasGroup.interactable = false;
-            _canvasTransform.DOMove(_closedPos, scriptable.animationTime)
-                .SetUpdate(true)
-                .SetLink(gameObject)
+
+            _canvasTransform.position = _openedPos;
+            await _canvasTransform.DOMove(_closedPos, scriptable.animationTime)
                 .SetEase(scriptable.hideEase)
-                .OnStart(() =>
-                {
-                    canvasGroup.gameObject.SetActive(true);
-                    _canvasTransform.position = _openedPos;
-                })
-                .OnComplete(() =>
-                {
-                    canvasGroup.gameObject.SetActive(false);
-                    onComplete?.Invoke();
-                });
+                .SetLink(gameObject)
+                .AsyncWaitForCompletion();
         }
 
-        private void OnEnable() => _canvasTransform.position = _closedPos;
+        
+        public override void ImmediateEnable()
+        {
+            base.ImmediateEnable();
+            
+            _canvasTransform.position = _openedPos;
+        }
+        
+        public override void ImmediateDisable()
+        {
+            base.ImmediateDisable();
+            
+            _canvasTransform.position = _closedPos;
+        }
     }
 }

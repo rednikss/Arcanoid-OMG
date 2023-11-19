@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base
 {
     public interface ICanvasGroupView
     {
-        public void Show(Action onComplete);
+        public Task Show();
 
-        public void Hide(Action onComplete);
+        public Task Hide();
     }
 }

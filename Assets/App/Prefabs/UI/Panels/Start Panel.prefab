@@ -9,7 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6503739202074640778}
+  - component: {fileID: 3448404907254867512}
+  - component: {fileID: 1973562188305033575}
   - component: {fileID: -1649160395803272164}
+  - component: {fileID: 5139859100185118173}
   m_Layer: 5
   m_Name: Start Panel
   m_TagString: Untagged
@@ -40,6 +43,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 768, y: 1366}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &3448404907254867512
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503739202074640777}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1973562188305033575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503739202074640777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efaf3d1418784e6b8c8f825bd69ffea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 3448404907254867512}
+  scriptable: {fileID: 11400000, guid: 66629fcd3e5700842955cb8fcc4534f7, type: 2}
 --- !u!114 &-1649160395803272164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52,12 +81,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c1ed3b885f4efa99571bb0b1044cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 6503739203373235853}
-  playSceneID: Level Scene
-  languageButton: {fileID: 6155023187089428836}
+  panelCanvasGroup: {fileID: 3448404907254867512}
+  canvasGroupView: {fileID: 1973562188305033575}
   localizedTexts:
   - {fileID: 2948589720932051883}
   - {fileID: 6770749091188088648}
+  playButton: {fileID: 6503739203373235853}
+  playSceneID: Level Scene
+  languageButton: {fileID: 6155023187089428836}
+--- !u!114 &5139859100185118173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6503739202074640777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9849d2bf273a01c459923dfa3c564b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoInstallers:
+  - {fileID: 1973562188305033575}
+  - {fileID: -1649160395803272164}
 --- !u!1 &6503739203862357022
 GameObject:
   m_ObjectHideFlags: 0

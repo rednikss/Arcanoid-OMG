@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using App.Scripts.Libs.ProjectContext;
 using UnityEngine;
@@ -12,14 +13,16 @@ namespace App.Scripts.Game.Mechanics.Ball
         [SerializeField] [Min(0)] private float speed;
         
         private Vector2 _currentVelocity;
-        
+
+        private BallPool _pool;
         public override void Init(ProjectContext context)
         {
-           
+            _pool = context.GetContainer().GetService<BallPool>();
         }
 
         public override void UpdateWithDT(float dt)
         {
+            _rigidbody.velocity = Vector2.zero;
             _rigidbody.MovePosition(_rigidbody.position + dt * _currentVelocity);
         }
         
@@ -30,6 +33,7 @@ namespace App.Scripts.Game.Mechanics.Ball
             {
                 normal += contact.normal;
             }
+            normal.Normalize();
             
             _currentVelocity = Vector2.Reflect(_currentVelocity, normal);
         }
@@ -43,6 +47,11 @@ namespace App.Scripts.Game.Mechanics.Ball
         {
             speed = Math.Abs(newSpeed);
             _currentVelocity = _currentVelocity.normalized * speed;
+        }
+
+        private void OnBecameInvisible()
+        {
+            _pool.ReturnObject(this);
         }
     }
 }

@@ -2,14 +2,14 @@
 using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.Utilities.SceneLoader;
-using App.Scripts.UI.PanelInstallers.Base;
+using App.Scripts.Libs.Utilities.Scene;
+using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.Scripts.UI.PanelInstallers.Pause
+namespace App.Scripts.UI.PanelControllers.Pause
 {
-    public class PausePanelInstaller : LocalizedPanelInstaller
+    public class PausePanelController : LocalizedPanelController
     {
         [SerializeField] private Button restartButton;
         
@@ -20,11 +20,11 @@ namespace App.Scripts.UI.PanelInstallers.Pause
         
         public override void Init(ProjectContext context)
         {
-            InitLocalizedTexts(context.GetContainer().GetService<LocaleManager>());
+            base.Init(context);
             
             continueButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<GameStateMachine>().ChangeState<PlayState>();
+                context.GetContainer().GetService<GameStateMachine>().ChangeToPrevious();
             });
             
             backButton.onClick.AddListener(() =>

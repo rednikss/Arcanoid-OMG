@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace App.Scripts.Libs.Patterns.StateMachine
@@ -6,7 +7,8 @@ namespace App.Scripts.Libs.Patterns.StateMachine
     public class GameStateMachine : MonoBehaviour
     {
         private readonly Dictionary<string, GameState> _states = new();
-        
+
+        private GameState _previousState;
         private GameState _currentState;
         
         public void AddState(GameState state)
@@ -22,18 +24,28 @@ namespace App.Scripts.Libs.Patterns.StateMachine
             SetState(state);
         }
 
-        private void SetState(GameState value)
+        public void ChangeToPrevious()
         {
-            _currentState?.OnExitState();
+            SetState(_previousState);
+        }
+        
+        private async void SetState(GameState value)
+        {
+            _previousState = _currentState;
             _currentState = value;
-            _currentState?.OnEnterState();
+            
+            await (_previousState?.OnExitState() ?? Task.CompletedTask);
+            await (_currentState?.OnEnterState() ?? Task.CompletedTask);
         }
 
-        public GameState GetState<T>() => _states[typeof(T).Name];
-        
+        public GameState GetState<T>()
+        { 
+            return _states[typeof(T).Name];
+        } 
+
         public void ExitState()
         {
-            _currentState?.OnExitState();
+            SetState(null);
         }
         
         public void Update()

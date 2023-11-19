@@ -2,7 +2,7 @@
 using App.Scripts.Architecture.Scene.PanelManager.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.UI.PanelInstallers.Base;
+using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,32 +12,25 @@ namespace App.Scripts.Architecture.Scene.PanelManager
     {
         [SerializeField] private PanelListScriptable scriptable;
 
-        private readonly List<LocalizedPanelInstaller> _panels = new();
-
-        private ProjectContext _context;
+        private readonly List<LocalizedPanelController> _disabledPanels = new();
+        
+        private readonly Stack<LocalizedPanelController> _activePanels = new();
 
         public override void Init(ProjectContext context)
         {
-            _context = context;
-
             SceneManager.sceneUnloaded += (arg0) => DisableAll();
         }
 
-        public TInstaller GetDisabledPanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
+        public TInstaller GetPanel<TInstaller>() where TInstaller : LocalizedPanelController
         {
-            return FindPanel<TInstaller>(false) ?? CreatePanel<TInstaller>();
+            return FindPanel<TInstaller>() ?? CreatePanel<TInstaller>();
         }
 
-        public TInstaller GetEnabledPanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
+        private TInstaller FindPanel<TInstaller>() where TInstaller : LocalizedPanelController
         {
-            return FindPanel<TInstaller>(true);
-        }
-
-        private TInstaller FindPanel<TInstaller>(bool activeState) where TInstaller : LocalizedPanelInstaller
-        {
-            foreach (var panel in _panels)
+            foreach (var panel in _disabledPanels)
             {
-                if (panel.GetType() != typeof(TInstaller) || panel.isActiveAndEnabled != activeState) continue;
+                if (panel.GetType() != typeof(TInstaller)) continue;
                 
                 return (TInstaller)panel;
             }
@@ -45,19 +38,18 @@ namespace App.Scripts.Architecture.Scene.PanelManager
             return null;
         }
 
-        private TInstaller CreatePanel<TInstaller>() where TInstaller : LocalizedPanelInstaller
+        private TInstaller CreatePanel<TInstaller>() where TInstaller : LocalizedPanelController
         {
             foreach (var newPanel in scriptable.panelList)
             {
                 if (newPanel.GetType() != typeof(TInstaller)) continue;
                 
-                var installer = Instantiate(newPanel, transform);
-                installer.Init(_context);
-                installer.gameObject.SetActive(false);
+                var panelController = Instantiate(newPanel, transform);
+                panelController.HidePanelImmediately();
                 
-                _panels.Add(installer);
+                _disabledPanels.Add(panelController);
                 
-                return (TInstaller)installer;
+                return (TInstaller)panelController;
             }
 
             Debug.LogError($"Attempted to create non-existent panel {typeof(TInstaller).Name}!");
@@ -65,12 +57,35 @@ namespace App.Scripts.Architecture.Scene.PanelManager
             return null;
         }
 
+        public void AddActive(LocalizedPanelController newPanel)
+        {
+            if (_activePanels.TryPeek(out var panel))
+            {
+                panel.SetInteractive(false);
+            }
+            
+            _disabledPanels.Remove(newPanel);
+            _activePanels.Push(newPanel);
+            _activePanels.Peek().SetInteractive(true);
+        }
+
+        public LocalizedPanelController RemoveActive()
+        {
+            var activePanel = _activePanels.Pop();
+            _disabledPanels.Add(activePanel);
+            activePanel.SetInteractive(false);
+            
+            if (_activePanels.TryPeek(out var panel))
+            {
+                panel.SetInteractive(true);
+            }
+            
+            return activePanel;
+        }
+        
         private void DisableAll()
         {
-            foreach (var installer in _panels)
-            {
-                installer.gameObject.SetActive(false);
-            }
+            while (_activePanels.Count > 0) RemoveActive().HidePanelImmediately();
         }
     }
 }

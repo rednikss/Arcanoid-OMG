@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c9bb05c778e40518496460a62b3dc69, type: 3}
-  m_Name: Object Pool Options
+  m_Script: {fileID: 11500000, guid: 14926e376e3c47f394188bfdcc87ddee, type: 3}
+  m_Name: Fast Animation
   m_EditorClassIdentifier: 
-  defaultSize: 3
-  maximumSize: 10
+  animationTime: 0.25
+  showEase: 3
+  hideEase: 2

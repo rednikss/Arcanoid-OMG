@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   systems:
+  - {fileID: 1636393134}
   - {fileID: 1954023909}
 --- !u!114 &769972910
 MonoBehaviour:
@@ -535,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57e4560fb28430f9d790d30500dcf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pad: {fileID: 11400000, guid: f029367bfa93d96498bdf36cdcab993a, type: 2}
+  pad: {fileID: 11400000, guid: 031408f389992ff428e4e880be0fd6ad, type: 2}
   edgeCollider: {fileID: 1157186759}
 --- !u!1 &1218846502
 GameObject:
@@ -598,7 +599,7 @@ MonoBehaviour:
   - {fileID: 769972909}
   - {fileID: 1636393135}
   - {fileID: 1636393134}
-  sceneStarter: {fileID: 1218846505}
+  - {fileID: 1218846505}
 --- !u!114 &1218846505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,10 +625,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   services:
-  - {fileID: 1411332436}
-  - {fileID: 1636393134}
-  - {fileID: 769972910}
-  - {fileID: 1122198663}
+  - service: {fileID: 1411332436}
+    type: 0
+  - service: {fileID: 1636393134}
+    type: 0
+  - service: {fileID: 769972910}
+    type: 0
+  - service: {fileID: 1122198663}
+    type: 0
 --- !u!1 &1411332434
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,15 +968,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 0
@@ -981,30 +978,30 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 3796.746
+      e00: 0.00000308191
       e01: 0
-      e02: -1.1020282e-38
-      e03: -1.1020282e-38
-      e10: 7.02e-43
+      e02: -3.8750038
+      e03: -3.8750038
+      e10: 8.27e-43
       e11: 0
-      e12: 7e-43
-      e13: 7e-43
-      e20: -7.206815e-33
+      e12: 8.25e-43
+      e13: 8.25e-43
+      e20: -0.011027813
       e21: 1e-45
-      e22: 3.5975098e-19
-      e23: 1.5932373e+29
+      e22: 8.373274e-29
+      e23: 3.9597478e+19
       e30: 4.5904e-41
       e31: 0
-      e32: 7.02e-43
-      e33: 7.05e-43
+      e32: 8.27e-43
+      e33: 8.3e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: 4.3087e-41, g: 4.3087e-41, b: 4.3087e-41, a: 4.3087e-41}
+    m_Data: {r: 3.6053e-41, g: 3.6053e-41, b: 3.6053e-41, a: 3.6053e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 8, y: -3, z: 0}
-  m_Size: {x: 4, y: 4, z: 1}
+  m_Origin: {x: 5, y: -1, z: 0}
+  m_Size: {x: 2, y: 2, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -1134,6 +1131,10 @@ PrefabInstance:
     - target: {fileID: 4696320433733758618, guid: 1175c186fd761c240a51239f5103b748, type: 3}
       propertyPath: m_Name
       value: Spaceship
+      objectReference: {fileID: 0}
+    - target: {fileID: 4696320433733758625, guid: 1175c186fd761c240a51239f5103b748, type: 3}
+      propertyPath: m_Mass
+      value: 0.36225003
       objectReference: {fileID: 0}
     - target: {fileID: 4696320433733758628, guid: 1175c186fd761c240a51239f5103b748, type: 3}
       propertyPath: m_RootOrder

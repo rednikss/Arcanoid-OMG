@@ -1,20 +1,19 @@
-﻿using App.Scripts.Architecture.Project.Localization.Manager;
-using App.Scripts.Game.States;
+﻿using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.UI.PanelInstallers.Base;
+using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.Scripts.UI.PanelInstallers.Level
+namespace App.Scripts.UI.PanelControllers.Level
 {
-    public class LevelPanelInstaller : LocalizedPanelInstaller
+    public class LevelPanelController : LocalizedPanelController
     {
         [SerializeField] private Button menuButton;
         
         public override void Init(ProjectContext context)
         {
-            InitLocalizedTexts(context.GetContainer().GetService<LocaleManager>());
+            base.Init(context);
             
             menuButton.onClick.AddListener(() =>
             {

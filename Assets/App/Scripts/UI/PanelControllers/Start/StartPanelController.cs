@@ -1,13 +1,13 @@
 ﻿using App.Scripts.Architecture.Project.Localization.Manager;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.Libs.Utilities.SceneLoader;
-using App.Scripts.UI.PanelInstallers.Base;
+using App.Scripts.Libs.Utilities.Scene;
+using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace App.Scripts.UI.PanelInstallers.Start
+namespace App.Scripts.UI.PanelControllers.Start
 {
-    public class StartPanelInstaller : LocalizedPanelInstaller
+    public class StartPanelController : LocalizedPanelController
     {
         [SerializeField] private Button playButton;
         [SerializeField] private string playSceneID;
@@ -18,7 +18,7 @@ namespace App.Scripts.UI.PanelInstallers.Start
         
         public override void Init(ProjectContext context)
         {
-            InitLocalizedTexts(context.GetContainer().GetService<LocaleManager>());
+            base.Init(context);
             
             playButton.onClick.AddListener(() =>
             {

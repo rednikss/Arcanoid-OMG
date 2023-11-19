@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace App.Scripts.Libs.Patterns.StateMachine
@@ -17,7 +18,7 @@ namespace App.Scripts.Libs.Patterns.StateMachine
         
         public void AddSystem(MonoSystem.MonoSystem system) => MonoSystems.Add(system.GetType(), system);
         
-        public abstract void OnEnterState();
+        public abstract Task OnEnterState();
 
         public virtual void Update()
         {
@@ -33,7 +34,7 @@ namespace App.Scripts.Libs.Patterns.StateMachine
             }
         }
         
-        public abstract void OnExitState();
+        public abstract Task OnExitState();
         
     }
 }

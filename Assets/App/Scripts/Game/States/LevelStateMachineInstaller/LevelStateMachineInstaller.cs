@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
@@ -13,7 +14,7 @@ namespace App.Scripts.Game.States.LevelStateMachineInstaller
     {
         private GameStateMachine gameStateMachine;
 
-        [SerializeField] private MonoSystem[] systems;
+        [SerializeReference] private MonoSystem[] systems;
 
         private readonly Dictionary<Type, MonoSystem> convertedSystems = new();
         
@@ -38,6 +39,10 @@ namespace App.Scripts.Game.States.LevelStateMachineInstaller
             gameStateMachine.AddState(startState);
             gameStateMachine.AddState(playState);
             gameStateMachine.AddState(pauseState);
+
+
+            var ballPool = context.GetContainer().GetService<BallPool>();
+            ballPool.OnReturnAllBalls += gameStateMachine.ChangeState<StartState>;
         }
     }
 }

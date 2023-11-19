@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using App.Scripts.Architecture.Scene.PanelManager;
+using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using App.Scripts.Libs.ProjectContext;
-using App.Scripts.UI.PanelInstallers.Level;
 
 namespace App.Scripts.Game.States
 {
@@ -20,14 +21,17 @@ namespace App.Scripts.Game.States
             MonoSystems = systems;
         }
         
-        public override void OnEnterState()
+        public override Task OnEnterState()
         {
+            var platform = (Platform) MonoSystems[typeof(Platform)];
+            
+            platform.usingBalls.Clear();
+            return Task.CompletedTask;
         }
 
-        public override void OnExitState()
+        public override Task OnExitState()
         {
-            var panel = _panelManager.GetEnabledPanel<LevelPanelInstaller>();
-            panel.gameObject.SetActive(true);
+            return Task.CompletedTask;
         }
     }
 }

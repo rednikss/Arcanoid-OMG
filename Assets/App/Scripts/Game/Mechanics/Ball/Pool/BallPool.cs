@@ -1,13 +1,17 @@
-﻿using App.Scripts.Game.Mechanics.Ball.Factory;
+﻿using System;
+using App.Scripts.Game.Mechanics.Ball.Factory;
 using App.Scripts.Libs.Patterns.ObjectPool;
 using App.Scripts.Libs.ProjectContext;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace App.Scripts.Game.Mechanics.Ball.Pool
 {
     public class BallPool : ObjectPool<Ball>
     {
         [SerializeField] private DefaultBallFactory factory;
+
+        public event Action OnReturnAllBalls;
         
         public override void Init(ProjectContext context)
         {
@@ -23,7 +27,7 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
             }
             
             var newBall = factory.Create();
-            PoolObjects.Push(newBall);
+            ReturnObject(newBall);
             
             return newBall;
         }
@@ -31,27 +35,26 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
         public override Ball Get()
         {
             var newBall = PoolObjects.Peek() ?? Create();
-            OnTakeObject(newBall);
+            TakeObject(newBall);
 
             return newBall;
-        }   
-
-        public override void Release(Ball pooledObject)
-        {
-            OnReturnObject(pooledObject);
         }
 
-        public override void OnReturnObject(Ball pooledObject)
+        public override void ReturnObject(Ball pooledObject)
         {
             pooledObject.gameObject.SetActive(false);
             
-            PoolObjects.Push(pooledObject);
             UsingObjects.Remove(pooledObject);
+            
+            if (UsingObjects.Count == 0) OnReturnAllBalls?.Invoke();
+            
+            PoolObjects.Push(pooledObject);
         }
 
-        public override void OnTakeObject(Ball pooledObject)
+        public override void TakeObject(Ball pooledObject)
         {
             pooledObject.gameObject.SetActive(true);
+            
             float angle = Mathf.Lerp(45, 135, Random.value);
             pooledObject.SetVelocity(Quaternion.Euler(0, 0, angle) * Vector3.right);
 
@@ -59,16 +62,21 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
             UsingObjects.Add(pooledObject);
         }
 
-        public override void OnDestroyObject(Ball pooledObject)
+        public override void DestroyObject(Ball pooledObject)
         {
             Destroy(pooledObject.gameObject);
+        }
+
+        public void OnDestroy()
+        {
+            Clear(true);
         }
 
         public override void Clear(bool clearUsing)
         {
             while (PoolObjects.Count > 0)
             {
-                OnDestroyObject(PoolObjects.Pop());
+                DestroyObject(PoolObjects.Pop());
             }
             
             if (!clearUsing) return;
@@ -78,7 +86,15 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
                 var obj = UsingObjects[0];
                 UsingObjects.Remove(obj);
                 
-                OnDestroyObject(obj);
+                DestroyObject(obj);
+            }
+        }
+
+        public override void UpdateWithDT(float dt)
+        {
+            foreach (var system in UsingObjects)
+            {
+                system.UpdateWithDT(dt);
             }
         }
     }

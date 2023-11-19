@@ -17,7 +17,7 @@ namespace App.Scripts.Libs.ProjectContext
             get
             {
                 if (_instance != null) return _instance;
-
+                
                 _instance = Resources.Load<ProjectContext>("Project Context");
                 _instance = Instantiate(_instance);
                 _instance.Init();
@@ -26,9 +26,8 @@ namespace App.Scripts.Libs.ProjectContext
                 
                 return _instance;
             }
-            
         }
-
+        
         private void Init()
         {
             container = new ServiceContainer();
