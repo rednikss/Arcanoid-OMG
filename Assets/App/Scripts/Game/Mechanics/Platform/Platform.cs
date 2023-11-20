@@ -26,15 +26,16 @@ namespace App.Scripts.Game.Mechanics.Platform
 
         public override void UpdateWithDT(float dt)
         {
-            bool isPressed = inputObserver.IsPressedInGame;
-            var targetPos = isPressed ? inputObserver.GetWorldPosition() : transform.position;
+            foreach (var ball in usingBalls) ball.transform.position = containerTransform.position;
+            
+            if (!inputObserver.IsPressedInGame) return;
+            
+            var targetPos = inputObserver.GetWorldPosition();
 
             float velocity = Mathf.Clamp((targetPos - transform.position).x, -1, 1);
             velocity *= speed;
             
-            _rigidbody.velocity = Vector2.right * velocity;
-
-            foreach (var ball in usingBalls) ball.transform.position = containerTransform.position;
+            _rigidbody.MovePosition(_rigidbody.position + dt * Vector2.right * velocity);
         }
 
     }

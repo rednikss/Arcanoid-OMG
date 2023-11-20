@@ -14,10 +14,8 @@ namespace App.Scripts.Game.Mechanics.Ball
         
         private Vector2 _currentVelocity;
 
-        private BallPool _pool;
         public override void Init(ProjectContext context)
         {
-            _pool = context.GetContainer().GetService<BallPool>();
         }
 
         public override void UpdateWithDT(float dt)
@@ -49,9 +47,5 @@ namespace App.Scripts.Game.Mechanics.Ball
             _currentVelocity = _currentVelocity.normalized * speed;
         }
 
-        private void OnBecameInvisible()
-        {
-            _pool.ReturnObject(this);
-        }
     }
 }

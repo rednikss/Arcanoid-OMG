@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using App.Scripts.Game.Mechanics.Ball.Pool;
+using App.Scripts.Game.Mechanics.Ball.Receiver;
 using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
@@ -35,14 +35,16 @@ namespace App.Scripts.Game.States.LevelStateMachineInstaller
             var startState = new StartState(gameStateMachine, context, startSystems);
             var playState = new PlayState(gameStateMachine, context, convertedSystems);
             var pauseState = new PauseState(gameStateMachine, context);
+            var loseState = new LoseState(gameStateMachine, context);
             
             gameStateMachine.AddState(startState);
             gameStateMachine.AddState(playState);
             gameStateMachine.AddState(pauseState);
+            gameStateMachine.AddState(loseState);
 
 
-            var ballPool = context.GetContainer().GetService<BallPool>();
-            ballPool.OnReturnAllBalls += gameStateMachine.ChangeState<StartState>;
+            var ballPool = context.GetContainer().GetService<BallReceiver>();
+            ballPool.OnBallMiss += gameStateMachine.ChangeState<StartState>;
         }
     }
 }

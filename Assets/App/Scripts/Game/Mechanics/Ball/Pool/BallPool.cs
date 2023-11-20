@@ -10,8 +10,6 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
     public class BallPool : ObjectPool<Ball>
     {
         [SerializeField] private DefaultBallFactory factory;
-
-        public event Action OnReturnAllBalls;
         
         public override void Init(ProjectContext context)
         {
@@ -45,9 +43,6 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
             pooledObject.gameObject.SetActive(false);
             
             UsingObjects.Remove(pooledObject);
-            
-            if (UsingObjects.Count == 0) OnReturnAllBalls?.Invoke();
-            
             PoolObjects.Push(pooledObject);
         }
 
@@ -65,11 +60,6 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
         public override void DestroyObject(Ball pooledObject)
         {
             Destroy(pooledObject.gameObject);
-        }
-
-        public void OnDestroy()
-        {
-            Clear(true);
         }
 
         public override void Clear(bool clearUsing)

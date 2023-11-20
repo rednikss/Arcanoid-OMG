@@ -41,13 +41,8 @@ namespace App.Scripts.Libs.Patterns.StateMachine
         public GameState GetState<T>()
         { 
             return _states[typeof(T).Name];
-        } 
-
-        public void ExitState()
-        {
-            SetState(null);
         }
-        
+
         public void Update()
         {
             _currentState?.Update();
