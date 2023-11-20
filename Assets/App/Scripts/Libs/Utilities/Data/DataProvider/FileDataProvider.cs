@@ -7,63 +7,51 @@ namespace App.Scripts.Libs.Utilities.Data.DataProvider
 {
     public class FileDataProvider : MonoInstaller, IDataProvider
     {
-        [SerializeField] private string filesPath;
-
         [SerializeField] private string format;
         
         private IDataParser _dataParser;
         
         public override void Init(ProjectContext.ProjectContext context)
         {
-            context.GetContainer().SetServiceSelf<IDataProvider>(this);
             _dataParser = context.GetContainer().GetService<IDataParser>();
         }
     
-        public void LoadData<TDataType>(out TDataType data, string fileName = null) where TDataType : new()
+        private string GetFullFileName<TDataType>(string fileName)
+        {
+            return string.Format($"{fileName ?? typeof(TDataType).Name}.{format}");
+        }
+
+        public TDataType LoadData<TDataType>(string fileName, string filePath) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName<TDataType>(fileName));
 #else
             string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
 #endif
             if (!File.Exists(fullPath))
             {
-                data = new();
-                SaveData(data, fileName);
-                
-                return;
+                Debug.LogWarning("File not existing!");
+                return new();
             }
-            
-            StreamReader streamReader = new(fullPath);
 
+            using StreamReader streamReader = new(fullPath);
             string unparsedData = streamReader.ReadToEnd();
-            streamReader.Close();
-
-            data = _dataParser.Parse<TDataType>(unparsedData);
+            
+            return _dataParser.Parse<TDataType>(unparsedData);
         }
 
-        public void SaveData<TDataType>(in TDataType data, string fileName = null) where TDataType : new()
+        public void SaveData<TDataType>(TDataType data, string fileName, string filePath) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filesPath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName<TDataType>(fileName));
 #else
             string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
 #endif
             
-            FileStream fileStream = File.Open(fullPath, FileMode.OpenOrCreate);
-            StreamWriter streamWriter = new(fileStream);
-            
             string unparsedData = _dataParser.Convert(data);
-            streamWriter.Write(unparsedData);
             
-            streamWriter.Close();
-            fileStream.Close();
+            using StreamWriter streamWriter = new(File.Open(fullPath, FileMode.Create));
+            streamWriter.Write(unparsedData);
         }
-
-        private string GetFullFileName<TDataType>(string fileName)
-        {
-            return string.Format($"{fileName ?? typeof(TDataType).Name}.{format}");
-        }
-        
     }
 }

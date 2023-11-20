@@ -1,9 +1,11 @@
-﻿namespace App.Scripts.Libs.Utilities.Data.DataProvider
+﻿using System;
+
+namespace App.Scripts.Libs.Utilities.Data.DataProvider
 {
     public interface IDataProvider
     {
-        public void LoadData<TDataType>(out TDataType data, string fileName = null) where TDataType : new();
+        public TDataType LoadData<TDataType>(string fileName, string filePath = null) where TDataType : new();
 
-        public void SaveData<TDataType>(in TDataType data, string fileName = null) where TDataType : new();
+        public void SaveData<TDataType>(TDataType data, string fileName, string filePath) where TDataType : new();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base.Scriptable;
 using UnityEngine;

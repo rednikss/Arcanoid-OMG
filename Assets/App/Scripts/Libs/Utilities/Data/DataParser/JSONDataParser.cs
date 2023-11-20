@@ -9,12 +9,12 @@ namespace App.Scripts.Libs.Utilities.Data.DataParser
         {
         }
         
-        public TDataType Parse<TDataType>(in string data)
+        public TDataType Parse<TDataType>(string data)
         {
             return JsonUtility.FromJson<TDataType>(data);
         }
 
-        public string Convert<TDataType>(in TDataType data)
+        public string Convert<TDataType>(TDataType data)
         {
             return JsonUtility.ToJson(data);
         }

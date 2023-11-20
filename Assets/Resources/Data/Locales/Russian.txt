@@ -1,0 +1,29 @@
+{
+    "Name": "Russian",
+    "Words": [
+        {
+            "Key": "LANGUAGE",
+            "Value": "RU"
+        },
+        {
+            "Key": "PLAY",
+            "Value": "Играть"
+        },
+        {
+            "Key": "MENU",
+            "Value": "Меню"
+        },
+        {
+            "Key": "RESTART",
+            "Value": "Рестарт"
+        },
+        {
+            "Key": "BACK",
+            "Value": "Назад"
+        },
+        {
+            "Key": "CONTINUE",
+            "Value": "Продолжить"
+        }
+    ]
+}

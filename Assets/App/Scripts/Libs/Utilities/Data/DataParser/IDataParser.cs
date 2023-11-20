@@ -2,7 +2,7 @@
 {
     public interface IDataParser
     {
-        public TDataType Parse<TDataType>(in string data);
-        public string Convert<TDataType>(in TDataType data);
+        public TDataType Parse<TDataType>(string data);
+        public string Convert<TDataType>(TDataType data);
     }
 }

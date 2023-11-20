@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using App.Scripts.Architecture.Project.Localization.Scriptable.AvailableLocales;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.ProjectContext;
@@ -15,17 +14,25 @@ namespace App.Scripts.Architecture.Project.Localization.Manager
 
         [SerializeField] private string localesPath;
         
-        private IDataProvider _provider;
+        [SerializeField] private string currentLocalePath;
+        
+        private IDataProvider _fileProvider;
+        
+        private IDataProvider _resourcesProvider;
 
         private LocaleInfo _current;
-
+        private readonly Dictionary<string, string> currentDictionary = new();
+        
         public event Action OnLocaleChanged;
         
         public override void Init(ProjectContext context)
         {
-            _provider = context.GetContainer().GetService<IDataProvider>();
-            _provider.LoadData(out _current);
-
+            _fileProvider = context.GetContainer().GetService<FileDataProvider>();
+            _resourcesProvider = context.GetContainer().GetService<ResourcesTextDataProvider>();
+            
+            _current = _fileProvider.LoadData<LocaleInfo>(nameof(LocaleInfo), currentLocalePath);
+            foreach (var pair in _current.Words) currentDictionary[pair.Key] = pair.Value;
+            
             SetLocale(_current.Name ?? scriptable.defaultLocaleName);
         }
 
@@ -40,43 +47,40 @@ namespace App.Scripts.Architecture.Project.Localization.Manager
         
         public void SetLocale(string localeName)
         {
-            _current.Name = localeName;
-            _current.Words = LoadLocaleWords(localeName);
-            
-            _provider.SaveData(_current);
+            _current = _resourcesProvider.LoadData<LocaleInfo>(localeName, localesPath);
+            foreach (var pair in _current.Words) currentDictionary[pair.Key] = pair.Value;
+
+            _fileProvider.SaveData(_current, nameof(LocaleInfo), currentLocalePath);
             
             OnLocaleChanged?.Invoke();
         }
         
-        private Dictionary<string, string> LoadLocaleWords(string localeName)
-        {
-            string path = Path.Combine(localesPath, localeName);
-            var localeData = Resources.Load<TextAsset>(path);
-
-            Dictionary<string, string> words = new();
-            
-            var pairs = localeData.text.Split(Environment.NewLine);
-
-            foreach (var pair in pairs)
-            {
-                var data = pair.Split(';', 2);
-                words[data[0]] = data[1];
-            }
-
-            return words;
-        }
+        public string GetLocalizedText(string key) => currentDictionary[key];
         
-        public string GetLocalizedText(string key) => _current.Words[key];
-        
+        [Serializable]
         private class LocaleInfo
         {
             public string Name;
-            public Dictionary<string, string> Words;
+
+            public List<StringPair> Words;
 
             public LocaleInfo()
             {
                 Name = null;
                 Words = new();
+            }
+        }
+
+        [Serializable]
+        private class StringPair
+        {
+            public string Key;
+            public string Value;
+
+            public StringPair(string key, string value)
+            {
+                Key = key;
+                Value = value;
             }
         }
     }

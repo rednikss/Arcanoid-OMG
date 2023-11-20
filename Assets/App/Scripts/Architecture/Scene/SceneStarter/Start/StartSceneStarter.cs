@@ -9,7 +9,6 @@ namespace App.Scripts.Architecture.Scene.SceneStarter.Start
         public override void Init(ProjectContext context)
         {
             var panelManager = context.GetContainer().GetService<PanelManager.PanelManager>();
-            
             var startPanel = panelManager.GetPanel<StartPanelController>();
             
             panelManager.AddActive(startPanel);
