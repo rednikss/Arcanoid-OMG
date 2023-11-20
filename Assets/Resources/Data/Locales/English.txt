@@ -24,6 +24,10 @@
         {
             "Key": "CONTINUE",
             "Value": "Continue"
+        },
+        {
+            "Key": "LOSE",
+            "Value": "You lose!"
         }
     ]
 }

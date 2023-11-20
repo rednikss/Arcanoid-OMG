@@ -1,0 +1,1 @@
+{"Name":"English","Words":[{"Key":"LANGUAGE","Value":"EN"},{"Key":"PLAY","Value":"Play"},{"Key":"MENU","Value":"Menu"},{"Key":"RESTART","Value":"Restart"},{"Key":"BACK","Value":"Back"},{"Key":"CONTINUE","Value":"Continue"},{"Key":"LOSE","Value":"You lose!"}]}
