@@ -16,8 +16,7 @@ namespace App.Scripts.Game.Mechanics.Platform
         
         private InputObserver inputObserver;
 
-        [HideInInspector]
-        public List<Ball.Ball> usingBalls = new();
+        private readonly List<Ball.Ball> usingBalls = new();
         
         public override void Init(ServiceContainer container)
         {
@@ -35,8 +34,24 @@ namespace App.Scripts.Game.Mechanics.Platform
             float velocity = Mathf.Clamp((targetPos - transform.position).x, -1, 1);
             velocity *= speed;
             
-            _rigidbody.MovePosition(_rigidbody.position + dt * Vector2.right * velocity);
+            _rigidbody.MovePosition(_rigidbody.position + Vector2.right * (dt * velocity));
         }
 
+        public void AddBall(Ball.Ball ball)
+        {
+            usingBalls.Add(ball);
+            ball.transform.position = containerTransform.position;
+        }
+        
+        public bool RemoveBall()
+        {
+            if (usingBalls.Count == 0) return false;
+
+            var ball = usingBalls[0];
+            ball.Velocity = Vector2.up;
+            
+            usingBalls.Remove(ball);
+            return true;
+        }
     }
 }

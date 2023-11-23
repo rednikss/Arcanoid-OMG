@@ -26,7 +26,7 @@ namespace App.Scripts.Game.States
 
             if (pool == null) return Task.CompletedTask;
             
-            if (platform.usingBalls.Count == 0) platform.usingBalls.Add(pool.Get());
+            platform.AddBall(pool.Get());
 
             return Task.CompletedTask;
         }

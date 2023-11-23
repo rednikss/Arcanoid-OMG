@@ -1,8 +1,4 @@
-﻿using App.Scripts.Game.Mechanics.Ball.Factory;
-using App.Scripts.Libs.Patterns.Factory;
-using App.Scripts.Libs.Patterns.ObjectPool;
-using App.Scripts.Libs.Patterns.Service.Container;
-using UnityEngine;
+﻿using App.Scripts.Libs.Patterns.ObjectPool;
 
 namespace App.Scripts.Game.Mechanics.Ball.Pool
 {
@@ -24,6 +20,15 @@ namespace App.Scripts.Game.Mechanics.Ball.Pool
         protected override void ResumeSystem()
         {
             foreach (var system in UsingObjects) system.IsPaused = false;
+        }
+        
+        public void ReturnAll()
+        {
+            while (UsingObjects.Count > 0)
+            {
+                var block = UsingObjects[0];
+                ReturnObject(block);
+            }
         }
     }
 }

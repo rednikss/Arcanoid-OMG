@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Game.Mechanics.Ball.Pool;
+using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
 using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -21,16 +22,31 @@ namespace App.Scripts.Game.States
 
             var platform = GetSystem<Platform>();
             
-            foreach(var ball in platform.usingBalls) ball.Velocity = Vector2.up;
-            platform.usingBalls.Clear();
+            while (platform.RemoveBall())
+            { }
 
+            var blockPool = Container.GetService<BlockPool>();
+            blockPool.OnBlockCountChanged += WinCheck;
+            
             return Task.CompletedTask;
         }
 
         public override Task OnExitState()
         {
             foreach (var system in MonoSystems) system.Value.IsPaused = true;
+            
+            var blockPool = Container.GetService<BlockPool>();
+            blockPool.OnBlockCountChanged -= WinCheck;
+            
             return Task.CompletedTask;
         }
+
+        private void WinCheck(int current, int min, int max)
+        {
+            if (current > min) return;
+
+            StateMachine.ChangeState<WinState>();
+        }
+        
     }
 }

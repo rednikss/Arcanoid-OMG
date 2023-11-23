@@ -10,13 +10,13 @@ namespace App.Scripts.Architecture.Scene.SceneStarter.Game
     {
         public override void Init(ServiceContainer container)
         {
-            container.GetService<GameStateMachine>().ChangeState<StartState>();
-
             var panelManager = container.GetService<PanelManager.PanelManager>();
             var levelPanel = panelManager.GetPanel<LevelPanelController>();
             
             panelManager.AddActive(levelPanel);
             levelPanel.ShowPanelImmediately();
+            
+            container.GetService<GameStateMachine>().ChangeState<LoadState>();
         }
     }
 }

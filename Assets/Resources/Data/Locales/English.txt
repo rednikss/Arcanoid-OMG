@@ -28,6 +28,14 @@
         {
             "Key": "LOSE",
             "Value": "You lose!"
+        },
+        {
+            "Key": "WIN",
+            "Value": "You win!"
+        },
+        {
+            "Key": "NEXT",
+            "Value": "Next"
         }
     ]
 }

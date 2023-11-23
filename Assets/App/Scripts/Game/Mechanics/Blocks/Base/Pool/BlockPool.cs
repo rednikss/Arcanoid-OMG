@@ -21,6 +21,13 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base.Pool
             //maxBlockCount = container.GetService<LevelLoader>().GetLevelBlockCount();
         }
 
+        public override Block Create(int id = 0)
+        {
+            if (id == 0) minBlockCount++;
+
+            return base.Create(id);
+        }
+        
         public override void ReturnObject(Block pooledObject, int id = 0)
         {
             pooledObject.transform.localScale = Vector3.one;
@@ -40,7 +47,7 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base.Pool
             
             OnBlockCountChanged?.Invoke(UsingObjects.Count, minBlockCount, maxBlockCount);
         }
-
+        
         public void ReturnAll()
         {
             while (UsingObjects.Count > 0)

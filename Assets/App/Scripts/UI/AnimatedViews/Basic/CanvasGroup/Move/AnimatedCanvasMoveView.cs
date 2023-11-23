@@ -9,10 +9,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
 {
     public class AnimatedCanvasMoveView : AnimatedCanvasGroupView
     {
-        [Header("Additional Options")]
         [SerializeField] private Vector2 showDirection;
-        
-        [SerializeField] private Canvas parentCanvas;
         
         private CameraAdapter _adapter;
         
@@ -27,8 +24,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
             
             _canvasTransform = canvasGroup.transform;
 
-            var size = parentCanvas.pixelRect.size;
-            Vector3 deltaPos = showDirection.normalized * 2 * _adapter.PixelToWorld(size);
+            Vector3 deltaPos = showDirection.normalized * 2 * _adapter.GetSize();
             
             _openedPos = _closedPos = (Vector2)_canvasTransform.position;
             _closedPos -= deltaPos;

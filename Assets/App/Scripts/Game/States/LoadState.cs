@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Game.LevelManager;
+using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -15,6 +16,7 @@ namespace App.Scripts.Game.States
         
         public override Task OnEnterState()
         {
+            Container.GetService<BallPool>().ReturnAll();
             Container.GetService<BlockPool>().ReturnAll();
             Container.GetService<HealthBarController>().Init(Container);
             Container.GetService<LevelLoader>().LoadLevel();
