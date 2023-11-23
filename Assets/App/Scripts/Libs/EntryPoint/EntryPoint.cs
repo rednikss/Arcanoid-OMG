@@ -8,11 +8,11 @@ namespace App.Scripts.Libs.EntryPoint
         
         public void Awake()
         {
-            var context = ProjectContext.ProjectContext.Instance;
+            var container = ProjectContext.ProjectContext.Instance.GetContainer();
 
             foreach (var monoInstaller in monoInstallers)
             {
-                monoInstaller.Init(context);
+                monoInstaller.Init(container);
             }
         }
     }

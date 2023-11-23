@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using DG.Tweening;
@@ -21,9 +21,9 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Move
         private Vector3 _openedPos;
         private Vector3 _closedPos;
 
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            _adapter = context.GetContainer().GetService<CameraAdapter>();
+            _adapter = container.GetService<CameraAdapter>();
             
             _canvasTransform = canvasGroup.transform;
 

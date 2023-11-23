@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using App.Scripts.Architecture.Scene.PanelManager;
+﻿using System.Threading.Tasks;
+using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
+using UnityEngine;
 
 namespace App.Scripts.Game.States
 {
     public class PlayState : GameState
     {
-        private readonly PanelManager _panelManager;
-
-        public PlayState(GameStateMachine machine, 
-            ProjectContext context, 
-            Dictionary<Type, MonoSystem> systems) : base(machine)
+        public PlayState(GameStateMachine machine, ServiceContainer container) : base(machine, container)
         {
-            _panelManager = context.GetContainer().GetService<PanelManager>();
-            MonoSystems = systems;
+            AddSystem<Platform>();
+            AddSystem<BallPool>();
         }
         
         public override Task OnEnterState()
         {
-            var platform = (Platform) MonoSystems[typeof(Platform)];
+            foreach (var system in MonoSystems) system.Value.IsPaused = false;
+
+            var platform = GetSystem<Platform>();
             
+            foreach(var ball in platform.usingBalls) ball.Velocity = Vector2.up;
             platform.usingBalls.Clear();
+
             return Task.CompletedTask;
         }
 
         public override Task OnExitState()
         {
+            foreach (var system in MonoSystems) system.Value.IsPaused = true;
             return Task.CompletedTask;
         }
     }

@@ -1,8 +1,9 @@
 ﻿using System.IO;
 using App.Scripts.Game.LevelManager.Scriptable;
 using App.Scripts.Game.Mechanics.Blocks.Base;
+using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,13 +17,15 @@ namespace App.Scripts.Game.LevelManager
         [SerializeField] private BlockTileListScriptable blocks;
 
         private CameraAdapter adapter;
-
+        private BlockPool pool;
+        
         private LevelInfo currentLevelInfo;
         private float levelSize;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            adapter = context.GetContainer().GetService<CameraAdapter>();
+            pool = container.GetService<BlockPool>();
+            adapter = container.GetService<CameraAdapter>();
 
             Vector3 percentPosition = new(mapSize.padding.right, 1 - mapSize.padding.top, 0);
             tilemap.transform.position = adapter.PercentToWorld(percentPosition) + Vector3.up * mapSize.row;
@@ -30,6 +33,8 @@ namespace App.Scripts.Game.LevelManager
             LoadLevel();
         }
 
+        public int GetLevelBlockCount() => currentLevelInfo.size.x * currentLevelInfo.size.y;
+        
         public void LoadLevel()
         {
             currentLevelInfo = JsonUtility.FromJson<LevelInfo>(Resources.Load<TextAsset>("Data/Levels/Level").text);
@@ -47,12 +52,12 @@ namespace App.Scripts.Game.LevelManager
             tilemap.transform.localScale = Vector3.one * levelSize;
             tilemap.layoutGrid.cellGap = new Vector3(mapSize.column, mapSize.row, 0) / levelSize;
         }
-        
-        public void InitBlocks()
+
+        private void InitBlocks()
         {
             foreach (var blockInfo in currentLevelInfo.blocks)
             {
-                var newBlock = Instantiate(blocks.GetByBlockID(blockInfo.id), transform);
+                var newBlock = pool.Get(blockInfo.id);
 
                 newBlock.transform.position = tilemap.GetCellCenterWorld(blockInfo.pos);
                 newBlock.transform.localScale *= levelSize;

@@ -117,11 +117,11 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 5
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_Spacing: 20
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -670,6 +670,7 @@ GameObject:
   - component: {fileID: 4394975530306884687}
   - component: {fileID: 8426861587355909103}
   - component: {fileID: 8759330017489351752}
+  - component: {fileID: 2880334637150960688}
   m_Layer: 5
   m_Name: Level Header
   m_TagString: Untagged
@@ -755,9 +756,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoInstallers:
+  - {fileID: 2880334637150960688}
   - {fileID: 4394975530306884687}
   - {fileID: 8426861587355909103}
   - {fileID: 6264554150714191869}
+--- !u!114 &2880334637150960688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965845002089560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c91a65d147346f3983e3d2fb262d2a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  services:
+  - service: {fileID: 6264554150714191869}
+    type: 0
 --- !u!1001 &1950727762587706236
 PrefabInstance:
   m_ObjectHideFlags: 0

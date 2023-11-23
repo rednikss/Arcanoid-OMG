@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Data.DataParser;
 using UnityEngine;
 
@@ -10,9 +11,9 @@ namespace App.Scripts.Libs.Utilities.Data.DataProvider
     {
         private IDataParser parser;
         
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            parser = context.GetContainer().GetService<IDataParser>();
+            parser = container.GetService<IDataParser>();
         }
 
         public TDataType LoadData<TDataType>(string fileName, string filePath) where TDataType : new()

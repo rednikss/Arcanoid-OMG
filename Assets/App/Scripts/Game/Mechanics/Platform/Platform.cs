@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Architecture.Project.InputObserver;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Game.Mechanics.Platform
@@ -19,9 +19,9 @@ namespace App.Scripts.Game.Mechanics.Platform
         [HideInInspector]
         public List<Ball.Ball> usingBalls = new();
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            inputObserver = context.GetContainer().GetService<InputObserver>();
+            inputObserver = container.GetService<InputObserver>();
         }
 
         public override void UpdateWithDT(float dt)

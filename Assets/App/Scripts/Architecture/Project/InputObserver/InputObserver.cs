@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.ProjectContext;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
 using UnityEngine;
@@ -27,9 +28,9 @@ namespace App.Scripts.Architecture.Project.InputObserver
         
         private CameraAdapter _adapter;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            _adapter = context.GetContainer().GetService<CameraAdapter>();
+            _adapter = container.GetService<CameraAdapter>();
         }
 
         public Vector3 GetPixelPosition() => inputPixelPosition;

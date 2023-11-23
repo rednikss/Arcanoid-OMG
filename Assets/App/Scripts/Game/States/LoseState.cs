@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Architecture.Scene.PanelManager;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.UI.PanelControllers.Lose;
 
 namespace App.Scripts.Game.States
@@ -10,10 +10,9 @@ namespace App.Scripts.Game.States
     {
         private readonly PanelManager _panelManager;
         
-        public LoseState(GameStateMachine machine, 
-            ProjectContext context) : base(machine)
+        public LoseState(GameStateMachine machine, ServiceContainer container) : base(machine, container)
         {
-            _panelManager = context.GetContainer().GetService<PanelManager>();
+            _panelManager = container.GetService<PanelManager>();
         }
         
         public override Task OnEnterState()

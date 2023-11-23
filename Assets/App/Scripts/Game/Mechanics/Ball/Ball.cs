@@ -1,7 +1,5 @@
-﻿using System;
-using App.Scripts.Game.Mechanics.Ball.Pool;
-using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
-using App.Scripts.Libs.ProjectContext;
+﻿using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Game.Mechanics.Ball
@@ -14,38 +12,38 @@ namespace App.Scripts.Game.Mechanics.Ball
         
         private Vector2 _currentVelocity;
 
-        public override void Init(ProjectContext context)
+        public Vector2 Velocity
         {
+            get => _rigidbody.velocity;
+            set => _rigidbody.velocity = value.normalized * speed;
+        }
+        
+        public override void Init(ServiceContainer container)
+        {
+            
         }
 
         public override void UpdateWithDT(float dt)
         {
-            _rigidbody.velocity = Vector2.zero;
-            _rigidbody.MovePosition(_rigidbody.position + dt * _currentVelocity);
-        }
-        
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            Vector2 normal = Vector2.zero;
-            foreach (var contact in col.contacts)
-            {
-                normal += contact.normal;
-            }
-            normal.Normalize();
+            if (IsPaused) return;
             
-            _currentVelocity = Vector2.Reflect(_currentVelocity, normal);
+            SetSpeed(speed);
+            _currentVelocity = _rigidbody.velocity;
         }
 
-        public void SetVelocity(Vector2 velocity)
+        protected override void PauseSystem()
         {
-            _currentVelocity = velocity.normalized * speed;
+            _rigidbody.velocity = Vector2.zero;
         }
-        
+
+        protected override void ResumeSystem()
+        {
+            _rigidbody.velocity = _currentVelocity;
+        }
+
         public void SetSpeed(float newSpeed)
         {
-            speed = Math.Abs(newSpeed);
-            _currentVelocity = _currentVelocity.normalized * speed;
+            _rigidbody.velocity = _rigidbody.velocity.normalized * newSpeed;
         }
-
     }
 }

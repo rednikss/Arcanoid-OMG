@@ -1,44 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using App.Scripts.Architecture.Project.InputObserver;
-using App.Scripts.Architecture.Scene.PanelManager;
 using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 
 namespace App.Scripts.Game.States
 {
     public class StartState : GameState
     {
-        private readonly ProjectContext _context;
-
         private readonly InputObserver inputObserver;
-        private readonly PanelManager panelManager;
         
-        public StartState(GameStateMachine machine, 
-            ProjectContext context, 
-            Dictionary<Type, MonoSystem> systems) : base(machine)
+        public StartState(GameStateMachine machine, ServiceContainer container) : base(machine, container)
         {
-            _context = context;
-            MonoSystems = systems;
+            inputObserver = container.GetService<InputObserver>();
             
-            
-            inputObserver = _context.GetContainer().GetService<InputObserver>();
-            panelManager = _context.GetContainer().GetService<PanelManager>();
+            AddSystem<Platform>();
+            AddSystem<BallPool>();
         }
         
         public override Task OnEnterState()
         {
-            var platform = (Platform) MonoSystems[typeof(Platform)];
-            var pool = _context.GetContainer().GetService<BallPool>();
+            var platform = GetSystem<Platform>();
+            var pool = GetSystem<BallPool>();
 
             if (pool == null) return Task.CompletedTask;
             
-            var balls = platform.usingBalls;
-            if (balls.Count == 0) balls.Add(pool.Get());
+            if (platform.usingBalls.Count == 0) platform.usingBalls.Add(pool.Get());
 
             return Task.CompletedTask;
         }
@@ -53,10 +41,5 @@ namespace App.Scripts.Game.States
             }
         }
         
-        public override Task OnExitState()
-        {
-            
-            return Task.CompletedTask;
-        }
     }
 }

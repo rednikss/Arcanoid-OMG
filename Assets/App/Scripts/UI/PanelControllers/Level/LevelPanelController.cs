@@ -1,6 +1,6 @@
 ﻿using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +11,13 @@ namespace App.Scripts.UI.PanelControllers.Level
     {
         [SerializeField] private Button menuButton;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            base.Init(context);
+            base.Init(container);
             
             menuButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<GameStateMachine>().ChangeState<PauseState>();
+                container.GetService<GameStateMachine>().ChangeState<PauseState>();
             });
         }
     }

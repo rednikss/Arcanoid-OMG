@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8351765056287141968}
   - component: {fileID: 9051377628621042135}
   - component: {fileID: -5451510790882917821}
+  - component: {fileID: -8826130739071479740}
   - component: {fileID: -2493460535525374260}
   m_Layer: 0
   m_Name: Iron
@@ -112,6 +113,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-8826130739071479740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8351765056287141970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9849d2bf273a01c459923dfa3c564b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoInstallers:
+  - {fileID: -2493460535525374260}
 --- !u!114 &-2493460535525374260
 MonoBehaviour:
   m_ObjectHideFlags: 0

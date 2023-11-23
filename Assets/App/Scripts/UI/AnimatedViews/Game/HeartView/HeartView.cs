@@ -35,5 +35,9 @@ namespace App.Scripts.UI.AnimatedViews.Game.HeartView
                 .SetEase(scriptable.hideEase)
                 .AsyncWaitForCompletion();
         }
+
+        public void ImmediateEnable() => image.color = activeColor;
+        
+        public void ImmediateDisable() => image.color = inactiveColor;
     }
 }

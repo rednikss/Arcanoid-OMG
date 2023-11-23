@@ -1,11 +1,12 @@
 ﻿using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Libs.Utilities.Data.DataParser
 {
     public class JSONDataParser : MonoInstaller, IDataParser
     {
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
         }
         

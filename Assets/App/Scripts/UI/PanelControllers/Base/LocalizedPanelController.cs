@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using App.Scripts.Architecture.Project.Localization.Manager;
 using App.Scripts.Architecture.Project.Localization.Text;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using UnityEngine;
 
@@ -16,9 +16,9 @@ namespace App.Scripts.UI.PanelControllers.Base
         [SerializeField] protected AnimatedCanvasGroupView canvasGroupView;
         [SerializeField] protected LocalizedText[] localizedTexts;
 
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            InitLocalizedTexts(context.GetContainer().GetService<LocaleManager>());
+            InitLocalizedTexts(container.GetService<LocaleManager>());
         }
         
         protected void InitLocalizedTexts(LocaleManager localeManager)

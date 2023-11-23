@@ -1,6 +1,8 @@
 ﻿using System;
+using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
+using App.Scripts.Game.Mechanics.Blocks.Base.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Game.Mechanics.Blocks.Base
@@ -9,7 +11,6 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base
     {
         [SerializeField] public BlockDataScriptable scriptable;
 
-        public event Action<Block> OnBlockDestroyed;
         public event Action<float> OnHealthChanged;
 
         private float health;
@@ -23,9 +24,12 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base
             }
         }
 
-        public override void Init(ProjectContext context)
+        private BlockPool pool;
+        
+        public override void Init(ServiceContainer container)
         {
             ResetHealth();
+            pool = container.GetService<BlockPool>();
         }
 
         private void OnCollisionEnter2D(Collision2D col)
@@ -34,8 +38,7 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base
             
             if (!IsDead()) return;
             
-            OnBlockDestroyed?.Invoke(this);
-            gameObject.SetActive(false);
+            pool.ReturnObject(this, scriptable.blockID);
         }
         
         private void ResetHealth() => Health = scriptable.health;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Libs.Patterns.Service.Installer
@@ -9,7 +10,7 @@ namespace App.Scripts.Libs.Patterns.Service.Installer
     {
         [SerializeField] private ServiceInfo[] services;
 
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
             MethodInfo setServiceRef;
             foreach (var serviceInfo in services)
@@ -18,18 +19,18 @@ namespace App.Scripts.Libs.Patterns.Service.Installer
                 if (serviceInfo.type == InstallType.Class)
                 {
                     
-                    var methodInfo = typeof(Container.ServiceContainer).GetMethod("SetServiceSelf");
+                    var methodInfo = typeof(ServiceContainer).GetMethod("SetServiceSelf");
                     setServiceRef = methodInfo?.MakeGenericMethod(serviceType);
                 }
                 else
                 {
                     var interfaces = serviceInfo.service.GetType().GetInterfaces();
                     
-                    var methodInfo = typeof(Container.ServiceContainer).GetMethod("SetService");
+                    var methodInfo = typeof(ServiceContainer).GetMethod("SetService");
                     setServiceRef = methodInfo?.MakeGenericMethod(interfaces[^1], serviceType);
                 }
                 
-                setServiceRef?.Invoke(context.GetContainer(), new object[] {serviceInfo.service});
+                setServiceRef?.Invoke(container, new object[] {serviceInfo.service});
             }
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Libs.Patterns.StateMachine
@@ -8,33 +9,37 @@ namespace App.Scripts.Libs.Patterns.StateMachine
     public abstract class GameState
     {
         protected readonly GameStateMachine StateMachine;
-        
-        protected Dictionary<Type, MonoSystem.MonoSystem> MonoSystems = new();
 
-        protected GameState(GameStateMachine machine)
+        protected readonly ServiceContainer Container;
+        
+        protected readonly Dictionary<Type, MonoSystem.MonoSystem> MonoSystems = new();
+
+        protected GameState(GameStateMachine machine, ServiceContainer container)
         {
             StateMachine = machine;
+            Container = container;
         }
         
-        public void AddSystem(MonoSystem.MonoSystem system) => MonoSystems.Add(system.GetType(), system);
-        
-        public abstract Task OnEnterState();
+        protected void AddSystem<TSystem>() where TSystem : MonoSystem.MonoSystem
+        {
+            MonoSystems.Add(typeof(TSystem), Container.GetService<TSystem>());
+        }
 
+        protected TSystem GetSystem<TSystem>() where TSystem : MonoSystem.MonoSystem
+        {
+            return (TSystem) MonoSystems[typeof(TSystem)];
+        }
+        
+        public virtual Task OnEnterState() => Task.CompletedTask;
+        
         public virtual void Update()
         {
             foreach (var system in MonoSystems)
             {
-                if (system.Value == null)
-                {
-                    MonoSystems.Remove(system.Key);
-                    continue;
-                }
-                
                 system.Value.UpdateWithDT(Time.deltaTime);
             }
         }
-        
-        public abstract Task OnExitState();
-        
+
+        public virtual Task OnExitState() => Task.CompletedTask;
     }
 }

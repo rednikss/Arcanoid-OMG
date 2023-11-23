@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base;
 using DG.Tweening;
 
@@ -7,7 +7,7 @@ namespace App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Fade
 {
     public class AnimatedCanvasFadeView : AnimatedCanvasGroupView
     {
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         { }
 
         public override async Task Show()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using App.Scripts.Architecture.Project.Localization.Scriptable.AvailableLocales;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Data.DataProvider;
 using UnityEngine;
 
@@ -25,10 +25,10 @@ namespace App.Scripts.Architecture.Project.Localization.Manager
         
         public event Action OnLocaleChanged;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            _fileProvider = context.GetContainer().GetService<FileDataProvider>();
-            _resourcesProvider = context.GetContainer().GetService<ResourcesTextDataProvider>();
+            _fileProvider = container.GetService<FileDataProvider>();
+            _resourcesProvider = container.GetService<ResourcesTextDataProvider>();
             
             _current = _fileProvider.LoadData<LocaleInfo>(nameof(LocaleInfo), currentLocalePath);
             foreach (var pair in _current.Words) currentDictionary[pair.Key] = pair.Value;

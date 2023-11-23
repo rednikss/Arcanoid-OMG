@@ -1,4 +1,5 @@
 ﻿using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Camera.Collider.Scriptable;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace App.Scripts.Libs.Utilities.Camera.Collider
         [SerializeField] private PaddingScriptable pad;
         [SerializeField] private EdgeCollider2D edgeCollider;
         
-        public override void Init(ProjectContext.ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            var adapter = context.GetContainer().GetService<Adapter.CameraAdapter>();
+            var adapter = container.GetService<Adapter.CameraAdapter>();
 
             var offsetMagnitude = edgeCollider.edgeRadius;
             

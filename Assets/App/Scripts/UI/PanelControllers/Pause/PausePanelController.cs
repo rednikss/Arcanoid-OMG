@@ -1,7 +1,7 @@
 ﻿using App.Scripts.Architecture.Project.Localization.Manager;
 using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Scene;
 using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
@@ -18,18 +18,23 @@ namespace App.Scripts.UI.PanelControllers.Pause
         
         [SerializeField] private Button continueButton;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            base.Init(context);
+            base.Init(container);
+            
+            restartButton.onClick.AddListener(() =>
+            {
+                container.GetService<GameStateMachine>().ChangeState<LoadState>();
+            });
             
             continueButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<GameStateMachine>().ChangeToPrevious();
+                container.GetService<GameStateMachine>().ChangeToPrevious();
             });
             
             backButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<SceneLoader>().LoadScene(backSceneName);
+                container.GetService<SceneLoader>().LoadScene(backSceneName);
             });
         }
     }

@@ -1,5 +1,5 @@
 ﻿using App.Scripts.Architecture.Project.Localization.Manager;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Scene;
 using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
@@ -16,18 +16,18 @@ namespace App.Scripts.UI.PanelControllers.Start
 
         private int localeID;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            base.Init(context);
+            base.Init(container);
             
             playButton.onClick.AddListener(() =>
             {
-                context.GetContainer().GetService<SceneLoader>().LoadScene(playSceneID);
+                container.GetService<SceneLoader>().LoadScene(playSceneID);
             });
             
             languageButton.onClick.AddListener(() =>
             {
-                var localeManager = context.GetContainer().GetService<LocaleManager>();
+                var localeManager = container.GetService<LocaleManager>();
                 var locales = localeManager.GetAvailableLocales();
                 
                 localeManager.SetLocale(locales[localeID++]);

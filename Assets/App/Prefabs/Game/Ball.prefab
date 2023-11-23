@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6934950658181115807}
   - component: {fileID: 6934950658181115806}
   - component: {fileID: 6934950658181115805}
+  - component: {fileID: 6785688047790384444}
+  - component: {fileID: 5112318611388940936}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -138,3 +140,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 6934950658181115807}
   speed: 5
+--- !u!114 &6785688047790384444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934950658181115804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8810b2b957a4a778bc7bbd714868f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptable: {fileID: 11400000, guid: cdf65e94d633f2e41b6da8e0ebd91a8b, type: 2}
+  ball: {fileID: 6934950658181115805}
+--- !u!114 &5112318611388940936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6934950658181115804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9849d2bf273a01c459923dfa3c564b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoInstallers:
+  - {fileID: 6785688047790384444}

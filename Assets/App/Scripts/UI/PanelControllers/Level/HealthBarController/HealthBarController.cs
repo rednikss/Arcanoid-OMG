@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using App.Scripts.Game.Mechanics.Ball.Pool;
+﻿using System.Collections.Generic;
 using App.Scripts.Game.Mechanics.Ball.Receiver;
 using App.Scripts.Game.States;
-using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
+using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using App.Scripts.UI.AnimatedViews.Game.HeartView;
 using App.Scripts.UI.PanelControllers.Level.HealthBarController.Scriptable;
 using UnityEngine;
 
 namespace App.Scripts.UI.PanelControllers.Level.HealthBarController
 {
-    public class HealthBarController : MonoInstaller
+    public class HealthBarController : MonoSystem
     {
         [SerializeField] private HealthScriptable scriptable;
         [SerializeField] private HeartView prefab;
@@ -23,20 +21,25 @@ namespace App.Scripts.UI.PanelControllers.Level.HealthBarController
 
         private GameStateMachine machine;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
             currentHealthCount = scriptable.healthCount;
 
+            bool isInstantiated = hearts.Count == currentHealthCount;
             for (int i = 0; i < currentHealthCount; i++)
             {
-                hearts.Add(Instantiate(prefab, transform));
+                if (!isInstantiated) hearts.Add( Instantiate(prefab, transform));
+                
+                hearts[i].ImmediateEnable();
             }
 
-            context.GetContainer().GetService<BallReceiver>().OnBallMiss += RemoveHeart;
-            machine = context.GetContainer().GetService<GameStateMachine>();
+            if (isInstantiated) return;
+            
+            container.GetService<BallReceiver>().OnBallMiss += RemoveHeart;
+            machine = container.GetService<GameStateMachine>();
         }
 
-        public void RemoveHeart()
+        private void RemoveHeart()
         {
             if (currentHealthCount < 1) return;
             

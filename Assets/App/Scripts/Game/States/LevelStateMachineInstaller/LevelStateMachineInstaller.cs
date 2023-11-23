@@ -5,8 +5,8 @@ using App.Scripts.Game.Mechanics.Platform;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
-using App.Scripts.Libs.ProjectContext;
-using UnityEngine;
+using App.Scripts.Libs.Patterns.Service.Container;
+using App.Scripts.UI.PanelControllers.Level.HealthBarController;
 
 namespace App.Scripts.Game.States.LevelStateMachineInstaller
 {
@@ -14,36 +14,21 @@ namespace App.Scripts.Game.States.LevelStateMachineInstaller
     {
         private GameStateMachine gameStateMachine;
 
-        [SerializeReference] private MonoSystem[] systems;
-
-        private readonly Dictionary<Type, MonoSystem> convertedSystems = new();
-        
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            foreach (var levelSystem in systems) levelSystem.Init(context);
+            gameStateMachine = container.GetService<GameStateMachine>();
 
-            foreach (var system in systems) convertedSystems.Add(system.GetType(), system);
-            
-
-            Dictionary<Type, MonoSystem> startSystems = new()
-            {
-                {typeof(Platform), convertedSystems[typeof(Platform)]}
+            GameState[] states = {
+                new LoadState(gameStateMachine, container),
+                new StartState(gameStateMachine, container),
+                new PlayState(gameStateMachine, container),
+                new PauseState(gameStateMachine, container),
+                new LoseState(gameStateMachine, container)
             };
-            
-            gameStateMachine = context.GetContainer().GetService<GameStateMachine>();
 
-            var startState = new StartState(gameStateMachine, context, startSystems);
-            var playState = new PlayState(gameStateMachine, context, convertedSystems);
-            var pauseState = new PauseState(gameStateMachine, context);
-            var loseState = new LoseState(gameStateMachine, context);
-            
-            gameStateMachine.AddState(startState);
-            gameStateMachine.AddState(playState);
-            gameStateMachine.AddState(pauseState);
-            gameStateMachine.AddState(loseState);
+            foreach (var state in states) gameStateMachine.AddState(state);
 
-
-            var ballPool = context.GetContainer().GetService<BallReceiver>();
+            var ballPool = container.GetService<BallReceiver>();
             ballPool.OnBallMiss += gameStateMachine.ChangeState<StartState>;
         }
     }

@@ -33,7 +33,7 @@ namespace App.Scripts.Libs.ProjectContext
             container = new ServiceContainer();
             foreach (var installer in installers)
             {
-                installer.Init(_instance);
+                installer.Init(container);
             }
         }
 

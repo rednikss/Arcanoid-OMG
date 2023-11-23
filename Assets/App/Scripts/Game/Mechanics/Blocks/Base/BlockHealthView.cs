@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
 namespace App.Scripts.Game.Mechanics.Blocks.Base
@@ -12,7 +12,7 @@ namespace App.Scripts.Game.Mechanics.Blocks.Base
 
         private readonly List<SpriteRenderer> healthBar = new();
 
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
             block.OnHealthChanged += health => SetHealthPercent(health / block.scriptable.health);
             

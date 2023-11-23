@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Architecture.Scene.PanelManager.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.UI.PanelControllers.Base;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +16,7 @@ namespace App.Scripts.Architecture.Scene.PanelManager
         
         private readonly Stack<LocalizedPanelController> _activePanels = new();
 
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
             SceneManager.sceneUnloaded += (arg0) => DisableAll();
         }

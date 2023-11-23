@@ -1,7 +1,7 @@
 ﻿using System;
 using App.Scripts.Game.Mechanics.Ball.Pool;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
-using App.Scripts.Libs.ProjectContext;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
 using UnityEngine;
 
@@ -15,9 +15,9 @@ namespace App.Scripts.Game.Mechanics.Ball.Receiver
         
         public event Action OnBallMiss;
         
-        public override void Init(ProjectContext context)
+        public override void Init(ServiceContainer container)
         {
-            var adapter = context.GetContainer().GetService<CameraAdapter>();
+            var adapter = container.GetService<CameraAdapter>();
             
             var size = _collider.size;
             size.x = 2 * adapter.GetSize().x;
@@ -25,7 +25,7 @@ namespace App.Scripts.Game.Mechanics.Ball.Receiver
             _collider.size = size;
             transform.position = new(0, -adapter.GetSize().y - 1, 0);
             
-            pool = context.GetContainer().GetService<BallPool>();
+            pool = container.GetService<BallPool>();
         }
 
         private void OnCollisionEnter2D(Collision2D col)

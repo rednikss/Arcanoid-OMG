@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c9bb05c778e40518496460a62b3dc69, type: 3}
-  m_Name: Object Pool Options
+  m_Name: Block Pool Options
   m_EditorClassIdentifier: 
-  defaultSize: 3
-  maximumSize: 10
+  defaultSize: 10
+  maximumSize: 25
