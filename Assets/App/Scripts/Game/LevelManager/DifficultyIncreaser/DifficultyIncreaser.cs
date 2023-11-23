@@ -16,8 +16,9 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
         
         public override void Init(ServiceContainer container)
         {
-            pool = container.GetService<BallPool>();
             Speed = speedRange.minSpeed;
+            
+            pool = container.GetService<BallPool>();
         }
 
         public void UpdateSpeed(int current, int min, int max)

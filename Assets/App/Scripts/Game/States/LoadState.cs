@@ -23,8 +23,8 @@ namespace App.Scripts.Game.States
             Container.GetService<BlockPool>().ReturnAll();
             Container.GetService<HealthBarController>().Init(Container);
             Container.GetService<LevelLoader>().LoadLevel();
-            Container.GetService<DifficultyIncreaser>().Reset();
             Container.GetService<PercentageController>().Reset();
+            Container.GetService<DifficultyIncreaser>().Reset();
             
             StateMachine.ChangeState<StartState>();
             return Task.CompletedTask;

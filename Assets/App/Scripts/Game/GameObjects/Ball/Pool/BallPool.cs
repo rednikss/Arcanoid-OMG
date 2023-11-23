@@ -18,8 +18,8 @@ namespace App.Scripts.Game.GameObjects.Ball.Pool
 
         public override void Init(ServiceContainer container)
         {
-            base.Init(container);
             increaser = container.GetService<DifficultyIncreaser>();
+            base.Init(container);
         }
 
         public override void TakeObject(Ball pooledObject, int id = 0)

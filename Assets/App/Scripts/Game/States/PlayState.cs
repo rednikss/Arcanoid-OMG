@@ -12,7 +12,9 @@ namespace App.Scripts.Game.States
     public class PlayState : GameState
     {
         private readonly BlockPool blockPool;
+        
         private readonly DifficultyIncreaser increaser;
+        
         private PercentageController percentageController;
 
         public PlayState(GameStateMachine machine, ServiceContainer container) : base(machine, container)
