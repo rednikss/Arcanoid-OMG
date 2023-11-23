@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Architecture.Project.InputObserver;
-using App.Scripts.Game.Mechanics.Ball.Pool;
-using App.Scripts.Game.Mechanics.Platform;
+using App.Scripts.Game.GameObjects.Ball.Pool;
+using App.Scripts.Game.GameObjects.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
 

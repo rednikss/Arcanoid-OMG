@@ -1,4 +1,4 @@
-﻿using App.Scripts.Game.Mechanics.Blocks.Base;
+﻿using App.Scripts.Game.GameObjects.Blocks.Base;
 using UnityEngine;
 
 namespace App.Scripts.Game.LevelManager.Scriptable

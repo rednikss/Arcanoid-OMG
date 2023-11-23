@@ -1,19 +1,27 @@
 ﻿using System.Threading.Tasks;
-using App.Scripts.Game.Mechanics.Ball.Pool;
-using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
-using App.Scripts.Game.Mechanics.Platform;
+using App.Scripts.Game.GameObjects.Ball.Pool;
+using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
+using App.Scripts.Game.GameObjects.Platform;
+using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
-using UnityEngine;
+using App.Scripts.UI.PanelControllers.Level.PercentageController;
 
 namespace App.Scripts.Game.States
 {
     public class PlayState : GameState
     {
+        private readonly BlockPool blockPool;
+        private readonly DifficultyIncreaser increaser;
+        private PercentageController percentageController;
+
         public PlayState(GameStateMachine machine, ServiceContainer container) : base(machine, container)
         {
             AddSystem<Platform>();
             AddSystem<BallPool>();
+            
+            blockPool = Container.GetService<BlockPool>();
+            increaser = Container.GetService<DifficultyIncreaser>();
         }
         
         public override Task OnEnterState()
@@ -21,13 +29,14 @@ namespace App.Scripts.Game.States
             foreach (var system in MonoSystems) system.Value.IsPaused = false;
 
             var platform = GetSystem<Platform>();
-            
-            while (platform.RemoveBall())
-            { }
+            while (platform.RemoveBall()) { }
 
-            var blockPool = Container.GetService<BlockPool>();
-            blockPool.OnBlockCountChanged += WinCheck;
+            percentageController = Container.GetService<PercentageController>();
             
+            blockPool.OnBlockCountChanged += WinCheck;
+            blockPool.OnBlockCountChanged += increaser.UpdateSpeed;
+            blockPool.OnBlockCountChanged += percentageController.UpdatePercentage;
+
             return Task.CompletedTask;
         }
 
@@ -35,8 +44,9 @@ namespace App.Scripts.Game.States
         {
             foreach (var system in MonoSystems) system.Value.IsPaused = true;
             
-            var blockPool = Container.GetService<BlockPool>();
             blockPool.OnBlockCountChanged -= WinCheck;
+            blockPool.OnBlockCountChanged -= increaser.UpdateSpeed;
+            blockPool.OnBlockCountChanged -= percentageController.UpdatePercentage;
             
             return Task.CompletedTask;
         }

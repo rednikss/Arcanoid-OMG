@@ -1,5 +1,4 @@
-﻿using App.Scripts.Game.Mechanics.Ball.Receiver;
-using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
+﻿using App.Scripts.Game.GameObjects.Ball.Receiver;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;

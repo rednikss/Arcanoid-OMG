@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Scripts.Game.Mechanics.Ball.Receiver;
+using App.Scripts.Game.GameObjects.Ball.Receiver;
 using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;

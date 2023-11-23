@@ -1,7 +1,7 @@
 ﻿using System.IO;
+using App.Scripts.Game.GameObjects.Blocks.Base;
+using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
 using App.Scripts.Game.LevelManager.Scriptable;
-using App.Scripts.Game.Mechanics.Blocks.Base;
-using App.Scripts.Game.Mechanics.Blocks.Base.Pool;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Utilities.Camera.Adapter;
@@ -29,11 +29,9 @@ namespace App.Scripts.Game.LevelManager
 
             Vector3 percentPosition = new(mapSize.padding.right, 1 - mapSize.padding.top, 0);
             tilemap.transform.position = adapter.PercentToWorld(percentPosition) + Vector3.up * mapSize.row;
-
-            LoadLevel();
         }
 
-        public int GetLevelBlockCount() => currentLevelInfo.size.x * currentLevelInfo.size.y;
+        public int GetLevelBlockCount() => currentLevelInfo.blocks.Count;
         
         public void LoadLevel()
         {
