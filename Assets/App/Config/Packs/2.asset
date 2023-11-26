@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e440c7bfe9d0400a9ad0c37a8cbc5d3a, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  packNameKey: SOMBRERO
+  levelCount: 2
+  icon: {fileID: 21300000, guid: f5a65b84b8c87ef47b353950c237b847, type: 3}
+  mainViewColor: {r: 0.6156863, g: 0.34509805, b: 1, a: 1}
+  secondaryViewColor: {r: 0.6156863, g: 0.34509805, b: 1, a: 1}
+  fontMaterial: {fileID: 2100000, guid: e6768e126e525214db6595bc4d7aa784, type: 2}
+  mainTextGradient: {fileID: 11400000, guid: e6545206576aa9540b9cb6b469e198bc, type: 2}
+  secondaryTextGradient: {fileID: 11400000, guid: 461870f0e084e0149ad0553cca2d45eb, type: 2}

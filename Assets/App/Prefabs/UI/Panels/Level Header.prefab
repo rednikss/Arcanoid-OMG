@@ -577,6 +577,8 @@ GameObject:
   - component: {fileID: 8191965843349561365}
   - component: {fileID: 8191965843349561354}
   - component: {fileID: 5054099096780880619}
+  - component: {fileID: 2298407298688801547}
+  - component: {fileID: 3454183708619309416}
   m_Layer: 5
   m_Name: Center
   m_TagString: Untagged
@@ -665,6 +667,34 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &2298407298688801547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965843349561352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe2082487a8405f8173e4e611766b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  packList: {fileID: 11400000, guid: 3c04128eaa6e44844ace6baa0c6ed36d, type: 2}
+  filePath: App/Data/Current
+--- !u!114 &3454183708619309416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8191965843349561352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16774b49e0e94c7fb17d9c34dd5c266e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconImage: {fileID: 5170785755977745756}
+  counterText: {fileID: 1461765244522434679}
 --- !u!1 &8191965843615018958
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,14 +973,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1bee326019e9bc143a9579fcee67bc05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1046,6 +1076,8 @@ MonoBehaviour:
   localizedTexts:
   - {fileID: 3938881021012886237}
   menuButton: {fileID: 2534092293934220057}
+  onEnableInit:
+  - {fileID: 3454183708619309416}
 --- !u!114 &8759330017489351752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,6 +1097,8 @@ MonoBehaviour:
   - {fileID: 6086490809830878037}
   - {fileID: 7665973440179679890}
   - {fileID: 6264554150714191869}
+  - {fileID: 2298407298688801547}
+  - {fileID: 3454183708619309416}
 --- !u!114 &2880334637150960688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1115,8 @@ MonoBehaviour:
   - service: {fileID: 6264554150714191869}
     type: 0
   - service: {fileID: 7665973440179679890}
+    type: 0
+  - service: {fileID: 2298407298688801547}
     type: 0
 --- !u!1001 &1950727762587706236
 PrefabInstance:

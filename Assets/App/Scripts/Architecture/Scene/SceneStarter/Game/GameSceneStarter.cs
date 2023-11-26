@@ -2,7 +2,7 @@
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
-using App.Scripts.UI.PanelControllers.Level;
+using App.Scripts.UI.PanelControllers.Game.Level;
 
 namespace App.Scripts.Architecture.Scene.SceneStarter.Game
 {

@@ -19,5 +19,3 @@ MonoBehaviour:
     sceneName: Packs
   - stringID: Level Scene
     sceneName: Game
-  - stringID: End Scene
-    sceneName: Win

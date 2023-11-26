@@ -8,8 +8,6 @@ namespace App.Scripts.UI.AnimatedViews.Basic.Button.Scriptable
         [Min(0)] 
         public float animationTime;
 
-        public Color pressedColor;
-        
         [Range(0, 1)] 
         public float pressedScale;
     }

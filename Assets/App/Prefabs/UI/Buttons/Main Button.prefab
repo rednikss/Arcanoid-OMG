@@ -363,5 +363,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 494399996503842356}
-  image: {fileID: 494399996503842359}
-  scriptable: {fileID: 11400000, guid: f5e8edcfdc78f124dbd02609ecfa8096, type: 2}
+  scriptable: {fileID: 11400000, guid: 6f00376225396bd46af3eee1692544f8, type: 2}

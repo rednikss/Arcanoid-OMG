@@ -10,7 +10,13 @@ namespace App.Scripts.Game.LevelManager
         public Vector3Int size;
 
         public List<BlockInfo> blocks;
-
+        
+        public LevelInfo()
+        {
+            size = Vector3Int.zero;
+            blocks = new List<BlockInfo>();
+        }
+        
         public LevelInfo(Vector3Int size)
         {
             this.size = size;

@@ -14,6 +14,26 @@
             "Value": "Меню"
         },
         {
+            "Key": "NOTFOUND",
+            "Value": "Не обнаружена"
+        },
+        {
+            "Key": "GALACTIC",
+            "Value": "Галактика"
+        },
+        {
+            "Key": "SIGARA",
+            "Value": "Сигара"
+        },
+        {
+            "Key": "SOMBRERO",
+            "Value": "Сомбреро"
+        },
+        {
+            "Key": "SIGARETKA",
+            "Value": "Сигаретка"
+        },
+        {
             "Key": "RESTART",
             "Value": "Рестарт"
         },

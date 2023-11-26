@@ -2,7 +2,7 @@
 using App.Scripts.Architecture.Scene.PanelManager;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
-using App.Scripts.UI.PanelControllers.Lose;
+using App.Scripts.UI.PanelControllers.Game.Lose;
 
 namespace App.Scripts.Game.States
 {

@@ -54,8 +54,11 @@ namespace App.Scripts.Architecture.Project.Localization.Manager
             
             OnLocaleChanged?.Invoke();
         }
-        
-        public string GetLocalizedText(string key) => currentDictionary[key];
+
+        public string GetLocalizedText(string key)
+        {
+            return currentDictionary.ContainsKey(key) ? currentDictionary[key] : string.Empty;
+        }
         
         [Serializable]
         private class LocaleInfo

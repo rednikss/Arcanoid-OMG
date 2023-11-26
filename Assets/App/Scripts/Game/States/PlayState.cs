@@ -5,7 +5,7 @@ using App.Scripts.Game.GameObjects.Platform;
 using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
-using App.Scripts.UI.PanelControllers.Level.PercentageController;
+using App.Scripts.UI.PanelControllers.Game.Level.PercentageController;
 
 namespace App.Scripts.Game.States
 {

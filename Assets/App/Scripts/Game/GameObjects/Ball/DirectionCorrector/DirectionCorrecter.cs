@@ -12,7 +12,7 @@ namespace App.Scripts.Game.GameObjects.Ball.DirectionCorrector
 
         [SerializeField] private Ball ball;
 
-        private List<DirectionZone> blockZones = new();
+        private readonly List<DirectionZone> blockZones = new();
         
         public override void Init(ServiceContainer container)
         {
@@ -31,7 +31,7 @@ namespace App.Scripts.Game.GameObjects.Ball.DirectionCorrector
             foreach (var zone in zones)
             {
                 float differenceAngle = Vector2.Angle(zone.Direction, velocity);
-                if (Mathf.Abs(differenceAngle) >= zone.Width) continue;
+                if (Mathf.Abs(differenceAngle) > zone.Width) continue;
 
                 var offsetAngle = -Mathf.Sign(differenceAngle) * zone.Width;
                 velocity = Quaternion.Euler(0, 0, offsetAngle) * zone.Direction;

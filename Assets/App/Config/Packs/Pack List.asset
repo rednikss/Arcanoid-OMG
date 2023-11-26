@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a147c4293fe24ffb8c55aea2dea513c6, type: 3}
+  m_Name: Pack List
+  m_EditorClassIdentifier: 
+  blockedPack: {fileID: 11400000, guid: 0cff2ec0566f60349bffd5a28078b0f1, type: 2}
+  packs:
+  - {fileID: 11400000, guid: 5eaeb501b6ac129448cd9cc468283d90, type: 2}
+  - {fileID: 11400000, guid: 0f712e2a7876ee849b51b89128bb4403, type: 2}
+  - {fileID: 11400000, guid: a824698afa1e2554a993fa420b26664d, type: 2}

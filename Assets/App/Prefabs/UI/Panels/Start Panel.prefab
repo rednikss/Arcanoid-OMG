@@ -87,7 +87,7 @@ MonoBehaviour:
   - {fileID: 2948589720932051883}
   - {fileID: 6770749091188088648}
   playButton: {fileID: 6503739203373235853}
-  playSceneID: Level Scene
+  playSceneID: Pack Scene
   languageButton: {fileID: 6155023187089428836}
 --- !u!114 &5139859100185118173
 MonoBehaviour:

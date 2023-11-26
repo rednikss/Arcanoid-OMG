@@ -46,7 +46,8 @@ namespace App.Scripts.Libs.Patterns.ObjectPool
 
         public virtual TObjectType Get(int id = 0)
         {
-            var newBall = poolObjects[id].Peek() ?? Create(id);
+            if (!poolObjects[id].TryPeek(out TObjectType newBall)) newBall = Create(id);
+            
             TakeObject(newBall, id);
 
             return newBall;

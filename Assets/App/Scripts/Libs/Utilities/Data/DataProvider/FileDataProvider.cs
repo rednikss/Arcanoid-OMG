@@ -17,17 +17,12 @@ namespace App.Scripts.Libs.Utilities.Data.DataProvider
             _dataParser = container.GetService<IDataParser>();
         }
     
-        private string GetFullFileName<TDataType>(string fileName)
-        {
-            return string.Format($"{fileName ?? typeof(TDataType).Name}.{format}");
-        }
-
         public TDataType LoadData<TDataType>(string fileName, string filePath) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName(fileName));
 #else
-            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName(fileName));
 #endif
             if (!File.Exists(fullPath))
             {
@@ -44,9 +39,9 @@ namespace App.Scripts.Libs.Utilities.Data.DataProvider
         public void SaveData<TDataType>(TDataType data, string fileName, string filePath) where TDataType : new()
         {
 #if UNITY_EDITOR
-            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.dataPath, filePath, GetFullFileName(fileName));
 #else
-            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName<TDataType>(fileName));
+            string fullPath = Path.Combine(Application.persistentDataPath, GetFullFileName(fileName));
 #endif
             
             string unparsedData = _dataParser.Convert(data);
@@ -54,5 +49,7 @@ namespace App.Scripts.Libs.Utilities.Data.DataProvider
             using StreamWriter streamWriter = new(File.Open(fullPath, FileMode.Create));
             streamWriter.Write(unparsedData);
         }
+        
+        private string GetFullFileName(string fileName) => $"{fileName}.{format}";
     }
 }

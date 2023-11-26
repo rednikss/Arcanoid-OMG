@@ -5,9 +5,8 @@ using App.Scripts.Game.LevelManager;
 using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
-using App.Scripts.UI.PanelControllers.Level.HealthBarController;
-using App.Scripts.UI.PanelControllers.Level.PercentageController;
-using UnityEngine;
+using App.Scripts.UI.PanelControllers.Game.Level.HealthBarController;
+using App.Scripts.UI.PanelControllers.Game.Level.PercentageController;
 
 namespace App.Scripts.Game.States
 {
@@ -21,10 +20,10 @@ namespace App.Scripts.Game.States
         {
             Container.GetService<BallPool>().ReturnAll();
             Container.GetService<BlockPool>().ReturnAll();
-            Container.GetService<HealthBarController>().Init(Container);
             Container.GetService<LevelLoader>().LoadLevel();
             Container.GetService<PercentageController>().Reset();
-            Container.GetService<DifficultyIncreaser>().Reset();
+            Container.GetService<HealthBarController>().Init(Container);
+            Container.GetService<DifficultyIncreaser>().Init(Container);
             
             StateMachine.ChangeState<StartState>();
             return Task.CompletedTask;

@@ -12,6 +12,15 @@ namespace App.Scripts.Architecture.Project.Localization.Text
         
         [SerializeField] private string key;
 
+        public string Key
+        {
+            set
+            {
+                key = value;
+                SetLocalizedText();
+            }
+        }
+        
         private LocaleManager _manager;
         public void Init(LocaleManager manager)
         {
