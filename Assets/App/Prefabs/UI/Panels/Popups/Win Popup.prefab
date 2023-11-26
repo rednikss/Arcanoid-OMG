@@ -1385,6 +1385,7 @@ MonoBehaviour:
   - {fileID: 4558010865116994071}
   continueButton: {fileID: 7187339025754231349}
   packSceneID: Pack Scene
+  energyPrice: 3
 --- !u!114 &991041494632553182
 MonoBehaviour:
   m_ObjectHideFlags: 0

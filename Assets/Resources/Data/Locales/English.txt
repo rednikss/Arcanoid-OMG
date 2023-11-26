@@ -18,6 +18,14 @@
             "Value": "Not found"
         },
         {
+            "Key": "NOENERGY",
+            "Value": "No energy!"
+        },
+        {
+            "Key": "OK",
+            "Value": "Ok"
+        },
+        {
             "Key": "GALACTIC",
             "Value": "Galactic"
         },

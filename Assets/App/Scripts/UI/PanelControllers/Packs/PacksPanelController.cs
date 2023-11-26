@@ -41,7 +41,7 @@ namespace App.Scripts.UI.PanelControllers.Packs
             for (var i = 0; i < infoCount; i++)
             {
                 var newButton = Instantiate(packButton, content);
-                
+                newButton.Init(container);
                 buttons.Add(newButton);
             }
             
@@ -57,7 +57,6 @@ namespace App.Scripts.UI.PanelControllers.Packs
             {
                 var curInfo = stateController.GetCurrentLevel(i);
                 
-                buttons[i].Init(_container);
                 buttons[i].SetData(curInfo > 0 ? packList.packs[i] : packList.blockedPack, curInfo);
             }
         }

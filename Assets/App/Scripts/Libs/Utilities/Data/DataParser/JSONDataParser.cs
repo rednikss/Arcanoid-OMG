@@ -17,7 +17,7 @@ namespace App.Scripts.Libs.Utilities.Data.DataParser
 
         public string Convert<TDataType>(TDataType data)
         {
-            return JsonUtility.ToJson(data);
+            return JsonUtility.ToJson(data, true);
         }
     }
 }

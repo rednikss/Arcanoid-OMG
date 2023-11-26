@@ -1,0 +1,3 @@
+{
+    "CurrentAmount": 5
+}

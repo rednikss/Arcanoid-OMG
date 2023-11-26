@@ -1,5 +1,4 @@
 ﻿using System;
-using App.Scripts.Architecture.Scene.Packs.Manager;
 using App.Scripts.Architecture.Scene.Packs.Scriptables.Pack;
 using App.Scripts.Architecture.Scene.Packs.Scriptables.PackList;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;

@@ -394,6 +394,7 @@ MonoBehaviour:
   - {fileID: 7720029944943016857}
   - {fileID: 7720029945910693573}
   restartButton: {fileID: 7187339025754231349}
+  energyPrice: 3
   backButton: {fileID: 7187339026366887349}
   backSceneName: Pack Scene
   continueButton: {fileID: 7187339027328008425}

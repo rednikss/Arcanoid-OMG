@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Architecture.Scene.Packs.Manager
+﻿namespace App.Scripts.Architecture.Scene.Packs.StateController
 {
     public class PackStateInfo
     {

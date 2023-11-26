@@ -1,1 +1,8 @@
-{"CurrentLevel":[1,2,1],"LevelToLoad":3}
+{
+    "CurrentLevel": [
+        1,
+        1,
+        1
+    ],
+    "LevelToLoad": 4
+}

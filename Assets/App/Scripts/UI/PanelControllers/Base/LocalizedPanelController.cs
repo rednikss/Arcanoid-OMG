@@ -34,7 +34,7 @@ namespace App.Scripts.UI.PanelControllers.Base
             panelCanvasGroup.interactable = newState;
         }
 
-        public async Task ShowPanel()
+        public virtual async Task ShowPanel()
         {
             panelCanvasGroup.gameObject.SetActive(true);
             panelCanvasGroup.interactable = false;
@@ -44,7 +44,7 @@ namespace App.Scripts.UI.PanelControllers.Base
             panelCanvasGroup.interactable = true;
         }
 
-        public async Task HidePanel()
+        public virtual async Task HidePanel()
         {
             panelCanvasGroup.gameObject.SetActive(true);
             panelCanvasGroup.interactable = false;

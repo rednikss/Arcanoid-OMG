@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using App.Scripts.Architecture.Scene.Packs.Manager;
+using App.Scripts.Architecture.Scene.Packs.StateController;
 using App.Scripts.Game.GameObjects.Blocks.Base;
 using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
 using App.Scripts.Game.LevelManager.Scriptable;
@@ -19,6 +19,7 @@ namespace App.Scripts.Game.LevelManager
 
         [SerializeField] private string packStatePath;
         [SerializeField] private string levelPath;
+        
         
         private CameraAdapter adapter;
         private BlockPool pool;
@@ -49,12 +50,6 @@ namespace App.Scripts.Game.LevelManager
             InitTilemap();
             InitBlocks();
         }
-
-        public bool TryLoadNext()
-        {
-            return false;
-        }
-        
 
         public int GetLevelBlockCount() => currentLevel.blocks.Count;
 

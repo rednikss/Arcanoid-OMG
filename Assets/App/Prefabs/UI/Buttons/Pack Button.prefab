@@ -537,6 +537,7 @@ MonoBehaviour:
   view: {fileID: 529562929828811855}
   button: {fileID: 1070152462262710884}
   levelSceneID: Level Scene
+  energyPrice: 3
 --- !u!114 &529562929828811855
 MonoBehaviour:
   m_ObjectHideFlags: 0

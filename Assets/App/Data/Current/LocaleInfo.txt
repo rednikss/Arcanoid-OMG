@@ -1,1 +1,69 @@
-{"Name":"Russian","Words":[{"Key":"LANGUAGE","Value":"RU"},{"Key":"PLAY","Value":"Играть"},{"Key":"MENU","Value":"Меню"},{"Key":"NOTFOUND","Value":"Не обнаружена"},{"Key":"GALACTIC","Value":"Галактика"},{"Key":"SIGARA","Value":"Сигара"},{"Key":"SOMBRERO","Value":"Сомбреро"},{"Key":"SIGARETKA","Value":"Сигаретка"},{"Key":"RESTART","Value":"Рестарт"},{"Key":"BACK","Value":"Назад"},{"Key":"CONTINUE","Value":"Продолжить"},{"Key":"LOSE","Value":"Вы проиграли!"},{"Key":"WIN","Value":"Вы выиграли!"},{"Key":"NEXT","Value":"Далее"}]}
+{
+    "Name": "English",
+    "Words": [
+        {
+            "Key": "LANGUAGE",
+            "Value": "EN"
+        },
+        {
+            "Key": "PLAY",
+            "Value": "Play"
+        },
+        {
+            "Key": "MENU",
+            "Value": "Menu"
+        },
+        {
+            "Key": "NOTFOUND",
+            "Value": "Not found"
+        },
+        {
+            "Key": "NOENERGY",
+            "Value": "No energy!"
+        },
+        {
+            "Key": "OK",
+            "Value": "Ok"
+        },
+        {
+            "Key": "GALACTIC",
+            "Value": "Galactic"
+        },
+        {
+            "Key": "SIGARA",
+            "Value": "Sigara"
+        },
+        {
+            "Key": "SOMBRERO",
+            "Value": "Sombrero"
+        },
+        {
+            "Key": "SIGARETKA",
+            "Value": "Sigaretka"
+        },
+        {
+            "Key": "RESTART",
+            "Value": "Restart"
+        },
+        {
+            "Key": "BACK",
+            "Value": "Back"
+        },
+        {
+            "Key": "CONTINUE",
+            "Value": "Continue"
+        },
+        {
+            "Key": "LOSE",
+            "Value": "You lose!"
+        },
+        {
+            "Key": "WIN",
+            "Value": "You win!"
+        },
+        {
+            "Key": "NEXT",
+            "Value": "Next"
+        }
+    ]
+}

@@ -18,6 +18,14 @@
             "Value": "Не обнаружена"
         },
         {
+            "Key": "NOENERGY",
+            "Value": "Нет энергии!"
+        },
+        {
+            "Key": "OK",
+            "Value": "Ок"
+        },
+        {
             "Key": "GALACTIC",
             "Value": "Галактика"
         },

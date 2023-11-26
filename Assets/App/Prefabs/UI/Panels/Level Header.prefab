@@ -291,7 +291,7 @@ MonoBehaviour:
   label: {fileID: 2318681474660324893}
   prefix: 
   postfix: '%'
-  animationTime: 0.25
+  scriptable: {fileID: 11400000, guid: d33b62d2526455045a3e414bfc38bb97, type: 2}
 --- !u!114 &7665973440179679890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconImage: {fileID: 5170785755977745756}
+  packNameText: {fileID: 0}
   counterText: {fileID: 1461765244522434679}
 --- !u!1 &8191965843615018958
 GameObject:
@@ -1076,8 +1077,6 @@ MonoBehaviour:
   localizedTexts:
   - {fileID: 3938881021012886237}
   menuButton: {fileID: 2534092293934220057}
-  onEnableInit:
-  - {fileID: 3454183708619309416}
 --- !u!114 &8759330017489351752
 MonoBehaviour:
   m_ObjectHideFlags: 0

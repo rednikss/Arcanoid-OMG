@@ -11,6 +11,7 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.PercentageController
         
         public override void Init(ServiceContainer container)
         {
+            intView.Init(container);
             intView.SetValue(0);
         }
 
