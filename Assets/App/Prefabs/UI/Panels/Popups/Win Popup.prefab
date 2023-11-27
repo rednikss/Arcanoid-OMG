@@ -31,7 +31,7 @@ RectTransform:
   - {fileID: 6398210512944267918}
   - {fileID: 5237405545507283556}
   m_Father: {fileID: 7181130779413993767}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -72,7 +72,7 @@ RectTransform:
   - {fileID: 4348650510651489549}
   - {fileID: 638548657207795459}
   m_Father: {fileID: 7181130779413993767}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -338,9 +338,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3558962879858570822}
   - {fileID: 5181764566505404502}
   - {fileID: 3156273942065960895}
-  - {fileID: 3558962879858570822}
   m_Father: {fileID: 7823995417502428418}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1099,7 +1099,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7823995417502428418}
   m_RootOrder: 0
@@ -1309,6 +1309,7 @@ GameObject:
   - component: {fileID: 6290626204905617749}
   - component: {fileID: 1462175410570037092}
   - component: {fileID: 991041494632553182}
+  - component: {fileID: 6754084523697935571}
   m_Layer: 5
   m_Name: Win Popup
   m_TagString: Untagged
@@ -1386,6 +1387,7 @@ MonoBehaviour:
   continueButton: {fileID: 7187339025754231349}
   packSceneID: Pack Scene
   energyPrice: 3
+  animator: {fileID: 6754084523697935571}
 --- !u!114 &991041494632553182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,8 +1402,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monoInstallers:
   - {fileID: 1462175410570037092}
+  - {fileID: 6754084523697935571}
   - {fileID: 6290626204905617749}
   - {fileID: 5814293853072095377}
+--- !u!114 &6754084523697935571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823995419391610227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3d6eb87b484da5be798f3c4289b631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptable: {fileID: 11400000, guid: 263090095c6427042a6cd4d2f0544ddc, type: 2}
+  scaledComponents:
+  - {fileID: 7823995418409051475}
+  - {fileID: 7181130779413993767}
+  - {fileID: 3480369651902401961}
+  - {fileID: 7187339025754231346}
 --- !u!1 &9095421020487542427
 GameObject:
   m_ObjectHideFlags: 0
@@ -1434,7 +1455,7 @@ RectTransform:
   m_Children:
   - {fileID: 6401697254665426867}
   m_Father: {fileID: 7181130779413993767}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -1617,6 +1638,14 @@ PrefabInstance:
     - target: {fileID: 1797673028411651443, guid: d3ee3dde9b43dbf47976e9b78802e466, type: 3}
       propertyPath: m_Name
       value: Energy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544974931149932236, guid: d3ee3dde9b43dbf47976e9b78802e466, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3544974931149932236, guid: d3ee3dde9b43dbf47976e9b78802e466, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4682905886585318787, guid: d3ee3dde9b43dbf47976e9b78802e466, type: 3}
       propertyPath: m_Pivot.x

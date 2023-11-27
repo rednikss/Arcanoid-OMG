@@ -57,7 +57,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 2071753383
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -462,13 +462,13 @@ MonoBehaviour:
   installers:
   - {fileID: 7237431538516296475}
   - {fileID: 6197481960650103934}
+  - {fileID: 5485889750013960750}
   - {fileID: 4920422420668456513}
   - {fileID: 5799107850585403802}
   - {fileID: 5799107850676743648}
   - {fileID: 9144427693595377764}
   - {fileID: 5799107849311243744}
   - {fileID: 5799107848962729405}
-  - {fileID: 5485889750013960750}
   - {fileID: 2482863765082145649}
   - {fileID: 1038228534873993952}
 --- !u!114 &7237431538516296475

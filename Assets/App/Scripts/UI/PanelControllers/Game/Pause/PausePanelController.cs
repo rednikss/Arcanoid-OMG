@@ -48,7 +48,7 @@ namespace App.Scripts.UI.PanelControllers.Game.Pause
             
             backButton.onClick.AddListener(() =>
             {
-                container.GetService<SceneLoader>().LoadScene(backSceneName);
+                var task = container.GetService<SceneLoader>().LoadScene(backSceneName);
             });
         }
     }

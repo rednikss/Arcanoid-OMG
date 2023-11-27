@@ -21,7 +21,7 @@ namespace App.Scripts.Game.GameObjects.Ball.DirectionCorrector
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject.TryGetComponent<Platform.Platform>(out _)) return;
+            if (ball.IsPaused || other.gameObject.TryGetComponent<Platform.Platform>(out _)) return;
             
             ball.Velocity = CorrectVelocity(ball.Velocity, blockZones);
         }
@@ -31,9 +31,9 @@ namespace App.Scripts.Game.GameObjects.Ball.DirectionCorrector
             foreach (var zone in zones)
             {
                 float differenceAngle = Vector2.Angle(zone.Direction, velocity);
-                if (Mathf.Abs(differenceAngle) > zone.Width) continue;
+                if (Mathf.Abs(differenceAngle) >= zone.Width) continue;
 
-                var offsetAngle = -Mathf.Sign(differenceAngle) * zone.Width;
+                var offsetAngle = Mathf.Sign(differenceAngle) * zone.Width;
                 velocity = Quaternion.Euler(0, 0, offsetAngle) * zone.Direction;
             }
             

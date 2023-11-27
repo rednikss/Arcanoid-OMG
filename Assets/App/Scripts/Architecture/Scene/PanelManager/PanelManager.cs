@@ -45,6 +45,8 @@ namespace App.Scripts.Architecture.Scene.PanelManager
                 if (newPanel.GetType() != typeof(TInstaller)) continue;
                 
                 var panelController = Instantiate(newPanel, transform);
+                var index = transform.childCount - 2;
+                panelController.transform.SetSiblingIndex(index);
                 panelController.HidePanelImmediately();
                 
                 _disabledPanels.Add(panelController);

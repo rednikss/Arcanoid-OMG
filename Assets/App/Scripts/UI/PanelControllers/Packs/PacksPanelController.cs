@@ -32,7 +32,7 @@ namespace App.Scripts.UI.PanelControllers.Packs
             
             backButton.onClick.AddListener(() =>
             {
-                container.GetService<SceneLoader>().LoadScene(startSceneID);
+                var task = container.GetService<SceneLoader>().LoadScene(startSceneID);
             });
             
             stateController = container.GetService<PackStateController>();

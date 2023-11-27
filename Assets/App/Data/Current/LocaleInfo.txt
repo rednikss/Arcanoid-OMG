@@ -1,69 +1,73 @@
 {
-    "Name": "English",
+    "Name": "Russian",
     "Words": [
         {
             "Key": "LANGUAGE",
-            "Value": "EN"
+            "Value": "RU"
         },
         {
             "Key": "PLAY",
-            "Value": "Play"
+            "Value": "Играть"
         },
         {
             "Key": "MENU",
-            "Value": "Menu"
+            "Value": "Меню"
+        },
+        {
+            "Key": "LOADING",
+            "Value": "Загрузка..."
         },
         {
             "Key": "NOTFOUND",
-            "Value": "Not found"
+            "Value": "Не обнаружена"
         },
         {
             "Key": "NOENERGY",
-            "Value": "No energy!"
+            "Value": "Нет энергии!"
         },
         {
             "Key": "OK",
-            "Value": "Ok"
+            "Value": "Ок"
         },
         {
             "Key": "GALACTIC",
-            "Value": "Galactic"
+            "Value": "Галактика"
         },
         {
             "Key": "SIGARA",
-            "Value": "Sigara"
+            "Value": "Сигара"
         },
         {
             "Key": "SOMBRERO",
-            "Value": "Sombrero"
+            "Value": "Сомбреро"
         },
         {
             "Key": "SIGARETKA",
-            "Value": "Sigaretka"
+            "Value": "Сигаретка"
         },
         {
             "Key": "RESTART",
-            "Value": "Restart"
+            "Value": "Рестарт"
         },
         {
             "Key": "BACK",
-            "Value": "Back"
+            "Value": "Назад"
         },
         {
             "Key": "CONTINUE",
-            "Value": "Continue"
+            "Value": "Продолжить"
         },
         {
             "Key": "LOSE",
-            "Value": "You lose!"
+            "Value": "Вы проиграли!"
         },
         {
             "Key": "WIN",
-            "Value": "You win!"
+            "Value": "Вы выиграли!"
         },
         {
             "Key": "NEXT",
-            "Value": "Next"
+            "Value": "Далее"
         }
     ]
 }

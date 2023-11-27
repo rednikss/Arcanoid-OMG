@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Panel List
   m_EditorClassIdentifier: 
   panelList:
+  - {fileID: 4769086963914099313, guid: 0567ae2ed3267074d821d253d35c8e73, type: 3}
   - {fileID: -1649160395803272164, guid: 661c07f01dcb2f2498465306baade3d3, type: 3}
   - {fileID: 8426861587355909103, guid: d7eeb150e49421b4aab44e0138105b5c, type: 3}
   - {fileID: 47864212821159113, guid: 7dedef1e762c6ac40ad6991ae66f6885, type: 3}

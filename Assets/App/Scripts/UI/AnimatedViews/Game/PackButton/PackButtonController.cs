@@ -33,14 +33,14 @@ namespace App.Scripts.UI.AnimatedViews.Game.PackButton
                     var panelManager = container.GetService<PanelManager>();
                     var newPanel = panelManager.GetPanel<NoEnergyPanelController>();
                     panelManager.AddActive(newPanel);
-                    var task = newPanel.ShowPanel();
+                    var task1 = newPanel.ShowPanel();
                     
                     return;
                 }
 
                 container.GetService<EnergyController>().RemoveEnergy(energyPrice);
                 container.GetService<PackStateController>().SetPack(_scriptable);
-                container.GetService<SceneLoader>().LoadScene(levelSceneID);
+                var task2 = container.GetService<SceneLoader>().LoadScene(levelSceneID);
             });
         }
 

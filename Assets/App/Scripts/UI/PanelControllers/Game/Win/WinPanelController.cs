@@ -17,8 +17,11 @@ namespace App.Scripts.UI.PanelControllers.Game.Win
     {
         [SerializeField] private Button continueButton;
         [SerializeField] private string packSceneID;
-
+        
         [SerializeField] private int energyPrice;
+
+        
+        [SerializeField] private WinPanelAnimator animator;
         
         public override void Init(ServiceContainer container)
         {
@@ -43,9 +46,21 @@ namespace App.Scripts.UI.PanelControllers.Game.Win
                 }
                 else
                 {
-                    container.GetService<SceneLoader>().LoadScene(packSceneID);
+                    var task = container.GetService<SceneLoader>().LoadScene(packSceneID);
                 }
             });
+        }
+        
+        public override async Task ShowPanel()
+        {
+            panelCanvasGroup.gameObject.SetActive(true);
+            panelCanvasGroup.interactable = false;
+
+            animator.HideContent();
+            await canvasGroupView.Show();
+            await animator.ShowContentAnimated();
+            
+            panelCanvasGroup.interactable = true;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace App.Scripts.UI.PanelControllers.Start
             
             playButton.onClick.AddListener(() =>
             {
-                container.GetService<SceneLoader>().LoadScene(playSceneID);
+                var task = container.GetService<SceneLoader>().LoadScene(playSceneID);
             });
             
             languageButton.onClick.AddListener(() =>

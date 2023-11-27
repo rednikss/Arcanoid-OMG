@@ -52,8 +52,8 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
 
         public void SetPack(PackScriptable pack)
         {
-            CurrentPack = pack;
             currentInfo.LevelToLoad = GetLevelByPack(pack);
+            CurrentPack = pack;
             SaveState();
         }
 
@@ -125,8 +125,10 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
         
         private PackStateInfo CreateStartPackState()
         {
-            PackStateInfo startInfo = new();
-            startInfo.CurrentLevel = new int[packList.packs.Length];
+            PackStateInfo startInfo = new()
+            {
+                CurrentLevel = new int[packList.packs.Length]
+            };
             startInfo.CurrentLevel[0] = 1;
 
             for (int i = 1; i < Count; i++) 
