@@ -1,7 +1,7 @@
 {
     "CurrentLevel": [
         1,
-        1,
+        2,
         1
     ],
     "CompletedAmount": [
@@ -9,5 +9,5 @@
         2,
         1
     ],
-    "LevelToLoad": 5
+    "LevelToLoad": 3
 }

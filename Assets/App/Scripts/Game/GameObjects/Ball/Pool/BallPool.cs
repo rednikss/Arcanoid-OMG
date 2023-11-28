@@ -1,6 +1,7 @@
 ﻿using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.ObjectPool;
 using App.Scripts.Libs.Patterns.Service.Container;
+using UnityEngine;
 
 namespace App.Scripts.Game.GameObjects.Ball.Pool
 {
@@ -24,8 +25,9 @@ namespace App.Scripts.Game.GameObjects.Ball.Pool
 
         public override void TakeObject(Ball pooledObject, int id = 0)
         {
-            pooledObject.SetSpeed(increaser.Speed);
             base.TakeObject(pooledObject, id);
+            pooledObject.Velocity = Vector2.up;
+            pooledObject.SetSpeed(increaser.Speed);
         }
 
         protected override void PauseSystem()

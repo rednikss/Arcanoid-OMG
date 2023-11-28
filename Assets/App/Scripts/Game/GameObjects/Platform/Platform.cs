@@ -48,8 +48,6 @@ namespace App.Scripts.Game.GameObjects.Platform
             if (usingBalls.Count == 0) return false;
 
             var ball = usingBalls[0];
-            ball.Velocity = Vector2.up;
-            
             usingBalls.Remove(ball);
             return true;
         }
