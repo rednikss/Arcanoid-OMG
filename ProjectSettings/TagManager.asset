@@ -47,6 +47,9 @@ TagManager:
   - name: Blocks
     uniqueID: 3228241165
     locked: 0
+  - name: Boost
+    uniqueID: 3773402099
+    locked: 0
   - name: Effects
     uniqueID: 1716081395
     locked: 0

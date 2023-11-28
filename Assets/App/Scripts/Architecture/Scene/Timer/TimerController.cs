@@ -24,17 +24,12 @@ namespace App.Scripts.Architecture.Scene.Timer
         
         public override void Init(ServiceContainer container)
         {
-            CurrentTime = timerSeconds;
-            
             fileProvider = container.GetService<FileDataProvider>();
             currentInfo = fileProvider.LoadData<TimerStateInfo>(nameof(TimerStateInfo), filePath);
 
             if (currentInfo.TimerSecondsTime == 0) SaveState();
             
-            double timeDelta = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds - currentInfo.LastTotalSeconds;
-            float timerEndCount = (float) timeDelta / currentInfo.TimerSecondsTime;
-            
-            OnTimerEnd?.Invoke(Mathf.FloorToInt(timerEndCount));
+            LoadState();
             
             isTicking = true;
         }
@@ -53,27 +48,28 @@ namespace App.Scripts.Architecture.Scene.Timer
         private void OnApplicationFocus(bool hasFocus)
         {
             isTicking = hasFocus;
-            if (hasFocus)
-            {
-                LoadState();
-                
-                double timeDelta = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds - currentInfo.LastTotalSeconds;
-                float timerEndCount = (float) timeDelta / currentInfo.TimerSecondsTime;
-            
-                OnTimerEnd?.Invoke(Mathf.FloorToInt(timerEndCount));
-            }
+            if (hasFocus) LoadState();
             else SaveState();
         }
 
         private void LoadState()
         {
             currentInfo = fileProvider.LoadData<TimerStateInfo>(nameof(TimerStateInfo), filePath);
+
+            double timeDelta = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
+            timeDelta -= currentInfo.LastTotalSeconds;
+
+            CurrentTime = currentInfo.TimerSecondsTime - (float)(timeDelta % timerSeconds);
+            if (CurrentTime < 0) CurrentTime += timerSeconds;
+            
+            OnTimerEnd?.Invoke(Mathf.FloorToInt((float)(timeDelta / timerSeconds)));
         }
         
         private void SaveState()
         {
-            currentInfo.TimerSecondsTime = timerSeconds;
+            currentInfo.TimerSecondsTime = CurrentTime; 
             currentInfo.LastTotalSeconds = DateTime.Now.Subtract(DateTime.MinValue).TotalSeconds;
+            
             fileProvider.SaveData(currentInfo, nameof(TimerStateInfo), filePath);
         }
     }

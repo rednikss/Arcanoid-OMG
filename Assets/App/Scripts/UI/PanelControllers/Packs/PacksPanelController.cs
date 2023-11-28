@@ -55,9 +55,9 @@ namespace App.Scripts.UI.PanelControllers.Packs
             
             for (var i = 0; i < infoCount; i++)
             {
-                var curInfo = stateController.GetCurrentLevel(i);
+                var curInfo = stateController.GetCompletedAmount(i);
                 
-                buttons[i].SetData(curInfo > 0 ? packList.packs[i] : packList.blockedPack, curInfo);
+                buttons[i].SetData(curInfo >= 0 ? packList.packs[i] : packList.blockedPack, curInfo);
             }
         }
     }

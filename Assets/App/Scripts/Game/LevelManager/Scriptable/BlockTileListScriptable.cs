@@ -12,7 +12,7 @@ namespace App.Scripts.Game.LevelManager.Scriptable
         {
             foreach (var block in blocks)
             {
-                if (block.scriptable.blockID == blockId) return block;
+                if (block.ID == blockId) return block;
             }
             
             Debug.LogError($"Attempted to get a block with invalid id {blockId}!");

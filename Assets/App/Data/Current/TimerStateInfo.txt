@@ -1,4 +1,4 @@
 {
-    "LastTotalSeconds": 63836658254.85786,
-    "TimerSecondsTime": 30
+    "LastTotalSeconds": 63836743013.18378,
+    "TimerSecondsTime": 23.36656379699707
 }

@@ -30,7 +30,7 @@ namespace App.Scripts.UI.AnimatedViews.Game.PackInfo
             
             iconImage.sprite = pack.icon;
             if (packNameText != null) packNameText.Key = pack.packNameKey;
-            counterText.text = $"{stateController.GetCurrentLevel(pack).ToString()}/{pack.levelCount.ToString()}";
+            counterText.text = $"{stateController.GetCompletedAmount(pack).ToString()}/{pack.levelCount.ToString()}";
         }
     }
 }

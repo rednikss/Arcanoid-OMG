@@ -36,7 +36,7 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
             fileProvider = container.GetService<FileDataProvider>();
             currentInfo = fileProvider.LoadData<PackStateInfo>(nameof(PackStateInfo), filePath);
 
-            if (currentInfo.CurrentLevel == null)
+            if (currentInfo.LevelToLoad == 0)
             {
                 currentInfo = CreateStartPackState();
                 SaveState();
@@ -47,9 +47,13 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
         }
 
         public int GetCurrentLevel(int id) => currentInfo.CurrentLevel[id];
+        
+        public int GetCompletedAmount(int id) => currentInfo.CompletedAmount[id];
 
         public int GetCurrentLevel(PackScriptable pack) => currentInfo.CurrentLevel[GetPackID(pack)];
 
+        public int GetCompletedAmount(PackScriptable pack) => currentInfo.CompletedAmount[GetPackID(pack)];
+        
         public void SetPack(PackScriptable pack)
         {
             currentInfo.LevelToLoad = GetLevelByPack(pack);
@@ -63,7 +67,10 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
             
             if (CurrentPack.Equals(newPack))
             {
-                currentInfo.CurrentLevel[GetPackID(CurrentPack)]++;
+                var id = GetPackID(CurrentPack);
+                currentInfo.CompletedAmount[id] = 
+                    Math.Max(currentInfo.CurrentLevel[id], currentInfo.CompletedAmount[id]);
+                currentInfo.CurrentLevel[id]++;
                 OnCurrentPackChanged?.Invoke();
                 SaveState();
                 return true;
@@ -72,10 +79,11 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
             for (int i = 0; i < Count; i++)
             {
                 if (!packList.packs[i].Equals(CurrentPack)) continue;
-                
+
                 currentInfo.CurrentLevel[i] = 1;
-                
-                if (i + 1 < Count && currentInfo.CurrentLevel[i + 1] == 0) currentInfo.CurrentLevel[i + 1] = 1;
+                currentInfo.CompletedAmount[i] = CurrentPack.levelCount;
+                    
+                if (i + 1 < Count) currentInfo.CompletedAmount[i + 1] = Math.Max(currentInfo.CompletedAmount[i + 1], 0);
             }
 
             SaveState();
@@ -127,14 +135,18 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
         {
             PackStateInfo startInfo = new()
             {
-                CurrentLevel = new int[packList.packs.Length]
+                CurrentLevel = new int[packList.packs.Length],
+                CompletedAmount = new int[packList.packs.Length],
+                LevelToLoad = 1,
             };
             startInfo.CurrentLevel[0] = 1;
+            
+            for (int i = 1; i < packList.packs.Length; i++)
+            {
+                startInfo.CurrentLevel[i] = 1;
+                startInfo.CompletedAmount[i] = -1;
+            }
 
-            for (int i = 1; i < Count; i++) 
-                startInfo.CurrentLevel[i] = 0;
-
-            startInfo.LevelToLoad = 1;
             return startInfo;
         }
         

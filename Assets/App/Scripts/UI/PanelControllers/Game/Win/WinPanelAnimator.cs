@@ -12,25 +12,25 @@ namespace App.Scripts.UI.PanelControllers.Game.Win
         [SerializeField] private AnimationOptionsScriptable scriptable;
         
         [SerializeField] private RectTransform[] scaledComponents;
-        
-        private Tween[] tweens;
+
+        [SerializeField] private RectTransform rotatingGlow;
         
         private Sequence sequence;
         
         public override void Init(ServiceContainer container)
         {
-            tweens = new Tween[scaledComponents.Length];
             sequence = DOTween.Sequence(gameObject).SetAutoKill(false).Pause();
             var stepTime = scriptable.animationTime / scaledComponents.Length;
 
-            for (var i = 0; i < scaledComponents.Length; i++)
+            foreach (var comp in scaledComponents)
             {
-                tweens[i] = scaledComponents[i].DOScale(Vector3.one, stepTime)
-                    .SetEase(scriptable.showEase).SetAutoKill(false);
-
-                sequence.Append(tweens[i]);
+                sequence.Append(comp.DOScale(Vector3.one, stepTime)
+                    .SetEase(scriptable.showEase).SetAutoKill(false));
             }
-            
+
+            sequence.Insert(0, 
+                rotatingGlow.DORotate(Vector3.forward * 360, scriptable.animationTime, RotateMode.LocalAxisAdd)
+                .SetAutoKill(false));
         }
         
         public void HideContent()

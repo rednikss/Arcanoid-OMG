@@ -2,7 +2,7 @@
 using App.Scripts.Libs.Patterns.Service.Container;
 using UnityEngine;
 
-namespace App.Scripts.Game.GameObjects.Blocks.Base
+namespace App.Scripts.Game.GameObjects.Blocks.Base.View
 {
     public class BlockHealthView : BlockView
     {
@@ -14,14 +14,13 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base
 
         public override void Init(ServiceContainer container)
         {
-            block.OnHealthChanged += health => SetHealthPercent(health / block.scriptable.health);
-            
             healthBar.Add(null);
             healthBar.AddRange(breaks);
             healthBar.Add(null);
         }
         
-        private void SetHealthPercent(float percent)
+        
+        public void SetHealthPercent(float percent)
         {
             int intCount = 1 + (int)((1 - percent) * healthBar.Count);
 

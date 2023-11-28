@@ -1,73 +1,73 @@
 {
-    "Name": "Russian",
+    "Name": "English",
     "Words": [
         {
             "Key": "LANGUAGE",
-            "Value": "RU"
+            "Value": "EN"
         },
         {
             "Key": "PLAY",
-            "Value": "Играть"
+            "Value": "Play"
         },
         {
             "Key": "MENU",
-            "Value": "Меню"
+            "Value": "Menu"
         },
         {
             "Key": "LOADING",
-            "Value": "Загрузка..."
+            "Value": "Loading..."
         },
         {
             "Key": "NOTFOUND",
-            "Value": "Не обнаружена"
+            "Value": "Not found"
         },
         {
             "Key": "NOENERGY",
-            "Value": "Нет энергии!"
+            "Value": "No energy!"
         },
         {
             "Key": "OK",
-            "Value": "Ок"
+            "Value": "Ok"
         },
         {
             "Key": "GALACTIC",
-            "Value": "Галактика"
+            "Value": "Galactic"
         },
         {
             "Key": "SIGARA",
-            "Value": "Сигара"
+            "Value": "Sigara"
         },
         {
             "Key": "SOMBRERO",
-            "Value": "Сомбреро"
+            "Value": "Sombrero"
         },
         {
             "Key": "SIGARETKA",
-            "Value": "Сигаретка"
+            "Value": "Sigaretka"
         },
         {
             "Key": "RESTART",
-            "Value": "Рестарт"
+            "Value": "Restart"
         },
         {
             "Key": "BACK",
-            "Value": "Назад"
+            "Value": "Back"
         },
         {
             "Key": "CONTINUE",
-            "Value": "Продолжить"
+            "Value": "Continue"
         },
         {
             "Key": "LOSE",
-            "Value": "Вы проиграли!"
+            "Value": "You lose!"
         },
         {
             "Key": "WIN",
-            "Value": "Вы выиграли!"
+            "Value": "You win!"
         },
         {
             "Key": "NEXT",
-            "Value": "Далее"
+            "Value": "Next"
         }
     ]
 }

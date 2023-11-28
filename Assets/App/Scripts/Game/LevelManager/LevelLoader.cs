@@ -2,6 +2,7 @@
 using App.Scripts.Architecture.Scene.Packs.StateController;
 using App.Scripts.Game.GameObjects.Blocks.Base;
 using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
+using App.Scripts.Game.GameObjects.Boost.Base;
 using App.Scripts.Game.LevelManager.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -14,12 +15,12 @@ namespace App.Scripts.Game.LevelManager
 {
     public class LevelLoader : MonoInstaller
     {
-        [SerializeField] private Tilemap tilemap;
+        [SerializeField] private Tilemap blockTilemap;
+        [SerializeField] private Tilemap boostTilemap;
         [SerializeField] private LevelSizeScriptable mapSize;
 
         [SerializeField] private string packStatePath;
         [SerializeField] private string levelPath;
-        
         
         private CameraAdapter adapter;
         private BlockPool pool;
@@ -38,8 +39,8 @@ namespace App.Scripts.Game.LevelManager
             fileProvider = container.GetService<FileDataProvider>();
 
             Vector3 percentPosition = new(mapSize.padding.right, 1 - mapSize.padding.top, 0);
-            tilemap.transform.position = adapter.PercentToWorld(percentPosition) + Vector3.up * mapSize.row;
-
+            blockTilemap.transform.position = boostTilemap.transform.position =
+                adapter.PercentToWorld(percentPosition) + Vector3.up * mapSize.row;
         }
 
         public void LoadLevel()
@@ -59,8 +60,9 @@ namespace App.Scripts.Game.LevelManager
             levelSize -= (currentLevel.size.x - 1) * mapSize.column;
             levelSize /= currentLevel.size.x;
 
-            tilemap.transform.localScale = Vector3.one * levelSize;
-            tilemap.layoutGrid.cellGap = new Vector3(mapSize.column, mapSize.row, 0) / levelSize;
+            blockTilemap.transform.localScale = Vector3.one * levelSize;
+            blockTilemap.layoutGrid.cellGap = boostTilemap.layoutGrid.cellGap = 
+                new Vector3(mapSize.column, mapSize.row, 0) / levelSize;
         }
 
         private void InitBlocks()
@@ -68,9 +70,11 @@ namespace App.Scripts.Game.LevelManager
             foreach (var blockInfo in currentLevel.blocks)
             {
                 var newBlock = pool.Get(blockInfo.id);
+                newBlock.SetBoost(blockInfo.boostID);
+                
                 var blockTransform = newBlock.transform;
                 
-                blockTransform.position = tilemap.GetCellCenterWorld(blockInfo.pos);
+                blockTransform.position = blockTilemap.GetCellCenterWorld(blockInfo.pos);
                 blockTransform.localScale *= levelSize;
             }
         }
@@ -79,8 +83,8 @@ namespace App.Scripts.Game.LevelManager
         
         public void SaveCurrentAsLevel(string filepath)
         {
-            tilemap.CompressBounds();
-            var cellBounds = tilemap.cellBounds;
+            blockTilemap.CompressBounds();
+            var cellBounds = blockTilemap.cellBounds;
             var positions = cellBounds.allPositionsWithin;
             
             Vector3Int topLeftPosition = cellBounds.position + new Vector3Int(0, cellBounds.size.y, 0);
@@ -88,17 +92,25 @@ namespace App.Scripts.Game.LevelManager
             LevelInfo level = new LevelInfo(cellBounds.size);
             foreach (var position in positions)
             {
-                var block = tilemap.GetTile<BlockTile>(position);
+                var block = blockTilemap.GetTile<BlockTile>(position);
                 
                 if (block == null) continue;
-                
-                level.blocks.Add(new BlockInfo(block.ID, position - topLeftPosition));
+
+                var boost = boostTilemap.GetTile<BoostTile>(position);
+
+                level.blocks.Add(boost == null
+                    ? new BlockInfo(block.ID, position - topLeftPosition)
+                    : new BlockInfo(block.ID, position - topLeftPosition, boost.ID));
             }
+            
             
             using var stream = File.Create(filepath);
             using StreamWriter writer = new(stream);
             
             writer.Write(JsonUtility.ToJson(level));
+            
+            blockTilemap.ClearAllTiles();
+            boostTilemap.ClearAllTiles();
         }
 #endif
     }

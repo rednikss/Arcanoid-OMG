@@ -5,7 +5,7 @@ namespace App.Scripts.Architecture.Scene.Timer
     public class TimerStateInfo
     {
         public double LastTotalSeconds;
-        public uint TimerSecondsTime;
+        public float TimerSecondsTime;
 
         public TimerStateInfo()
         {

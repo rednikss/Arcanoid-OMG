@@ -33,7 +33,7 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base.Pool
             pooledObject.transform.localScale = Vector3.one;
             base.ReturnObject(pooledObject, id);
             
-            if (pooledObject.scriptable.blockID == 0) minBlockCount--;
+            if (pooledObject.ID == 0) minBlockCount--;
             
             OnBlockCountChanged?.Invoke(UsingObjects.Count, minBlockCount, 
                 _container.GetService<LevelLoader>().GetLevelBlockCount());
@@ -42,9 +42,10 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base.Pool
         public override void TakeObject(Block pooledObject, int id = 0)
         {
             pooledObject.Init(_container);
+            pooledObject.SetBoost(-1);
             base.TakeObject(pooledObject, id);
             
-            if (pooledObject.scriptable.blockID == 0) minBlockCount++;
+            if (pooledObject.ID == 0) minBlockCount++;
             
             OnBlockCountChanged?.Invoke(UsingObjects.Count, minBlockCount,  
                 _container.GetService<LevelLoader>().GetLevelBlockCount());
@@ -55,7 +56,7 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base.Pool
             while (UsingObjects.Count > 0)
             {
                 var block = UsingObjects[0];
-                ReturnObject(block, block.scriptable.blockID);
+                ReturnObject(block, block.ID);
             }
         }
     }

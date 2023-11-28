@@ -20,7 +20,7 @@ namespace App.Scripts.UI.AnimatedViews.Game.PackButton
         [SerializeField] private int energyPrice;
         
         private PackScriptable _scriptable;
-        private int _currentLevel;
+        private int _completedAmount;
         
         public override void Init(ServiceContainer container)
         {
@@ -44,14 +44,14 @@ namespace App.Scripts.UI.AnimatedViews.Game.PackButton
             });
         }
 
-        public void SetData(PackScriptable packData, int currentLevel)
+        public void SetData(PackScriptable packData, int completedAmount)
         {
             _scriptable = packData;
-            _currentLevel = currentLevel;
-            view.SetCompletedLevelCount(_currentLevel);
+            _completedAmount = Mathf.Max(0, completedAmount);
+            view.SetCompletedLevelCount(_completedAmount);
             view.SetPackView(_scriptable);
             
-            button.interactable = currentLevel > 0;
+            button.interactable = completedAmount >= 0;
         }
     }
 }

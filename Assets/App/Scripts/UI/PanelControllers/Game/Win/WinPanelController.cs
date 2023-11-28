@@ -22,14 +22,19 @@ namespace App.Scripts.UI.PanelControllers.Game.Win
 
         
         [SerializeField] private WinPanelAnimator animator;
+
+        private PackStateController stateController;
+        
+        private bool isLoadNext;
         
         public override void Init(ServiceContainer container)
         {
             base.Init(container);
+            stateController = container.GetService<PackStateController>();
             
             continueButton.onClick.AddListener(() =>
             {
-                if (container.GetService<PackStateController>().TrySetNextLevel())
+                if (stateController.TrySetNextLevel())
                 {
                     if (!container.GetService<EnergyController>().CanRemoveEnergy(energyPrice))
                     {

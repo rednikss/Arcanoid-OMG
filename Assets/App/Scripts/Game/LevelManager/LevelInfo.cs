@@ -29,11 +29,13 @@ namespace App.Scripts.Game.LevelManager
     {
         public int id;
         public Vector3Int pos;
+        public int boostID;
 
-        public BlockInfo(int id, Vector3Int pos)
+        public BlockInfo(int id, Vector3Int pos, int boostID = -1)
         {
             this.id = id;
             this.pos = pos;
+            this.boostID = boostID;
         }
     }
 }
