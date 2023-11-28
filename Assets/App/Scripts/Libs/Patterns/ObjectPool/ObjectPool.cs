@@ -16,6 +16,7 @@ namespace App.Scripts.Libs.Patterns.ObjectPool
         private readonly List<Stack<TObjectType>> poolObjects = new();
         
         protected readonly List<TObjectType> UsingObjects = new();
+        public int ActiveCount => UsingObjects.Count;
         
         public override void Init(ServiceContainer container)
         {
@@ -23,10 +24,7 @@ namespace App.Scripts.Libs.Patterns.ObjectPool
             {
                 poolObjects.Add(new());
                 
-                for (int j = 0; j < scriptable.defaultSize / factories.Length; j++)
-                {
-                    Create(i);
-                }
+                for (int j = 0; j < scriptable.defaultSize / factories.Length; j++) Create(i);
             }
         }
         

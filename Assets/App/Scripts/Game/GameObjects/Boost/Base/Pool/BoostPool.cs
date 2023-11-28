@@ -15,10 +15,18 @@ namespace App.Scripts.Game.GameObjects.Boost.Base.Pool
         
         public override void TakeObject(Boost pooledObject, int id = 0)
         {
-            pooledObject.Init(_container);
             base.TakeObject(pooledObject, id);
+            pooledObject.Init(_container);
         }
-
+        
+        public override void UpdateWithDT(float dt)
+        {
+            foreach (var system in UsingObjects)
+            {
+                system.UpdateWithDT(dt);
+            }
+        }
+        
         public void ReturnAll()
         {
             while (UsingObjects.Count > 0)

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1709152173569094148}
   - component: {fileID: -3378155600806520414}
   - component: {fileID: 1709152173569094155}
-  - component: {fileID: 1709152173569094154}
+  - component: {fileID: 7765170010542752685}
   m_Layer: 0
-  m_Name: BallSpeed+ Tile
+  m_Name: BallSpeed-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b38373f271c0a646b9137802b1bb953, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 309dee7338754e74b9fb4891509e4a95, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,13 +128,13 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 0.5
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
---- !u!114 &1709152173569094154
+--- !u!114 &7765170010542752685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,8 +143,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1709152173569094152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 259a38f94c2f4ed9b8f5e248611be5fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 68868fb71d554825b2ade9f63edc918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1709152173569094155}
-  id: 0
+  id: 1
+  moveDirection: {x: 0, y: -1}
+  speed: 4

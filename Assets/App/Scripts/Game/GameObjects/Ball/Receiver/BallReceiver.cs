@@ -30,12 +30,13 @@ namespace App.Scripts.Game.GameObjects.Ball.Receiver
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.TryGetComponent<Ball>(out var ball))
-            {
-                pool.ReturnObject(ball);
-                
-                OnBallMiss?.Invoke();
-            }
+            if (!col.gameObject.TryGetComponent<Ball>(out var ball)) return;
+            
+            pool.ReturnObject(ball);
+            
+            if (pool.ActiveCount > 0) return;
+            
+            OnBallMiss?.Invoke();
         }
     }
 }

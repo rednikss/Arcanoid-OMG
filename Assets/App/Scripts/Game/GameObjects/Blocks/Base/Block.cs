@@ -23,8 +23,8 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base
             get => health;
             set
             {
-                if (healthView != null) healthView.SetHealthPercent(health / scriptable.health);
                 health = value;
+                if (healthView != null) healthView.SetHealthPercent(health / scriptable.health);
             }
         }
 

@@ -107,7 +107,7 @@ namespace App.Scripts.Game.LevelManager
             using var stream = File.Create(filepath);
             using StreamWriter writer = new(stream);
             
-            writer.Write(JsonUtility.ToJson(level));
+            writer.Write(JsonUtility.ToJson(level, true));
             
             blockTilemap.ClearAllTiles();
             boostTilemap.ClearAllTiles();

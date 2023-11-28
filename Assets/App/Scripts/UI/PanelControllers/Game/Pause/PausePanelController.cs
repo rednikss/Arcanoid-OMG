@@ -20,6 +20,7 @@ namespace App.Scripts.UI.PanelControllers.Game.Pause
         [SerializeField] private string backSceneName;
         
         [SerializeField] private Button continueButton;
+        [SerializeField] private Button skipButton;
         
         public override void Init(ServiceContainer container)
         {
@@ -49,6 +50,11 @@ namespace App.Scripts.UI.PanelControllers.Game.Pause
             backButton.onClick.AddListener(() =>
             {
                 var task = container.GetService<SceneLoader>().LoadScene(backSceneName);
+            });
+
+            skipButton.onClick.AddListener(() =>
+            {
+                container.GetService<GameStateMachine>().ChangeState<WinState>();
             });
         }
     }

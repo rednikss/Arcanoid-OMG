@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Game.GameObjects.Ball.Pool;
 using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
+using App.Scripts.Game.GameObjects.Boost.Base.Pool;
 using App.Scripts.Game.GameObjects.Platform;
 using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.StateMachine;
@@ -21,6 +22,7 @@ namespace App.Scripts.Game.States
         {
             AddSystem<Platform>();
             AddSystem<BallPool>();
+            AddSystem<BoostPool>();
             
             blockPool = Container.GetService<BlockPool>();
             increaser = Container.GetService<DifficultyIncreaser>();

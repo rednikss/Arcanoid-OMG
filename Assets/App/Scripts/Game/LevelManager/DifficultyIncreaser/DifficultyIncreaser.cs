@@ -10,6 +10,10 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
     {
         [SerializeField] private SpeedRangeScriptable speedRange;
 
+        private SpeedRangeScriptable _currentRange;
+
+        private int lastPercent;
+        
         public float Speed { get; private set; }
 
         private BallPool pool;
@@ -17,6 +21,8 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
         public override void Init(ServiceContainer container)
         {
             Speed = speedRange.minSpeed;
+            _currentRange = speedRange;
+            lastPercent = 0;
             
             pool = container.GetService<BallPool>();
         }
@@ -24,11 +30,21 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
         public void UpdateSpeed(int current, int min, int max)
         {
             var percent = 1 - (float) current / max;
-
-            Speed = Mathf.Lerp(speedRange.minSpeed, speedRange.maxSpeed, percent);
+            lastPercent = (int) (percent * 100);
+            
+            Speed = Mathf.Lerp(_currentRange.minSpeed, _currentRange.maxSpeed, percent);
             pool.SetSpeed(Speed);
         }
 
+        public void SetRange(SpeedRangeScriptable scriptable)
+        {
+            _currentRange = scriptable;
+            UpdateSpeed(lastPercent, 0, 100);
+        }
+
+        public void ResetRange() => SetRange(speedRange);
+        
+        
         public void Reset() => pool.SetSpeed(speedRange.minSpeed);
     }
 }
