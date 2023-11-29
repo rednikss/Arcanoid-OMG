@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmpText: {fileID: 7006575169495161909}
-  key: GALACTIC
+  key: GALAXY
 --- !u!114 &7006575169495161909
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,12 @@ namespace App.Scripts.Game.GameObjects.Boost.Types.BallSpeed
     public class BallSpeedIncreaseBoost : Base.Boost
     {
         [SerializeField] private SpeedRangeScriptable percentIncrease;
-        
+
         protected override void OnCollected()
         {
-            Container.GetService<BallSpeedIncreaser>().StartEvent(percentIncrease);
-            
             base.OnCollected();
+            
+            Container.GetService<BallSpeedIncreaser>().StartEvent(percentIncrease);
         }
     }
 }

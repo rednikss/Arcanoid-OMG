@@ -30,8 +30,8 @@
             "Value": "Ok"
         },
         {
-            "Key": "GALACTIC",
-            "Value": "Galactic"
+            "Key": "GALAXY",
+            "Value": "Galaxy"
         },
         {
             "Key": "SIGARA",

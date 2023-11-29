@@ -1,4 +1,5 @@
-﻿using App.Scripts.Libs.Patterns.Service.Container;
+﻿using App.Scripts.Game.GameObjects.Ball.View.Boost;
+using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using UnityEngine;
 
@@ -8,7 +9,12 @@ namespace App.Scripts.Game.GameObjects.Ball
     {
         [SerializeField] private Rigidbody2D _rigidbody;
 
+        [SerializeField] private BallBoostView boostView;
+        
         [SerializeField] [Min(0)] private float speed;
+
+        [SerializeField] [Min(0)] private int damage;
+        public int Damage => damage;
         
         private Vector2 _currentVelocity;
 
@@ -46,5 +52,7 @@ namespace App.Scripts.Game.GameObjects.Ball
             speed = newSpeed;
             _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
         }
+
+        public void SetBoostView(bool state) => boostView.SetBoostView(state);
     }
 }

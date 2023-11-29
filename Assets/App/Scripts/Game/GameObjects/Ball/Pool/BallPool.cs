@@ -1,13 +1,14 @@
 ﻿using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.ObjectPool;
 using App.Scripts.Libs.Patterns.Service.Container;
-using UnityEngine;
 
 namespace App.Scripts.Game.GameObjects.Ball.Pool
 {
     public class BallPool : ObjectPool<Ball>
     {
         private DifficultyIncreaser increaser;
+
+        private bool isBoostState;
         
         public override void UpdateWithDT(float dt)
         {
@@ -26,6 +27,7 @@ namespace App.Scripts.Game.GameObjects.Ball.Pool
         public override void TakeObject(Ball pooledObject, int id = 0)
         {
             base.TakeObject(pooledObject, id);
+            pooledObject.SetBoostView(isBoostState);
             pooledObject.SetSpeed(increaser.Speed);
         }
 
@@ -53,6 +55,15 @@ namespace App.Scripts.Game.GameObjects.Ball.Pool
             foreach (var ball in UsingObjects)
             {
                 ball.SetSpeed(newSpeed);
+            }
+        }
+
+        public void SetBoostView(bool state)
+        {
+            isBoostState = state;
+            foreach (var ball in UsingObjects)
+            {
+                ball.SetBoostView(state);
             }
         }
     }

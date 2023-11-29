@@ -71,6 +71,11 @@ namespace App.Scripts.Architecture.Scene.PanelManager
             _activePanels.Peek().SetInteractive(true);
         }
 
+        public LocalizedPanelController GetActive()
+        {
+            return _activePanels.Pop();
+        }
+        
         public LocalizedPanelController RemoveActive()
         {
             var activePanel = _activePanels.Pop();

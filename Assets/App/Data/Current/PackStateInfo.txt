@@ -5,9 +5,9 @@
         1
     ],
     "CompletedAmount": [
-        1,
-        2,
-        3
+        0,
+        -1,
+        -1
     ],
-    "LevelToLoad": 2
+    "LevelToLoad": 1
 }

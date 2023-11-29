@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 5825441803789029040}
-  scriptable: {fileID: 11400000, guid: 9f7e65256747ac94aa7f8f999197828e, type: 2}
+  scriptable: {fileID: 11400000, guid: d33b62d2526455045a3e414bfc38bb97, type: 2}
   showDirection: {x: 0, y: 1}
 --- !u!114 &2494851129844220054
 MonoBehaviour:
@@ -391,7 +391,6 @@ MonoBehaviour:
   - {fileID: 7823995418409051477}
   - {fileID: 7720029945404103705}
   okButton: {fileID: 7187339025754231349}
-  packSceneID: Pack Scene
 --- !u!114 &991041494632553182
 MonoBehaviour:
   m_ObjectHideFlags: 0

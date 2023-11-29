@@ -228,6 +228,7 @@ MonoBehaviour:
   scriptable: {fileID: 11400000, guid: 01ededfdbe1656846957ae8e703ec878, type: 2}
   healthView: {fileID: 0}
   boostView: {fileID: 8020185059512063143}
+  _collider: {fileID: 9051377628621042135}
 --- !u!114 &8020185059512063143
 MonoBehaviour:
   m_ObjectHideFlags: 0

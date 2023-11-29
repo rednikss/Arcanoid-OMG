@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using App.Scripts.Game.GameObjects.Ball.Receiver;
 using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
+using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Fade;
 using App.Scripts.UI.AnimatedViews.Game.HeartView;
 using App.Scripts.UI.PanelControllers.Game.Level.HealthBarController.Scriptable;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
 {
@@ -15,6 +18,11 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
     {
         [SerializeField] private HealthScriptable scriptable;
         [SerializeField] private HeartView prefab;
+        
+        [SerializeField] private AnimatedCanvasFadeView glowView;
+        [SerializeField] private Image glowImage;
+        [SerializeField] private Color addColor;
+        [SerializeField] private Color removeColor;
 
         private readonly List<HeartView> hearts = new();
 
@@ -63,9 +71,15 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
             if (currentHealthCount == 0) machine.ChangeState<LoseState>();
         }
 
-        public void SafeAddHeart(int count)
+        public async Task SafeAddHeart(int count)
         {
             AddHeart(count, true);
+
+            var color = Math.Sign(count) > 0 ? addColor : removeColor;
+            glowImage.color = color;
+
+            await glowView.Show();
+            await glowView.Hide();
         }
     }
 }

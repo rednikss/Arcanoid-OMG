@@ -15,20 +15,18 @@ namespace App.Scripts.Game.States
             _panelManager = container.GetService<PanelManager>();
         }
         
-        public override Task OnEnterState()
+        public override async Task OnEnterState()
         {
             var panel = _panelManager.GetPanel<PausePanelController>();
             _panelManager.AddActive(panel);
             
-            var task = panel.ShowPanel();
-            return task;
+            await panel.ShowPanel();
         }
 
         public override async Task OnExitState()
         {
             var panel = _panelManager.RemoveActive();
-            var task = panel.HidePanel();
-            await task;
+            await panel.HidePanel();
         }
     }
 }

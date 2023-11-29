@@ -77,16 +77,19 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
                 return true;
             }
 
-            if (newPack == null) currentInfo.LevelToLoad = 1;
+            var i = GetPackID(CurrentPack);
             
-            for (int i = 0; i < Count; i++)
-            {
-                if (!packList.packs[i].Equals(CurrentPack)) continue;
+            currentInfo.CurrentLevel[i] = 1;
+            currentInfo.CompletedAmount[i] = CurrentPack.levelCount;
 
-                currentInfo.CurrentLevel[i] = 1;
-                currentInfo.CompletedAmount[i] = CurrentPack.levelCount;
-                    
-                if (i + 1 < Count) currentInfo.CompletedAmount[i + 1] = Math.Max(currentInfo.CompletedAmount[i + 1], 0);
+            if (i + 1 < Count)
+            {
+                currentInfo.CompletedAmount[i + 1] = Math.Max(currentInfo.CompletedAmount[i + 1], 0);
+                CurrentPack = packList.packs[i + 1];
+            }
+            else
+            {
+                CurrentPack = packList.packs[0];
             }
 
             SaveState();

@@ -3,6 +3,7 @@ using App.Scripts.Game.GameObjects.Ball.Pool;
 using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
 using App.Scripts.Game.GameObjects.Boost.Base.Pool;
 using App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.BlockDestroySetter;
 using App.Scripts.Game.GameObjects.Boost.Services.PlatformSizeIncreaser;
 using App.Scripts.Game.GameObjects.Boost.Services.PlatformSpeedIncreaser;
 using App.Scripts.Game.GameObjects.Platform;
@@ -28,6 +29,7 @@ namespace App.Scripts.Game.States
             AddSystem<BoostPool>();
 
             AddSystem<BallSpeedIncreaser>();
+            AddSystem<BlockDestroySetter>();
             AddSystem<PlatformSpeedIncreaser>();
             AddSystem<PlatformSizeIncreaser>();
             

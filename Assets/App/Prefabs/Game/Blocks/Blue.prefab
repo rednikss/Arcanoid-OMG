@@ -448,7 +448,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1066726131
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a743f7c21290d24d88635407b9066e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -535,6 +535,7 @@ MonoBehaviour:
   scriptable: {fileID: 11400000, guid: 6f197ff94414ac94e9015a11a95df0cc, type: 2}
   healthView: {fileID: 7676678857307229428}
   boostView: {fileID: 2153550306608652608}
+  _collider: {fileID: 9051377628621042135}
 --- !u!114 &2153550306608652608
 MonoBehaviour:
   m_ObjectHideFlags: 0

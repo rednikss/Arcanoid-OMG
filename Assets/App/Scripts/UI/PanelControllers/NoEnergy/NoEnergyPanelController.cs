@@ -14,11 +14,11 @@ namespace App.Scripts.UI.PanelControllers.NoEnergy
         {
             base.Init(container);
             
-            okButton.onClick.AddListener( () =>
+            okButton.onClick.AddListener(async () =>
             {
                 var panelManager = container.GetService<PanelManager>();
                 var newPanel = panelManager.RemoveActive();
-                var task = newPanel.HidePanel();
+                await newPanel.HidePanel();
             });
         }
     }

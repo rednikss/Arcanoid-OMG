@@ -6,10 +6,10 @@ namespace App.Scripts.Game.GameObjects.Boost.Types.Health
     public class HealthIncreaserBoost : Base.Boost
     {
         [SerializeField] private int addCount;
-        
+
         protected override void OnCollected()
         {
-            Container.GetService<HealthBarController>().SafeAddHeart(addCount);
+            var task = Container.GetService<HealthBarController>().SafeAddHeart(addCount);
             
             base.OnCollected();
         }

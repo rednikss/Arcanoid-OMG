@@ -30,7 +30,7 @@
             "Value": "Ок"
         },
         {
-            "Key": "GALACTIC",
+            "Key": "GALAXY",
             "Value": "Галактика"
         },
         {

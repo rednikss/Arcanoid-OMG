@@ -22,14 +22,15 @@ namespace App.Scripts.Game.GameObjects.Boost.Base
             boostPool = container.GetService<BoostPool>();
             Container = container;
         }
-
+        
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (col.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-            
-            OnCollected();
+            if (gameObject.activeInHierarchy && col.gameObject.layer == LayerMask.NameToLayer("Platform"))
+            {
+                OnCollected();
+            }
         }
-
+        
         private void OnBecameInvisible()
         {
             if (_rigidbody.velocity != Vector2.zero) boostPool.ReturnObject(this, ID);
@@ -39,7 +40,7 @@ namespace App.Scripts.Game.GameObjects.Boost.Base
         {
             _rigidbody.MovePosition(_rigidbody.position + dt * moveDirection.normalized * speed);
         }
-        
+
         protected virtual void OnCollected()
         {
             boostPool.ReturnObject(this, ID);

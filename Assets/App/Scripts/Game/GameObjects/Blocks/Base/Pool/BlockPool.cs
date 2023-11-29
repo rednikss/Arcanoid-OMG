@@ -15,6 +15,8 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base.Pool
         private int maxBlockCount;
         private int minBlockCount;
 
+        private bool currentImmediateDestroy;
+        
         public override void Init(ServiceContainer container)
         {
             base.Init(container);
@@ -43,12 +45,22 @@ namespace App.Scripts.Game.GameObjects.Blocks.Base.Pool
         {
             pooledObject.Init(_container);
             pooledObject.SetBoost(-1);
+            pooledObject.IsImmediateDestroy = currentImmediateDestroy;
             base.TakeObject(pooledObject, id);
             
             if (pooledObject.ID == 0) minBlockCount++;
             
             OnBlockCountChanged?.Invoke(UsingObjects.Count, minBlockCount,  
                 _container.GetService<LevelLoader>().GetLevelBlockCount());
+        }
+
+        public void SetImmediateDestroy(bool state)
+        {
+            currentImmediateDestroy = state;
+            foreach (var block in UsingObjects)
+            {
+                block.IsImmediateDestroy = state;
+            }
         }
         
         public void ReturnAll()

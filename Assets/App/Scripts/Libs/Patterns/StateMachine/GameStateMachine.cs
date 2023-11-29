@@ -31,16 +31,10 @@ namespace App.Scripts.Libs.Patterns.StateMachine
         
         private async void SetState(GameState value)
         {
+            await (_currentState?.OnExitState() ?? Task.CompletedTask);
             _previousState = _currentState;
             _currentState = value;
-            
-            await (_previousState?.OnExitState() ?? Task.CompletedTask);
             await (_currentState?.OnEnterState() ?? Task.CompletedTask);
-        }
-
-        public GameState GetState<T>()
-        { 
-            return _states[typeof(T).Name];
         }
 
         public void Update()

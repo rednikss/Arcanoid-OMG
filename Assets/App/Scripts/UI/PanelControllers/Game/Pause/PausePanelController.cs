@@ -34,7 +34,6 @@ namespace App.Scripts.UI.PanelControllers.Game.Pause
                     var newPanel = panelManager.GetPanel<NoEnergyPanelController>();
                     panelManager.AddActive(newPanel);
                     var task = newPanel.ShowPanel();
-                    
                     return;
                 }
 

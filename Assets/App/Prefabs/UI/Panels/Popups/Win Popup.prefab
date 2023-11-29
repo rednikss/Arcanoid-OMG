@@ -823,7 +823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmpText: {fileID: 5688600660302245743}
-  key: GALACTIC
+  key: GALAXY
 --- !u!114 &5688600660302245743
 MonoBehaviour:
   m_ObjectHideFlags: 0

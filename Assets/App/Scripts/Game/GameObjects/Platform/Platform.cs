@@ -72,7 +72,14 @@ namespace App.Scripts.Game.GameObjects.Platform
         {
             foreach (var comp in scaledComponents)
             {
-                comp.DOScaleX(percent, scaleOptions.animationTime).SetEase(scaleOptions.showEase);
+                for (int i = 0; i < comp.childCount; i++)
+                {
+                    comp.GetChild(i).DOScaleX(1 / percent, scaleOptions.animationTime)
+                        .SetEase(scaleOptions.showEase);
+                }
+
+                comp.DOScaleX(percent, scaleOptions.animationTime)
+                    .SetEase(scaleOptions.showEase);
             }
         }
     }

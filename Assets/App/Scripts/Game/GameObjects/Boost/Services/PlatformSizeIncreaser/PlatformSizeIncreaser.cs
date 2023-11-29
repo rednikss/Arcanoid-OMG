@@ -13,7 +13,7 @@ namespace App.Scripts.Game.GameObjects.Boost.Services.PlatformSizeIncreaser
         
         public override void StartEvent(float speedPercent)
         {
-            platform.SetWidthPercent(1 + speedPercent);
+            platform.SetWidthPercent(speedPercent);
             CurrentTime = eventDuration;
         }
 

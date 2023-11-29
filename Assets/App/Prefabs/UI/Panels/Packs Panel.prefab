@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3392393489605442634}
-  - component: {fileID: 2931710284454783382}
   - component: {fileID: 2155981946061049805}
   - component: {fileID: 8834723899854586407}
   m_Layer: 5
@@ -40,20 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -65}
   m_SizeDelta: {x: 0, y: -130}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2931710284454783382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377225248603292586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe2082487a8405f8173e4e611766b64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  packList: {fileID: 11400000, guid: 3c04128eaa6e44844ace6baa0c6ed36d, type: 2}
-  filePath: App/Data/Current
 --- !u!114 &2155981946061049805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +360,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -637,7 +622,6 @@ GameObject:
   - component: {fileID: 4394975530306884687}
   - component: {fileID: 2732958687128700740}
   - component: {fileID: 8759330017489351752}
-  - component: {fileID: 2880334637150960688}
   m_Layer: 5
   m_Name: Packs Panel
   m_TagString: Untagged
@@ -727,25 +711,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoInstallers:
-  - {fileID: 2880334637150960688}
   - {fileID: 4394975530306884687}
-  - {fileID: 2931710284454783382}
   - {fileID: 2732958687128700740}
---- !u!114 &2880334637150960688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8191965845002089560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c91a65d147346f3983e3d2fb262d2a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  services:
-  - service: {fileID: 2931710284454783382}
-    type: 0
 --- !u!1001 &1950727762587706236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -764,6 +731,22 @@ PrefabInstance:
     - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
       propertyPath: m_fontSize
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_margin.w
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_margin.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_margin.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_margin.z
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4051136380533721438, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
       propertyPath: m_enableAutoSizing
@@ -796,6 +779,14 @@ PrefabInstance:
     - target: {fileID: 4051136382348386404, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136382348386404, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051136382348386404, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 4051136382348386404, guid: 938b48a93a2e4a043a1941d1c7b3fb65, type: 3}
       propertyPath: m_LocalPosition.x

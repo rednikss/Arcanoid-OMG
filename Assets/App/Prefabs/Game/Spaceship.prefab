@@ -199,7 +199,7 @@ PolygonCollider2D:
       - {x: -0.3, y: 0}
       - {x: -0.3, y: -0.15}
       - {x: 0, y: -0.15}
-      - {x: 0, y: 0.225}
+      - {x: 0, y: 0.275}
 --- !u!1 &4696320433658736866
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4696320433658736866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35, z: 0}
+  m_LocalPosition: {x: 0, y: 0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -337,7 +337,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 0721cba15690d3f4fa77aed220c9036c, type: 2}
+  m_Material: {fileID: 6200000, guid: 347746821a430574d8427a00e982e707, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -366,7 +366,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.543, y: 0.45}
+  m_Size: {x: 0.543, y: 0.55}
   m_EdgeRadius: 0
 --- !u!114 &4696320433733758624
 MonoBehaviour:
@@ -502,7 +502,7 @@ PolygonCollider2D:
       - {x: 0.3, y: 0}
       - {x: 0.3, y: -0.15}
       - {x: 0, y: -0.15}
-      - {x: 0, y: 0.225}
+      - {x: 0, y: 0.275}
 --- !u!1 &7651284078493038403
 GameObject:
   m_ObjectHideFlags: 0
