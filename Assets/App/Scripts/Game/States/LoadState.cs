@@ -2,6 +2,9 @@
 using App.Scripts.Game.GameObjects.Ball.Pool;
 using App.Scripts.Game.GameObjects.Blocks.Base.Pool;
 using App.Scripts.Game.GameObjects.Boost.Base.Pool;
+using App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSizeIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSpeedIncreaser;
 using App.Scripts.Game.LevelManager;
 using App.Scripts.Game.LevelManager.DifficultyIncreaser;
 using App.Scripts.Libs.Patterns.StateMachine;
@@ -19,14 +22,15 @@ namespace App.Scripts.Game.States
         
         public override Task OnEnterState()
         {
-            Container.GetService<BallPool>().ReturnAll();
-            Container.GetService<BlockPool>().ReturnAll();
-            Container.GetService<BoostPool>().ReturnAll();
-            Container.GetService<LevelLoader>().LoadLevel();
             Container.GetService<PercentageController>().Reset();
             Container.GetService<HealthBarController>().Init(Container);
             Container.GetService<DifficultyIncreaser>().Init(Container);
+            
+            Container.GetService<BallPool>().ReturnAll();
+            Container.GetService<BlockPool>().ReturnAll();
+            Container.GetService<BoostPool>().ReturnAll();
 
+            Container.GetService<LevelLoader>().LoadLevel();
             StateMachine.ChangeState<StartState>();
             return Task.CompletedTask;
         }

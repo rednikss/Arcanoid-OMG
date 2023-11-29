@@ -2,6 +2,8 @@
 using App.Scripts.Architecture.Project.InputObserver;
 using App.Scripts.Libs.Patterns.Service.Container;
 using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
+using App.Scripts.UI.AnimatedViews.Basic.CanvasGroup.Base.Scriptable;
+using DG.Tweening;
 using UnityEngine;
 
 namespace App.Scripts.Game.GameObjects.Platform
@@ -13,14 +15,21 @@ namespace App.Scripts.Game.GameObjects.Platform
         [SerializeField] [Min(0)] private float speed;
 
         [SerializeField] private Transform containerTransform;
+
+        [SerializeField] private Transform[] scaledComponents;
+        
+        [SerializeField] private AnimationOptionsScriptable scaleOptions;
         
         private InputObserver inputObserver;
 
         private readonly List<Ball.Ball> usingBalls = new();
+
+        private float _currentSpeed;
         
         public override void Init(ServiceContainer container)
         {
             inputObserver = container.GetService<InputObserver>();
+            _currentSpeed = speed;
         }
 
         public override void UpdateWithDT(float dt)
@@ -32,7 +41,7 @@ namespace App.Scripts.Game.GameObjects.Platform
             var targetPos = inputObserver.GetWorldPosition();
 
             float velocity = Mathf.Clamp((targetPos - transform.position).x, -1, 1);
-            velocity *= speed;
+            velocity *= _currentSpeed;
             
             _rigidbody.MovePosition(_rigidbody.position + Vector2.right * (dt * velocity));
         }
@@ -48,8 +57,23 @@ namespace App.Scripts.Game.GameObjects.Platform
             if (usingBalls.Count == 0) return false;
 
             var ball = usingBalls[0];
-            usingBalls.Remove(ball);
+            ball.Velocity = Vector2.up;
+            
+            usingBalls.RemoveAt(0);
             return true;
+        }
+
+        public void SetSpeedPercent(float percent)
+        {
+            _currentSpeed = speed * percent;
+        }
+
+        public void SetWidthPercent(float percent)
+        {
+            foreach (var comp in scaledComponents)
+            {
+                comp.DOScaleX(percent, scaleOptions.animationTime).SetEase(scaleOptions.showEase);
+            }
         }
     }
 }

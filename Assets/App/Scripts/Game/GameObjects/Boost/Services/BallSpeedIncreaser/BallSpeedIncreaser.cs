@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser
 {
-    public class BallSpeedIncreaser : TemporaryEffect.TemporaryEffect
+    public class BallSpeedIncreaser : TemporaryEffect.TemporaryEffect<SpeedRangeScriptable>
     {
-        [SerializeField] private SpeedRangeScriptable scriptable;
-
         private DifficultyIncreaser difficultyIncreaser;
         
         public override void Init(ServiceContainer container)
@@ -16,14 +14,13 @@ namespace App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser
             difficultyIncreaser = container.GetService<DifficultyIncreaser>();
         }
         
-        public override void StartEvent()
+        public override void StartEvent(SpeedRangeScriptable speedRange)
         {
-            difficultyIncreaser.SetRange(scriptable);
-            
-            base.StartEvent();
+            difficultyIncreaser.SetRange(speedRange);
+            CurrentTime = eventDuration;
         }
 
-        protected override void EndEvent()
+        public override void EndEvent()
         {
             difficultyIncreaser.ResetRange();
             

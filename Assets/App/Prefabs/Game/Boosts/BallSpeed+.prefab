@@ -96,7 +96,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1709152173569094152}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0460163a90514d64dbe2c5966d5e1131, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -150,3 +150,4 @@ MonoBehaviour:
   id: 0
   moveDirection: {x: 0, y: -1}
   speed: 4
+  percentIncrease: {fileID: 11400000, guid: 3a92c171c1c2b6743ba172067c7c7af4, type: 2}

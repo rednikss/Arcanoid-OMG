@@ -26,7 +26,6 @@ namespace App.Scripts.Game.GameObjects.Ball.Pool
         public override void TakeObject(Ball pooledObject, int id = 0)
         {
             base.TakeObject(pooledObject, id);
-            pooledObject.Velocity = Vector2.up;
             pooledObject.SetSpeed(increaser.Speed);
         }
 

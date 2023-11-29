@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using App.Scripts.Game.GameObjects.Ball;
+﻿using System;
+using System.Collections.Generic;
 using App.Scripts.Game.GameObjects.Ball.Receiver;
 using App.Scripts.Game.States;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -31,7 +31,7 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
             if (receiver != container.GetService<BallReceiver>())
             {
                 receiver = container.GetService<BallReceiver>();
-                receiver.OnBallMiss += RemoveHeart;
+                receiver.OnBallMiss += () => AddHeart(-1);
             }
             
             machine = container.GetService<GameStateMachine>();
@@ -49,17 +49,23 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
             }
         }
 
-        private void RemoveHeart()
+        private void AddHeart(int count, bool safeRemove = false)
         {
             if (currentHealthCount < 1) return;
-            
-            var task = hearts[currentHealthCount-- - 1].Disable();
 
-            if (currentHealthCount == 0)
+            currentHealthCount = Math.Clamp(currentHealthCount + count, safeRemove ? 1 : 0, scriptable.healthCount);
+
+            for (int i = 0; i < scriptable.healthCount; i++)
             {
-                machine.ChangeState<LoseState>();
+                var task = i < currentHealthCount ? hearts[i].Enable() : hearts[i].Disable();
             }
+            
+            if (currentHealthCount == 0) machine.ChangeState<LoseState>();
         }
 
+        public void SafeAddHeart(int count)
+        {
+            AddHeart(count, true);
+        }
     }
 }

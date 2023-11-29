@@ -1,6 +1,10 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Architecture.Project.InputObserver;
 using App.Scripts.Game.GameObjects.Ball.Pool;
+using App.Scripts.Game.GameObjects.Boost.Base.Pool;
+using App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSizeIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSpeedIncreaser;
 using App.Scripts.Game.GameObjects.Platform;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -17,6 +21,11 @@ namespace App.Scripts.Game.States
             
             AddSystem<Platform>();
             AddSystem<BallPool>();
+            AddSystem<BoostPool>();
+            
+            AddSystem<BallSpeedIncreaser>();
+            AddSystem<PlatformSpeedIncreaser>();
+            AddSystem<PlatformSizeIncreaser>();
         }
         
         public override Task OnEnterState()

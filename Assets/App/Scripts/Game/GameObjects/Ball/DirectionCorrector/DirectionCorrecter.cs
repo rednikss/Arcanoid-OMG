@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using App.Scripts.Game.GameObjects.Ball.DirectionCorrector.Scriptable;
 using App.Scripts.Libs.EntryPoint.MonoInstaller;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -31,7 +32,7 @@ namespace App.Scripts.Game.GameObjects.Ball.DirectionCorrector
             foreach (var zone in zones)
             {
                 float differenceAngle = Vector2.Angle(zone.Direction, velocity);
-                if (Mathf.Abs(differenceAngle) >= zone.Width) continue;
+                if (Math.Abs(Math.Round(differenceAngle)) >= zone.Width) continue;
 
                 var offsetAngle = Mathf.Sign(differenceAngle) * zone.Width;
                 velocity = Quaternion.Euler(0, 0, offsetAngle) * zone.Direction;

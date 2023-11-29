@@ -14,6 +14,7 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
         [SerializeField] private string filePath;
 
         public event Action OnCurrentPackChanged;
+        
         private PackScriptable _currentPack;
         public PackScriptable CurrentPack 
         {
@@ -75,6 +76,8 @@ namespace App.Scripts.Architecture.Scene.Packs.StateController
                 SaveState();
                 return true;
             }
+
+            if (newPack == null) currentInfo.LevelToLoad = 1;
             
             for (int i = 0; i < Count; i++)
             {

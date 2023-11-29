@@ -1,33 +1,31 @@
 ﻿using App.Scripts.Libs.EntryPoint.MonoInstaller;
+using App.Scripts.Libs.Patterns.StateMachine.MonoSystem;
 using UnityEngine;
 
 namespace App.Scripts.Game.GameObjects.Boost.Services.TemporaryEffect
 {
-    public abstract class TemporaryEffect : MonoInstaller
+    public abstract class TemporaryEffect<TDataType> : MonoSystem
     {
         [SerializeField] [Min(0)] protected float eventDuration;
 
-        private float currentTime;
-        
-        private void Update()
-        {
-            if (currentTime == 0) return;
-            
-            currentTime -= Time.unscaledDeltaTime;
+        protected float CurrentTime;
 
-            if (currentTime > 0) return;
-            
+        public override void UpdateWithDT(float dt)
+        {
+            if (CurrentTime < 0) return;
+
+            CurrentTime -= dt;
+
+            if (CurrentTime > 0) return;
+
             EndEvent();
         }
 
-        public virtual void StartEvent()
-        {
-            currentTime = eventDuration;
-        }
+        public abstract void StartEvent(TDataType data);
 
-        protected virtual void EndEvent()
+        public virtual void EndEvent()
         {
-            currentTime = 0;
+            CurrentTime = -1;
         }
     }
 }

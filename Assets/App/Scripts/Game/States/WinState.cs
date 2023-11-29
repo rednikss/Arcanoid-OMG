@@ -1,5 +1,8 @@
 ﻿using System.Threading.Tasks;
 using App.Scripts.Architecture.Scene.PanelManager;
+using App.Scripts.Game.GameObjects.Boost.Services.BallSpeedIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSizeIncreaser;
+using App.Scripts.Game.GameObjects.Boost.Services.PlatformSpeedIncreaser;
 using App.Scripts.Game.Mechanics.Energy;
 using App.Scripts.Libs.Patterns.StateMachine;
 using App.Scripts.Libs.Patterns.Service.Container;
@@ -21,6 +24,10 @@ namespace App.Scripts.Game.States
         
         public override Task OnEnterState()
         {
+            Container.GetService<BallSpeedIncreaser>().EndEvent();
+            Container.GetService<PlatformSpeedIncreaser>().EndEvent();
+            Container.GetService<PlatformSizeIncreaser>().EndEvent();
+            
             Container.GetService<EnergyController>().AddEnergy(energyReward);
             
             var panel = _panelManager.GetPanel<WinPanelController>();

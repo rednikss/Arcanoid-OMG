@@ -22,7 +22,7 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
         {
             Speed = speedRange.minSpeed;
             _currentRange = speedRange;
-            lastPercent = 0;
+            lastPercent = 1;
             
             pool = container.GetService<BallPool>();
         }
@@ -39,7 +39,7 @@ namespace App.Scripts.Game.LevelManager.DifficultyIncreaser
         public void SetRange(SpeedRangeScriptable scriptable)
         {
             _currentRange = scriptable;
-            UpdateSpeed(lastPercent, 0, 100);
+            UpdateSpeed(lastPercent, 0, 1);
         }
 
         public void ResetRange() => SetRange(speedRange);

@@ -25,7 +25,7 @@ namespace App.Scripts.Game.GameObjects.Boost.Base
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if (!col.TryGetComponent(out Platform.Platform _)) return;
+            if (col.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
             
             OnCollected();
         }
