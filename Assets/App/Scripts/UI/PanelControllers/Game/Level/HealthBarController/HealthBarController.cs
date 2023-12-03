@@ -18,11 +18,6 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
     {
         [SerializeField] private HealthScriptable scriptable;
         [SerializeField] private HeartView prefab;
-        
-        [SerializeField] private AnimatedCanvasFadeView glowView;
-        [SerializeField] private Image glowImage;
-        [SerializeField] private Color addColor;
-        [SerializeField] private Color removeColor;
 
         private readonly List<HeartView> hearts = new();
 
@@ -71,15 +66,9 @@ namespace App.Scripts.UI.PanelControllers.Game.Level.HealthBarController
             if (currentHealthCount == 0) machine.ChangeState<LoseState>();
         }
 
-        public async Task SafeAddHeart(int count)
+        public void SafeAddHeart(int count)
         {
             AddHeart(count, true);
-
-            var color = Math.Sign(count) > 0 ? addColor : removeColor;
-            glowImage.color = color;
-
-            await glowView.Show();
-            await glowView.Hide();
         }
     }
 }

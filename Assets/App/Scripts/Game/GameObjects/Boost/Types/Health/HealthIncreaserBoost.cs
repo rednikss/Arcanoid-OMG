@@ -9,7 +9,7 @@ namespace App.Scripts.Game.GameObjects.Boost.Types.Health
 
         protected override void OnCollected()
         {
-            var task = Container.GetService<HealthBarController>().SafeAddHeart(addCount);
+            Container.GetService<HealthBarController>().SafeAddHeart(addCount);
             
             base.OnCollected();
         }
