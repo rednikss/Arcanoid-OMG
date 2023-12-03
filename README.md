@@ -1,12 +1,13 @@
 # Arcanoid
 
 ## About
-Second project created during internship. Mobile game in arkanoid genre.
+Second project created during internship. Mobile game in arkanoid genre. Destroy all the blocks by moving the spaceship and saving the ball.
 
 ## Used Technologies
 - Dependency Injection Pattern
 - State Machine Pattern
 - Object Pool Pattern
+- Used asynchronous methods for animation
 
 ## Screenshots
 
