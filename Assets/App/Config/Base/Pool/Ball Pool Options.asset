@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ball Pool Options
   m_EditorClassIdentifier: 
   defaultSize: 3
-  maximumSize: 10
+  maximumSize: 15

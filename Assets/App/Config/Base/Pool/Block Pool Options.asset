@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9bb05c778e40518496460a62b3dc69, type: 3}
   m_Name: Block Pool Options
   m_EditorClassIdentifier: 
-  defaultSize: 10
-  maximumSize: 25
+  defaultSize: 16
+  maximumSize: 100

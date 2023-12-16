@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Boost Pool Options
   m_EditorClassIdentifier: 
   defaultSize: 8
-  maximumSize: 20
+  maximumSize: 100

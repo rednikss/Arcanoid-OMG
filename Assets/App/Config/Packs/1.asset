@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   packNameKey: SIGARA
-  levelCount: 1
+  levelCount: 3
   icon: {fileID: 21300000, guid: 1bee326019e9bc143a9579fcee67bc05, type: 3}
   mainViewColor: {r: 0.3254902, g: 0.99215686, b: 0.4745098, a: 1}
   secondaryViewColor: {r: 0.6156863, g: 0.34509805, b: 1, a: 1}
