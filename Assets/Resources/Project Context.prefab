@@ -132,8 +132,55 @@ Transform:
   - {fileID: 5993720643059156620}
   - {fileID: 2784788207008803303}
   m_Father: {fileID: 5799107850240345562}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2154557805452442603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8776795272028817589}
+  - component: {fileID: 9002013244481620330}
+  m_Layer: 0
+  m_Name: Interstitial Ad Provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8776795272028817589
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154557805452442603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5799107850240345562}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9002013244481620330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154557805452442603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e4ef7f634341199c3589aece682cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTesting: 0
+  androidAdScriptable: {fileID: 11400000, guid: a3e92b95d9b43a9429e58d852cace113, type: 2}
+  iosAdScriptable: {fileID: 11400000, guid: 77b9b5f0b96ac2443bca0be64173faa5, type: 2}
 --- !u!1 &2945310893514120690
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +491,7 @@ Transform:
   - {fileID: 5799107850676743655}
   - {fileID: 5799107849311243751}
   - {fileID: 5799107848962729404}
+  - {fileID: 8776795272028817589}
   - {fileID: 6110396692644279849}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -473,6 +521,7 @@ MonoBehaviour:
   - {fileID: 5799107848962729405}
   - {fileID: 2482863765082145649}
   - {fileID: 1038228534873993952}
+  - {fileID: 9002013244481620330}
 --- !u!114 &7237431538516296475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +554,8 @@ MonoBehaviour:
   - service: {fileID: 2482863765082145649}
     type: 0
   - service: {fileID: 3220348606503962834}
+    type: 0
+  - service: {fileID: 9002013244481620330}
     type: 0
 --- !u!1 &5799107850585403800
 GameObject:

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be5ad9a96b544ad8885b4b7209b0d89a, type: 3}
-  m_Name: Base Options
+  m_Script: {fileID: 11500000, guid: d0ea27d832484a67b16c2323021ff81d, type: 3}
+  m_Name: Android Interstitial Options
   m_EditorClassIdentifier: 
-  targetFPS: 60
-  androidAdID: 5534759
-  iosAdID: 5534758
+  gameID: 5534759
+  adUnitID: Interstitial_Android
+  isTesting: 1
